@@ -105,6 +105,8 @@ deploy: # 部署部分的设置
   repo: https://github.com/Coley48/coley48.github.io.git
   branch: master
 
+# 搜索设置
+# npm install hexo-hexo-generator-searchdb -S
 search:
   path: search.xml
   field: post
