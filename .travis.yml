@@ -4,21 +4,22 @@ node_js:
   - 10  # 使用 nodejs LTS v10
 branches:
   only:
-    - main # 只监控 source 的 branch
+    - main # 只监控存放源代码的 main 分支
 cache:
   directories:
     - node_modules # 缓存 node_modules 加快构建速度
-before_script: ## 根据你所用的主题和自定义的不同，这里会有所不同
+before_script: ## 根据所用的主题和自定义的不同，这里会有所不同
   - npm install -g hexo-cli # 在 CI 环境内安装 Hexo
-  - mkdir themes # 由于我们没有将 themes/ 上传，所以我们需要新建一个
-  - git clone https://github.com/theme-next/hexo-theme-next themes/next #从 Github 上拉取 Suka 主题
-  - npm install # 在根目录安装站点需要的依赖 
+  - mkdir themes # 由于 main 分支中没有将 themes/ 文件夹，所以需要重新创建
+  - git clone https://github.com/theme-next/hexo-theme-next themes/next #从 Github 上拉取 next 主题
+  - npm install # 最后在根目录安装站点需要的依赖 
 script: 
   - hexo generate # generate static files
 deploy: # 根据个人情况，这里会有所不同
   provider: pages
-  skip_cleanup: true # 构建完成后不清除
-  token: $GH_TOKEN # 你刚刚设置的 token
+  cleanup: true # 构建完成后不清除
+  strategy: git # 默认使用 git
+  token: $GH_TOKEN # 在 Travis CI 中设置的环境变量 token
   keep_history: true # 保存历史
   fqdn: blog.coley48.cn # 自定义域名，使用 username.github.io 可删除
   on:
