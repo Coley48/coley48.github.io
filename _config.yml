@@ -114,6 +114,8 @@ search:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+# 下载hexo next主题
+# git clone https://github.com/theme-next/hexo-theme-next themes/next
 theme: next # 设置当前主题，false禁用主题
 theme_config: # 主题的配置文件。在这里放置的配置会覆盖主题目录下的 _config.yml 中的配置
   # ---------------------------------------------------------------
