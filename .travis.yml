@@ -17,7 +17,7 @@ script:
   - hexo generate # generate static files
 deploy: # 根据个人情况，这里会有所不同
   provider: pages
-  cleanup: true # 构建完成后不清除
+  # cleanup: true # 构建完成后不清除
   strategy: git # 默认使用 git
   token: $GH_TOKEN # 在 Travis CI 中设置的环境变量 token
   keep_history: true # 保存历史
