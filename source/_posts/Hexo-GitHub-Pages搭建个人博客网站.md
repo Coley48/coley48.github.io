@@ -2,6 +2,7 @@
 title: Hexo + GitHub Pages搭建个人博客网站
 date: 2021-04-05 20:34:29
 tags: [Hexo,GitHub Pages]
+categories: blog
 ---
 
 
@@ -9,19 +10,15 @@ tags: [Hexo,GitHub Pages]
 
 Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用Hexo和Github Pages快速搭建个人博客网站的整个过程。
 
-{% blockquote David Levithan, Wide Awake %}
-Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.
-{% endblockquote %}
+中文官网：<https://hexo.io/zh-cn/>
 
-![ ](ssh%20and%20gpg%20keys.png)
-
-中文官网：https://hexo.io/zh-cn/
+<!-- more -->
 
 ### 环境搭建
 
 1. 安装nodejs
 
-官网地址：https://nodejs.org/zh-cn/download/
+官网地址：<https://nodejs.org/zh-cn/download/>
 选择相应版本安装后分别执行`node -v`和`npm -v`查看是否正确安装。
 
 ```bash
@@ -31,10 +28,9 @@ v12.16.2
 6.14.4
 ```
 
-
 2. 安装git
 
-官网地址：https://git-scm.com/downloads
+官网地址：<https://git-scm.com/downloads>
 同样在安装好后检查安装的版本信息
 
 ```bash
@@ -100,7 +96,7 @@ themes设置Hexo主题。
 > hexo server/s
 ```
 
-在浏览器中访问http://localhost:4000查看
+在浏览器中访问 <http://localhost:4000> 查看
 
 4. 创建GitHub仓库并通过ssh key关联
 
@@ -163,8 +159,7 @@ Hi Coley48! You've successfully authenticated, but GitHub does not provide shell
 首次连接会出现警告，此后git会将github的解析地址存到.ssh下的known_host中。
 
 GitHub文档：使用 SSH 连接到 GitHub
-https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh
-
+<https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh>
 
 修改_config.yml，将hexo关联到github
 

@@ -129,9 +129,10 @@ theme_config:
     icon: # Icon between year and copyright info.
       name: fa fa-heart # Icon name in Font Awesome. See: https://fontawesome.com/icons
       animated: true # If you want to animate the icon, set it to true.
-      color: "#ff0000" # Change the color of icon, using Hex Code.
+      color: "#fc6423" # Change the color of icon, using Hex Code.
 
-  powered: false # Powered by Hexo & NexT
+    powered: false # Powered by Hexo & NexT
+    since: 2021 # 建站时间
 
   # 协议
   creative_commons:
@@ -148,7 +149,7 @@ theme_config:
     home: / || fa fa-home
     about: /about/ || fa fa-user
     tags: /tags/ || fa fa-tags
-    #categories: /categories/ || fa fa-th
+    categories: /categories/ || fa fa-th
     archives: /archives/ || fa fa-archive
     #schedule: /schedule/ || fa fa-calendar
     #sitemap: /sitemap.xml || fa fa-sitemap
@@ -253,6 +254,10 @@ theme_config:
     unescape: false
     # Preload the search data when the page loads.
     preload: false
+
+  # 友链
+  links:
+    #Title: http://yoursite.com
 
 
 ## Live2D看板娘
