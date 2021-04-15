@@ -135,6 +135,13 @@ theme_config:
     since: 2021 # 建站时间
     copyright: Hush
 
+    beian: # 备案
+      enable: false
+      icp: 蜀ICP备 20003974-1号
+      # gongan_id: 1234567890
+      # gongan_num: 京公网安备 1234567890号
+      # gongan_icon_url: /uploads/beian.png
+
   # 协议
   creative_commons:
     license: by-nc-sa
@@ -172,14 +179,9 @@ theme_config:
   social:
     GitHub: https://github.com/Coley48 || fab fa-github
     E-Mail: mailto:coley48@qq.com || fa fa-envelope
-    #Weibo: https://weibo.com/yourname || fab fa-weibo
     #Google: https://plus.google.com/yourname || fab fa-google
     #Twitter: https://twitter.com/yourname || fab fa-twitter
-    #FB Page: https://www.facebook.com/yourname || fab fa-facebook
     #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
-    #YouTube: https://youtube.com/yourname || fab fa-youtube
-    #Instagram: https://instagram.com/yourname || fab fa-instagram
-    #Skype: skype:yourname?call|chat || fab fa-skype
 
   # Reward (Donate) 打赏
   # Front-matter variable (unsupport animation).
