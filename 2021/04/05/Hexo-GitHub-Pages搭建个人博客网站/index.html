@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"blog.coley48.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Hexo简介Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用Hexo和Github Pages快速搭建个人博客网站的整个过程。 中文官网：https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;">
+  <meta name="description" content="Hexo 简介Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用 Hexo 和 Github Pages 快速搭建个人博客网站的整个过程。以下代码均已我的博客和仓库为例，请自行更改为自己的。 中文官网：https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo + GitHub Pages搭建个人博客网站">
 <meta property="og:url" content="http://blog.coley48.cn/2021/04/05/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/index.html">
 <meta property="og:site_name" content="Coley&#39;s Blog">
-<meta property="og:description" content="Hexo简介Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用Hexo和Github Pages快速搭建个人博客网站的整个过程。 中文官网：https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;">
+<meta property="og:description" content="Hexo 简介Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用 Hexo 和 Github Pages 快速搭建个人博客网站的整个过程。以下代码均已我的博客和仓库为例，请自行更改为自己的。 中文官网：https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.coley48.cn/2021/04/05/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E6%B7%BB%E5%8A%A0ssh%20key.png">
 <meta property="article:published_time" content="2021-04-05T20:34:29.000Z">
-<meta property="article:modified_time" content="2021-04-13T14:35:43.593Z">
+<meta property="article:modified_time" content="2021-04-15T14:14:44.751Z">
 <meta property="article:author" content="Coley Brooks">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="GitHub Pages">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.coley48.cn/2021/04/05/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E6%B7%BB%E5%8A%A0ssh%20key.png">
 
 <link rel="canonical" href="http://blog.coley48.cn/2021/04/05/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">
 
@@ -225,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-13 14:35:43" itemprop="dateModified" datetime="2021-04-13T14:35:43+00:00">2021-04-13</time>
+                <time title="修改时间：2021-04-15 14:14:44" itemprop="dateModified" datetime="2021-04-15T14:14:44+00:00">2021-04-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,14 +245,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
+              <span>3.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -262,87 +264,125 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用Hexo和Github Pages快速搭建个人博客网站的整个过程。</p>
+        <h3 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用 Hexo 和 Github Pages 快速搭建个人博客网站的整个过程。以下代码均已我的博客和仓库为例，请自行更改为自己的。</p>
 <p>中文官网：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">https://hexo.io/zh-cn/</a></p>
 <span id="more"></span>
 
-<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ol>
-<li>安装nodejs</li>
-</ol>
-<p>官网地址：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a><br>选择相应版本安装后分别执行<code>node -v</code>和<code>npm -v</code>查看是否正确安装。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; node -v</span><br><span class="line">v12.16.2</span><br><span class="line">&gt; npm -v</span><br><span class="line">6.14.4</span><br></pre></td></tr></table></figure>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="安装-nodejs"><a href="#安装-nodejs" class="headerlink" title="安装 nodejs"></a>安装 nodejs</h4><p>官网地址：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a><br>选择相应版本安装后分别执行<code>node -v</code>和<code>npm -v</code>查看是否正确安装。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; node -v</span><br><span class="line">v12.16.2</span><br><span class="line">&gt; npm -v</span><br><span class="line">6.14.4</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>安装git</li>
-</ol>
-<p>官网地址：<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a><br>同样在安装好后检查安装的版本信息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; git --version</span><br><span class="line">git version 2.29.2.windows.2</span><br></pre></td></tr></table></figure>
+<h4 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h4><p>官网地址：<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a><br>同样在安装好后检查安装的版本信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; git --version</span><br><span class="line">git version 2.29.2.windows.2</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>安装hexo</li>
-</ol>
-<p>全局安装hexo-cli</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>全局安装<code>hexo-cli</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 
-<p>检查hexo版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo -v</span><br><span class="line">hexo-cli: 4.2.0</span><br><span class="line">os: Windows_NT 10.0.18363 win32 x64</span><br><span class="line">node: 12.16.2</span><br><span class="line">v8: 7.8.279.23-node.34</span><br><span class="line">uv: 1.34.2</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.40.0</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 2.0.4</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1e</span><br><span class="line">cldr: 36.0</span><br><span class="line">icu: 65.1</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure>
+<p>检查 Hexo 版本，会得到以下输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo -v</span><br><span class="line">hexo-cli: 4.2.0</span><br><span class="line">os: Windows_NT 10.0.18363 win32 x64</span><br><span class="line">node: 12.16.2</span><br><span class="line">v8: 7.8.279.23-node.34</span><br><span class="line">uv: 1.34.2</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.40.0</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 2.0.4</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1e</span><br><span class="line">cldr: 36.0</span><br><span class="line">icu: 65.1</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure>
 
-<p>然后创建一个空文件夹作为自己博客的文件夹，然后使用hexo初始化博客文件夹，<code>hexo init myblog</code>或者在该文件夹下执行<code>hexo init</code>。等待hexo的默认文件从github上下载完成后，在该文件夹下执行npm install，下载hexo所有的第三方依赖。得到的文件目录如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<p>然后依次执行以下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; mkdir myBlog <span class="comment"># 创建一个空的博客文件夹</span></span><br><span class="line">&gt; <span class="built_in">cd</span> myBlog <span class="comment"># 进入到博客文件夹中</span></span><br><span class="line">&gt; hexo init <span class="comment"># 使用 hexo init 命令下在 Hexo 项目初始化文件</span></span><br><span class="line">&gt; npm install <span class="comment"># 下载 Hexo 项目的第三方依赖</span></span><br></pre></td></tr></table></figure>
 
-<p>_config.yml是网站的配置文件。<br>package.json是项目的依赖、描述、版本等相关信息。<br>scaffolds文件夹下用于存放模板，在新建文章时，Hexo以此来建立文件。<br>source是资源文件夹，用于存放用户资源，其中_post存放md文档。<br>themes设置Hexo主题。</p>
+<p>最后得到的文件目录如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">文件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">_config.yml</td>
+<td align="left">网站配置文件</td>
+</tr>
+<tr>
+<td align="left">package.json</td>
+<td align="left">项目配置文件</td>
+</tr>
+<tr>
+<td align="left">scaffolds</td>
+<td align="left">模板文件夹</td>
+</tr>
+<tr>
+<td align="left">source</td>
+<td align="left">资源文件夹</td>
+</tr>
+<tr>
+<td align="left">themes</td>
+<td align="left">主题文件夹</td>
+</tr>
+</tbody></table>
 <p>本地预览</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo generate/g</span><br><span class="line">&gt; hexo server/s</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo generate</span><br><span class="line">&gt; hexo server</span><br></pre></td></tr></table></figure>
 
-<p>在浏览器中访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 查看</p>
-<ol start="4">
-<li>创建GitHub仓库并通过ssh key关联</li>
-</ol>
-<ul>
-<li>配置git</li>
+<p>在浏览器中访问 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 即可查看网站默认样式。</p>
+<h4 id="关联-GitHub-仓库"><a href="#关联-GitHub-仓库" class="headerlink" title="关联 GitHub 仓库"></a>关联 GitHub 仓库</h4><ul>
+<li>创建仓库</li>
 </ul>
-<p>在GitHub中创建一个新的同名仓库，coley48.github.io。然后需要在本地创建ssh key并关联到GitHub账号，如果初次使用git，需要设置用户名和邮箱。打开git bash，设置全局用户名和邮箱。</p>
+<p>在 GitHub 中创建一个同名仓库，命名为<code>coley48.github.io</code>，这也将成为网站的域名。</p>
+<ul>
+<li>配置 Git</li>
+</ul>
+<p>如果初次使用Git，需要设置用户名和邮箱。打开Git Bash，设置全局用户名和邮箱。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name coley48</span><br><span class="line">$ git config --global user.email coley48@qq.com</span><br></pre></td></tr></table></figure>
 
 <p>查看用户名和邮箱</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git config user.name &amp;&amp; git config user.email</span><br><span class="line">coley48</span><br><span class="line">coley48@qq.com</span><br></pre></td></tr></table></figure>
 
-<p>创建ssh密钥，不设置密码，全部回车：</p>
+<ul>
+<li>创建 SSH 密钥</li>
+</ul>
+<p><code>ssh</code>还可以设置密码，通常方便起见，这里不设置密码，全部回车。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;coley48@qq.com&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>默认创建在用户文件夹下的.ssh文件夹中。<br>然后查看生成的密钥：</p>
+<p>默认创建在用户文件夹下的<code>.ssh</code>文件夹中，查看生成的密钥：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/.ssh &amp;&amp; ls</span><br><span class="line">id_rsa  id_rsa.pub</span><br></pre></td></tr></table></figure>
 
-<p>其中id_rsa是私钥，id_rsa.pub是公钥，用于上传到github。</p>
-<p>将ssh key关联到github账号<br>在git bash中复制id_rsa.pub</p>
+<p>其中<code>id_rsa</code>是私钥，<code>id_rsa.pub</code>是公钥，用于上传到 GitHub。</p>
+<p>将<code>ssh key</code>关联到 GitHub 账号<br>在 Git Bash 中复制<code>id_rsa.pub</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat id_rsa.pub &gt; /dev/clipboard</span><br></pre></td></tr></table></figure>
 
-<p>或在cmd终端中复制id_rsa.pub</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; clip &lt; id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>或在 cmd 终端中复制<code>id_rsa.pub</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; clip &lt; id_rsa.pub</span><br></pre></td></tr></table></figure>
 
-<p>在github的中添加ssh key</p>
-<p>完成后测试ssh连接</p>
+<ul>
+<li>添加 SSH 密钥</li>
+</ul>
+<p>在 <a target="_blank" rel="noopener" href="https://github.com/settings/keys">https://github.com/settings/keys</a> 页面中选择<code>New SSH key</code>新建<code>ssh key</code>，标题自定义，然后将上一步复制的公钥粘贴进去，点击<code>Add SSH key</code>完成添加。<br><img src="Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E6%B7%BB%E5%8A%A0ssh%20key.png"></p>
+<ul>
+<li>测试 SSH 连接</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">Warning: Permanently added the RSA host key <span class="keyword">for</span> IP address <span class="string">&#x27;192.30.255.113&#x27;</span> to the list of known hosts.</span><br><span class="line">Hi Coley48! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
 
-<p>首次连接会出现警告，此后git会将github的解析地址存到.ssh下的known_host中。</p>
-<p>GitHub文档：使用 SSH 连接到 GitHub<br><a target="_blank" rel="noopener" href="https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh">https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh</a></p>
-<p>修改_config.yml，将hexo关联到github</p>
+<p>GitHub文档：<a target="_blank" rel="noopener" href="https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh">使用 SSH 连接到 GitHub</a></p>
+<ul>
+<li>Hexo 一键部署</li>
+</ul>
+<p>一键部署功能是在本地编辑完成之后，直接使用<code>hexo deploy</code>命令就可以完成部署操作。</p>
+<p>一键部署功能需要安装 Hexo 的部署插件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后修改_config.yml，为 Hexo 指定部署的 Github 仓库：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/Coley48/coley48.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 
-<p>配置完git后，再安装hexo的部署插件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>之后就可以使用以下命令更新网站：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo clean <span class="comment"># 清除之前生成的静态文件，不是必须的</span></span><br><span class="line">&gt; hexo generate <span class="comment"># 生成静态网页文件</span></span><br><span class="line">&gt; hexo deploy <span class="comment"># 部署到远程仓库</span></span><br></pre></td></tr></table></figure>
 
-<p>更新网站</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo clean</span><br><span class="line">&gt; hexo generate</span><br><span class="line">&gt; hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>绑定个人域名</p>
+<ul>
+<li>绑定个人域名</li>
+</ul>
+<p>GitHub Pages还提供 Custom Domain 可以使用自定义域名。</p>
 <ol>
-<li>在域名解析控制台添加解析记录</li>
-<li>在github.io仓库中设置Custom Domain为blog.coley48.cn</li>
-<li>在hexo项目中的/source文件夹下创建一个CNAME文本文件，存放域名</li>
-<li>重新deploy网站</li>
+<li>在域名解析控制台添加 CNAME 解析记录，将 coley48.github.io 解析到 blog.coley48.cn。</li>
+<li>同时在 github.io 仓库中设置 Custom Domain 为 blog.coley48.cn。</li>
+<li>然后在 /source 文件夹下创建一个 CNAME 文本文件，存放域名。</li>
+<li>最后重新生成部署一下网站，稍微等待片刻便可以通过自己的域名访问博客网站了。</li>
 </ol>
-<h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><table>
+<p>Github文档：<a target="_blank" rel="noopener" href="https://docs.github.com/cn/pages/configuring-a-custom-domain-for-your-github-pages-site">配置 GitHub Pages 站点的自定义域</a></p>
+<h3 id="Hexo-基本配置"><a href="#Hexo-基本配置" class="headerlink" title="Hexo 基本配置"></a>Hexo 基本配置</h3><p>Hexo的所有配置都在_config.yml文件中，部分配置如下：</p>
+<table>
 <thead>
 <tr>
 <th align="right">参数</th>
@@ -355,7 +395,7 @@
 </tr>
 <tr>
 <td align="right">subtitle</td>
-<td align="left">网站副标题</td>
+<td align="left">网站副标题，可以放座右铭</td>
 </tr>
 <tr>
 <td align="right">description</td>
@@ -363,7 +403,7 @@
 </tr>
 <tr>
 <td align="right">keywords</td>
-<td align="left">网站的关键词。支援多个关键词。</td>
+<td align="left">网站的关键词</td>
 </tr>
 <tr>
 <td align="right">author</td>
@@ -371,13 +411,88 @@
 </tr>
 <tr>
 <td align="right">language</td>
-<td align="left">网站使用的语言。</td>
+<td align="left">网站使用的语言</td>
 </tr>
 <tr>
-<td align="right">timezone</td>
-<td align="left">网站时区。默认使用电脑的时区。</td>
+<td align="right">url</td>
+<td align="left">网址，必须是完整的url</td>
+</tr>
+<tr>
+<td align="right">post_asset_folder</td>
+<td align="left">启动 Asset 文件夹，默认false</td>
+</tr>
+<tr>
+<td align="right">relative_link</td>
+<td align="left">把链接改为与根目录的相对位址，默认false</td>
+</tr>
+<tr>
+<td align="right">theme</td>
+<td align="left">设置主题，false禁用主题</td>
+</tr>
+<tr>
+<td align="right">theme_config</td>
+<td align="left">主题的配置参数，优先级高</td>
+</tr>
+<tr>
+<td align="right">deploy</td>
+<td align="left">部署配置</td>
 </tr>
 </tbody></table>
+<p>更多配置详见<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">官方文档</a></p>
+<h3 id="Hexo-的基本使用"><a href="#Hexo-的基本使用" class="headerlink" title="Hexo 的基本使用"></a>Hexo 的基本使用</h3><ul>
+<li>初始化</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo init [folder]</span><br></pre></td></tr></table></figure>
+
+<p>新建网站，未指定 folder 时在当前文件夹下创建。<br>创建步骤：</p>
+<ol>
+<li>git 下载包含 hexo-theme-landscape 主题的 hexo-starter 项目。</li>
+<li>通过包管理工具安装依赖，默认使用 npm。</li>
+</ol>
+<ul>
+<li>新建</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<p>新建文章，<code>layout</code>默认使用<code>_config.yml</code>中<code>default_layout</code>参数值，包含空格的标题需要加引号。三种布局：<code>post</code>、<code>page</code>、<code>draft</code>。<br>参数：<br><code>-p, --path</code> 自定义文章的路径，默认使用标题作为文章路径。<br><code>-r, --replace</code> 替换同名文章。<br><code>-s, --slug</code> 作为新文章的文件名和发布后的 URL。</p>
+<ul>
+<li>生成</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo generate/g</span><br></pre></td></tr></table></figure>
+
+<p>生成网页，将生成的文件放入<code>public</code>文件夹下，如果存在<code>public</code>，默认只生成改动的文件。<br>参数：<br><code>-d, --deploy</code> 文件生成后立即部署网站。<br><code>-w, --watch</code> 监视文件变动。<br><code>-b, --bail</code> 生成过程中如果发生任何未处理的异常则爆出异常。<br><code>-f, --force</code> 强制重新生成文件，等同于<code>hexo clean &amp;&amp; hexo generate</code>。<br><code>-c, --concurrency</code> 设置最大同时生成文件的数量，默认无限制。<br><code>--config &lt;custom.yml&gt; [config.json]</code> 使用自定义配置文件。</p>
+<ul>
+<li>发布</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo publish [layout] &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发表草稿。</p>
+<ul>
+<li>本地预览</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo server/s</span><br></pre></td></tr></table></figure>
+
+<p>启动服务器。默认情况下，网址为：<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a>。<br>参数：<br><code>-p, --port</code> 设置端口。<br><code>-s, --static</code> 只使用静态文件。<br><code>-l, --log</code> 启动日志记录，使用覆盖记录格式。<br><code>--config &lt;custom.yml&gt;</code> 使用自定义配置文件。</p>
+<ul>
+<li>部署</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo deploy/d</span><br></pre></td></tr></table></figure>
+
+<p>部署网站<br><code>-g, --generate</code> 部署之前预先生成静态文件，等同于<code>hexo g -d</code>。</p>
+<ul>
+<li>清除</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>清除缓存文件<code>db.json</code>和已生成的静态文件夹<code>public</code>。</p>
+<p>更多命令详见<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands">官方文档</a>。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/michael-xiang/p/10464518.html">Hexo 搭建 Blog 精简笔记</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_37781304/article/details/82729029?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.baidujs&dist_request_id=1328741.37347.16169781187402753&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.baidujs">Hexo 史上最全搭建教程</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.xinxiaoyang.com/programming/2016-11-25-hexo-image-bug/">Hexo 图片插入</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/07/yaml.html">YAML 语言教程</a></li>
+</ul>
 
     </div>
 
@@ -412,6 +527,13 @@
 
 
         
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/14/Hexo-Next%E4%B8%BB%E9%A2%98%E7%9A%84%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BC%98%E5%8C%96/" rel="next" title="Hexo Next主题的配置和优化">
+      Hexo Next主题的配置和优化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -469,7 +591,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Hexo简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEhexo"><span class="nav-number">3.</span> <span class="nav-text">配置hexo</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Hexo 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-nodejs"><span class="nav-number">2.1.</span> <span class="nav-text">安装 nodejs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Git"><span class="nav-number">2.2.</span> <span class="nav-text">安装 Git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="nav-number">2.3.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E8%81%94-GitHub-%E4%BB%93%E5%BA%93"><span class="nav-number">2.4.</span> <span class="nav-text">关联 GitHub 仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">Hexo 基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Hexo 的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -485,7 +607,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -498,7 +620,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
