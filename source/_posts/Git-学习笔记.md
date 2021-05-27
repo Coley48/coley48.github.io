@@ -1,8 +1,8 @@
 ---
 title: Git 学习笔记
-tags: [Git, tool, 学习笔记]
+tags: [Git, notes, 学习笔记]
 date: 2021-04-28 22:36:21
-categories: tool
+categories: notes
 ---
 
 ### 关于版本控制
