@@ -228,7 +228,9 @@
 <ul>
 <li>添加 SSH 密钥</li>
 </ul>
-<p>在 <a href="https://github.com/settings/keys">https://github.com/settings/keys</a> 页面中选择<code>New SSH key</code>新建<code>ssh key</code>，标题自定义，然后将上一步复制的公钥粘贴进去，点击<code>Add SSH key</code>完成添加。<br><img src="Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E6%B7%BB%E5%8A%A0ssh%20key.png"></p>
+<p>在 <a href="https://github.com/settings/keys">https://github.com/settings/keys</a> 页面中选择<code>New SSH key</code>新建<code>ssh key</code>，标题自定义，然后将上一步复制的公钥粘贴进去，点击<code>Add SSH key</code>完成添加。</p>
+<img src="/2021/04/05/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/%E6%B7%BB%E5%8A%A0ssh-key.png" class="">
+
 <ul>
 <li>测试 SSH 连接</li>
 </ul>
@@ -471,6 +473,30 @@
       </tags>
   </entry>
   <entry>
+    <title>写给自己</title>
+    <url>/2021/06/29/%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/</url>
+    <content><![CDATA[<p>首先要对自己说一句：“毕业快乐！”。<br>四年大学生活已经落下帷幕，从此也踏上了新的人生征途。<br>纵观整个大学四年，我觉得自己过得很充实，也没留下什么遗憾。</p>
+<span id="more"></span>
+
+<p><strong>做个简单的总结：</strong></p>
+<p>大一担任了班委，进了院上两委会，工作上比较忙，有时候饭都顾不上吃；然后参加了校上运动会，结交了很多朋友，但是学业上有些忽略了，所以前期成绩不太理想，后面开始慢慢将精力投入到学习上来，成绩有了很大的提升；</p>
+<p>大二因为大一表现还不错，有幸读了党校，也因此认识了更多的优秀的同学；虽然大二没有留在两委会，但进入了学校的社团，认识了不少其他学院的同学；平时的时间大多都是在泡在图书馆里看书学习，因此大二整个学年的成绩都还不错；</p>
+<p>从大三开始，积极参加了各种专业上的学科竞赛，数学建模、创新创业、计算机设计大赛、蓝桥杯等，不断积累项目经验以及获奖经历；专业的知识技能也是在大三这一年不断的通过项目的打磨提升上来的。</p>
+<p>到了大四，整个第一学期，几乎都是在为老师写项目，我们也因为项目成为了很好的朋友；这个项目也是成为了我的毕业设计，然后也是找到了跟专业对口的工作，进入了新的人生阶段；</p>
+<img src="/2021/06/29/%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/thumbnail.png" class="">
+
+<p>当然毕业不是终点，而是新生活、新奋斗的起点；<br>况且学无止境，我愿常怀一颗赤子之心，在知识的海洋里，乘风破浪；在学习的道路上，披荆斩棘！</p>
+<p>最后愿你历尽千帆，归来仍是少年；<br>愿你在多年之后再读到这篇文章时，仍是个积极进取，不断向前的少年。加油！</p>
+]]></content>
+      <categories>
+        <category>diary</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>diary</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>斯人已去，举国皆哀</title>
     <url>/2021/05/27/%E6%96%AF%E4%BA%BA%E5%B7%B2%E5%8E%BB%EF%BC%8C%E4%B8%BE%E5%9B%BD%E7%9A%86%E5%93%80/</url>
     <content><![CDATA[<blockquote>
@@ -488,6 +514,7 @@
         <category>diary</category>
       </categories>
       <tags>
+        <tag>日记</tag>
         <tag>diary</tag>
         <tag>纪念</tag>
       </tags>
