@@ -165,7 +165,7 @@ $ cat id_rsa.pub > /dev/clipboard
 - 添加 SSH 密钥
 
 在 <https://github.com/settings/keys> 页面中选择`New SSH key`新建`ssh key`，标题自定义，然后将上一步复制的公钥粘贴进去，点击`Add SSH key`完成添加。
-![](Hexo-GitHub-Pages搭建个人博客网站/添加ssh%20key.png)
+{% asset_img 添加ssh-key.png %}
 
 - 测试 SSH 连接
 
