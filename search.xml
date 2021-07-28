@@ -473,6 +473,221 @@
       </tags>
   </entry>
   <entry>
+    <title>Webpack-学习笔记</title>
+    <url>/2021/07/28/Webpack-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="webpack-学习笔记"><a href="#webpack-学习笔记" class="headerlink" title="webpack 学习笔记"></a>webpack 学习笔记</h2><blockquote>
+<p>At its core, webpack is a static module bundler for modern JavaScript applications. When webpack processes your application, it internally builds a dependency graph which maps every module your project needs and generates one or more bundles.<br>本质上，webpack 是一个用于现代 JavaScript 应用程序的静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个依赖图 (dependency graph) ，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 bundle。</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h3><p>webpack 是基于 nodejs 的，因此 webpack 项目也是一个 node 项目，直接使用 npm 来初始化项目；对于大多数项目，建议本地安装，便于后期分项目升级；</p>
+<ol>
+<li>使用<code>npm init</code>命令初始化项目文件夹，创建<code>package.json</code>文件；</li>
+<li>安装 webpack 和 webpack-cli 开发依赖；</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&gt; npm init -y</span><br><span class="line">&gt; npm install webpack webpack-cli -D</span><br></pre></td></tr></table></figure>
+
+<p>以该项目为例，目录结构如下：</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── .gitignore</span><br><span class="line">├── README.md</span><br><span class="line">├── LICENSE</span><br><span class="line">├── package.json</span><br><span class="line">├── package-lock.json</span><br><span class="line">├── node_modules</span><br><span class="line">├── src</span><br><span class="line">|   └── index.js</span><br><span class="line">└── dist</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><ol>
+<li>新建一个模块<code>a.js</code>，并在里面编写一个简单的打印函数；</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/a.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(params);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    print,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>新建入口<code>index.js</code>，并引入模块<code>a.js</code>；</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/index.js</span></span><br><span class="line"><span class="keyword">const</span> moduleA = <span class="built_in">require</span>(<span class="string">&quot;./a&quot;</span>);</span><br><span class="line"></span><br><span class="line">moduleA.print(<span class="string">&quot;Hello, world!&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>运行 <code>npx webpack</code> 开始打包，结果将被输出到根目录下 dist 文件夹中，并得到以下输出：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">asset main.js 224 bytes [compared <span class="keyword">for</span> emit] [minimized] (name: main)</span><br><span class="line">./src/index.js 83 bytes [built] [code generated]</span><br><span class="line">./src/a.js 104 bytes [built] [code generated]</span><br><span class="line"></span><br><span class="line">WARNING <span class="keyword">in</span> configuration</span><br><span class="line">The <span class="string">&#x27;mode&#x27;</span> option has not been <span class="built_in">set</span>, webpack will fallback to <span class="string">&#x27;production&#x27;</span> <span class="keyword">for</span> this value.</span><br><span class="line">Set <span class="string">&#x27;mode&#x27;</span> option to <span class="string">&#x27;development&#x27;</span> or <span class="string">&#x27;production&#x27;</span> to <span class="built_in">enable</span> defaults <span class="keyword">for</span> each environment.</span><br><span class="line">You can also <span class="built_in">set</span> it to <span class="string">&#x27;none&#x27;</span> to <span class="built_in">disable</span> any default behavior. Learn more: https://webpack.js.org/configuration/mode/</span><br><span class="line"></span><br><span class="line">webpack 5.37.1 compiled with 1 warning <span class="keyword">in</span> 201 ms</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>得到打包好的输出文件<code>dist/main.js</code>；</li>
+</ol>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><strong>入口</strong>（entry）：指示 webpack 应该使用哪个模块，来作为构建其内部依赖图（dependency graph）的开始，默认值是<code>./src/index.js</code>。</li>
+<li><strong>输出</strong>（output）：告诉 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件。主要输出文件的默认值是 <code>./dist/main.js</code>，其他生成文件默认放置在<code>./dist</code>文件夹中。</li>
+<li><strong>加载器</strong>（loader）：让 webpack 能够去处理 js 和 json 以外的其他类型的文件，并将它们转换为有效模块，以供应用程序使用，以及被添加到依赖图中。 </li>
+<li><strong>插件</strong>（plugin）：让 webpack 可以用于执行范围更广的任务。包括：打包优化，资源管理，注入环境变量等。                           </li>
+<li><strong>模式</strong>（mdoe）：通过选择<code>development</code>、<code>production</code>或<code>none</code>之中的一个，来设置 mode 参数，你可以启用 webpack 内置在相应环境下的优化。其默认值为<code>production</code>。</li>
+<li><strong>目标</strong>（target）：告知 webpack 为部署目标指定一个环境。默认值为<code>browserslist</code>，如果没有找到<code>browserslist</code>的配置，则默认为<code>web</code>。      </li>
+<li><strong>模块热替换</strong>（HMR - hot module replacement）：是指在应用程序运行过程中，替换、添加或删除模块，而无需重新加载整个页面。</li>
+<li><strong>初始化块</strong>（initail chunk） 是入口起点的主块。此 chunk 包含为入口起点指定的所有模块及其依赖项。默认名为<code>main.js</code>。</li>
+<li><strong>非初始化块</strong> （non-initial chunk）是可以延迟加载的块。可能会出现在使用 动态导入(dynamic imports) 或者 SplitChunksPlugin 时。默认情况下，这些非初始化块没有名称，因此会使用唯一 ID 来替代名称。</li>
+</ul>
+<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><p>webpack 可以无需使用任何配置文件。webpack 会假定项目的入口起点为<code>src/index.js</code>，然后会在<code>dist/main.js</code>输出结果，并且在生产环境开启压缩和优化。但通常我们还需要对 webpack 进行更精细化的配置，以充分发挥 webpack 的能力。</p>
+<p>习惯性的将配置文件拆分为三个配置文件，并提取公共配置部分到<code>webpack.common.js</code>，然后分别将开发模式和生产模式的配置放在<code>webpack.dev.js</code>和<code>webpack.prod.js</code>中，并用<code>webpack-merge</code>合并公共部分的配置。</p>
+<p>最后<code>package.json</code>中添加 webpack 的 script 启动命令，让 webpack 使用自定义的配置文件替代默认的<code>webpack.config.js</code>：</p>
+<p><strong>package.json</strong></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;script&quot; : &#123;</span><br><span class="line">    &quot;serve&quot;: &quot;webpack --config webpack.dev.js&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;webpack --config webpack.prod.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>遵循不重复原则(Don’t repeat yourself - DRY)，保留一个通用配置，将相同的公共配置放入<code>webpack.common.js</code>中：</p>
+<p><strong>webpack.common.js</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: &#123;</span><br><span class="line">        index: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">        print: <span class="string">&#x27;./src/print.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: <span class="string">&#x27;[name].bundle.js&#x27;</span>,</span><br><span class="line">        path: path.resolve(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [&#123;</span><br><span class="line">            test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">            include: path.resolve(__dirname, <span class="string">&#x27;src&#x27;</span>),</span><br><span class="line">            loader: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">        &#125;, ],</span><br><span class="line">    &#125;,</span><br><span class="line">    resolve: &#123;</span><br><span class="line">        symlinks: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    optimization: &#123;</span><br><span class="line">        sideEffects: <span class="literal">true</span>,</span><br><span class="line">        usedExports: <span class="literal">true</span>,</span><br><span class="line">        splitChunks: &#123;</span><br><span class="line">            chunks: <span class="string">&#x27;async&#x27;</span>, <span class="comment">// 对哪些块进行优化，all | async | initial，</span></span><br><span class="line">            cacheGroups: &#123;</span><br><span class="line">                vendors: &#123;</span><br><span class="line">                    test: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">                    priority: -<span class="number">10</span>,</span><br><span class="line">                    reuseExistingChunk: <span class="literal">true</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="keyword">default</span>: &#123;</span><br><span class="line">                    minChunks: <span class="number">2</span>,</span><br><span class="line">                    priority: -<span class="number">20</span>,</span><br><span class="line">                    reuseExistingChunk: <span class="literal">true</span>,</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>将开发模式的配置放入<code>webpack.dev.js</code>中：</p>
+<p><strong>webpack.dev.js</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.common.js&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">    merge</span><br><span class="line">&#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack-merge&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = merge(config, &#123;</span><br><span class="line">    mode: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    devtool: <span class="string">&#x27;source-map&#x27;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        publicPath: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        open: <span class="literal">true</span>,</span><br><span class="line">        host: <span class="string">&quot;localhost&quot;</span>,</span><br><span class="line">        port: <span class="number">8000</span>,</span><br><span class="line">        hot: <span class="literal">true</span>,</span><br><span class="line">        historyApiFallback: &#123;</span><br><span class="line">            index: <span class="string">&#x27;/index.html&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [&#123;</span><br><span class="line">                test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                use: [</span><br><span class="line">                    <span class="string">&#x27;vue-style-loader&#x27;</span>,</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            esModule: <span class="literal">false</span>,</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.less$/</span>,</span><br><span class="line">                use: [</span><br><span class="line">                    <span class="string">&#x27;vue-style-loader&#x27;</span>,</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            esModule: <span class="literal">false</span>,</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    optimization: &#123;</span><br><span class="line">        runtimeChunk: <span class="string">&#x27;single&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>将生产模式的配置放入<code>webpack.prod.js</code>中：</p>
+<p><strong>webpack.prod.js</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; merge &#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack-merge&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.common.js&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; CleanWebpackPlugin &#125; = <span class="built_in">require</span>(<span class="string">&#x27;clean-webpack-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> MiniCssExtractPlugin = <span class="built_in">require</span>(<span class="string">&#x27;mini-css-extract-plugin&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> OptimizeCssAssetsPlugin = <span class="built_in">require</span>(<span class="string">&#x27;optimize-css-assets-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = merge(config, &#123;</span><br><span class="line">    mode: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        publicPath: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> CleanWebpackPlugin(),</span><br><span class="line">        <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">            filename: <span class="string">&#x27;css/[name].[contenthash:8].css&#x27;</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> OptimizeCssAssetsPlugin(&#123;</span><br><span class="line">            assetNameRegExp: <span class="regexp">/\.css$/</span>,</span><br><span class="line">            cssProcessor: <span class="built_in">require</span>(<span class="string">&#x27;cssnano&#x27;</span>),</span><br><span class="line">            cssProcessorPluginOptions: &#123;</span><br><span class="line">                preset: [<span class="string">&#x27;default&#x27;</span>, &#123;</span><br><span class="line">                    discardComments: &#123;</span><br><span class="line">                        removeAll: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;],</span><br><span class="line">            &#125;,</span><br><span class="line">            canPrint: <span class="literal">true</span></span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [&#123;</span><br><span class="line">                test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                sideEffects: <span class="literal">true</span>,</span><br><span class="line">                use: [&#123;</span><br><span class="line">                        loader: MiniCssExtractPlugin.loader,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            publicPath: <span class="string">&quot;../&quot;</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;postcss-loader&#x27;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.less$/</span>,</span><br><span class="line">                sideEffects: <span class="literal">true</span>,</span><br><span class="line">                use: [&#123;</span><br><span class="line">                        loader: MiniCssExtractPlugin.loader,</span><br><span class="line">                        options: &#123;</span><br><span class="line">                            publicPath: <span class="string">&quot;../&quot;</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;postcss-loader&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;less-loader&#x27;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用 webpack-cli 脚手架初始化项目，需要安装 @webpack-cli/generators 依赖；<br>根据项目需要选择相应配置；</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&gt; npx webpack-cli init &lt;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现热重载"><a href="#实现热重载" class="headerlink" title="实现热重载"></a>实现热重载</h4><p>热重载能为开发提供极大的便利，不需要每次修改代码后手动编译，然后在浏览器中手动刷新页面来观察效果；同时每次只更新改动部分的代码，并且将编译的结果存在内存中；通过在内存中（而不是写入磁盘）编译和 serve 资源来提高性能。这里提供两种实现热重载的方式：</p>
+<p><strong>webpack-dev-serve</strong><br>使用 webpack 官方提供的开发服务器实现热重载是最简便的方式，需要安装开发依赖<code>webpack-dev-serve</code>，然后只需要在<code>webpack.dev.js</code>配置文件中添加 devSever 项的配置即可；</p>
+<p><strong>webpack watch + live server</strong><br>使用 webpack 的 watch 模式是一种替代方案，它会实时监听文件的变动，编辑保存后便开始编译，并将文件输出到 dist 文件夹下，然后开启 VS Code 的插件 live server 即可实现模块热替换。</p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><ol>
+<li>package.json 属性说明</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>name</code></td>
+<td align="left">设置软件包的名称。</td>
+</tr>
+<tr>
+<td align="left"><code>author</code></td>
+<td align="left">列出软件包的作者名称。</td>
+</tr>
+<tr>
+<td align="left"><code>contributors</code></td>
+<td align="left">除作者外，该项目可以有一个或多个贡献者。 此属性是列出他们的数组。</td>
+</tr>
+<tr>
+<td align="left"><code>bugs</code></td>
+<td align="left">链接到软件包的问题跟踪器，最常用的是 GitHub 的 issues 页面。</td>
+</tr>
+<tr>
+<td align="left"><code>homepage</code></td>
+<td align="left">设置软件包的主页。</td>
+</tr>
+<tr>
+<td align="left"><code>version</code></td>
+<td align="left">指定软件包的当前版本。x.x.x 分别表示主版本号、次版本号、补丁版本号仅修复缺陷的版本是补丁版本，引入向后兼容的更改的版本是次版本，具有重大更改的是主版本。</td>
+</tr>
+<tr>
+<td align="left"><code>license</code></td>
+<td align="left">指定软件包的许可证。</td>
+</tr>
+<tr>
+<td align="left"><code>keywords</code></td>
+<td align="left">此属性包含与软件包功能相关的关键字数组。</td>
+</tr>
+<tr>
+<td align="left"><code>description</code></td>
+<td align="left">此属性包含了对软件包的简短描述。</td>
+</tr>
+<tr>
+<td align="left"><code>repository</code></td>
+<td align="left">此属性指定了此程序包仓库所在的位置。</td>
+</tr>
+<tr>
+<td align="left"><code>main</code></td>
+<td align="left">设置软件包的入口点。</td>
+</tr>
+<tr>
+<td align="left"><code>private</code></td>
+<td align="left">如果设置为 true，则可以防止应用程序/软件包被意外发布到 npm 上。</td>
+</tr>
+<tr>
+<td align="left"><code>scripts</code></td>
+<td align="left">可以定义一组可以运行的 node 脚本。</td>
+</tr>
+<tr>
+<td align="left"><code>dependencies</code></td>
+<td align="left">设置作为依赖安装的 npm 软件包的列表。</td>
+</tr>
+<tr>
+<td align="left"><code>devDependencies</code></td>
+<td align="left">设置作为开发依赖安装的 npm 软件包的列表。</td>
+</tr>
+<tr>
+<td align="left"><code>browserslist</code></td>
+<td align="left">用于告知要支持哪些浏览器（及其版本）。 Babel、Autoprefixer 和其他工具会用到它，以将所需的 polyfill 和 fallback 添加到目标浏览器。</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>软件包版本说明符</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">~</td>
+<td align="left">如果写入的是 〜0.13.0，则只更新补丁版本：即 0.13.1 可以，但 0.14.0 不可以。</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">如果写入的是 ^0.13.0，则要更新补丁版本和次版本：即 0.13.1、0.14.0、依此类推。</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">如果写入的是 *，则表示接受所有的更新，包括主版本升级。</td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">接受高于指定版本的任何版本。</td>
+</tr>
+<tr>
+<td align="left">&gt;=</td>
+<td align="left">接受等于或高于指定版本的任何版本。</td>
+</tr>
+<tr>
+<td align="left">&lt;=</td>
+<td align="left">接受等于或低于指定版本的任何版本。</td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">接受低于指定版本的任何版本。</td>
+</tr>
+<tr>
+<td align="left">无符号</td>
+<td align="left">仅接受指定的特定版本。</td>
+</tr>
+<tr>
+<td align="left">latest</td>
+<td align="left">使用可用的最新版本。</td>
+</tr>
+<tr>
+<td align="left">||</td>
+<td align="left">使用范围组合</td>
+</tr>
+</tbody></table>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://webpack.docschina.org/">webpack中文官方文档</a></li>
+<li><a href="https://v4.webpack.js.org/">webpack v4 官网</a></li>
+<li><a href="https://github.com/ronami/minipack">一个简单打包工具的详细说明</a></li>
+<li><a href="https://blog.csdn.net/weixin_33936401/article/details/87963738">nodejs 中的依赖管理</a></li>
+<li><a href="https://github.com/Coley48/webpack">个人webpack项目地址</a></li>
+<li><a href="https://github.com/Coley48/webpack-code">个人webpack测试代码项目地址</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>学习笔记</tag>
+        <tag>Webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>写给自己</title>
     <url>/2021/06/29/%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/</url>
     <content><![CDATA[<p>首先要对自己说一句：“毕业快乐！”。<br>四年大学生活已经落下帷幕，从此也踏上了新的人生征途。<br>纵观整个大学四年，我觉得自己过得很充实，也没留下什么遗憾。</p>
