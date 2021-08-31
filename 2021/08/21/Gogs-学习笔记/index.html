@@ -20,15 +20,24 @@
     var CONFIG = {"hostname":"blog.coley48.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Coley&#39;s Blog">
-<meta property="og:url" content="http://blog.coley48.cn/tags/%E6%97%A5%E8%AE%B0/index.html">
+  <meta name="description" content="什么是 Gogs?Gogs 是一款极易搭建的自助 Git 服务。可以根据操作系统平台下载二进制运行，或者通过 Docker 或 Vagrant，以及包管理安装。Gogs 是用 Go 语言开发，因此任何 Go 语言支持的平台都可以运行 Gogs，包括 Windows、Mac、Linux 以及 ARM。一个廉价的树莓派的配置足以满足 Gogs 的最低系统硬件要求。甚至还可以将 Gogs 运行在 NAS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gogs-学习笔记">
+<meta property="og:url" content="http://blog.coley48.cn/2021/08/21/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Coley&#39;s Blog">
+<meta property="og:description" content="什么是 Gogs?Gogs 是一款极易搭建的自助 Git 服务。可以根据操作系统平台下载二进制运行，或者通过 Docker 或 Vagrant，以及包管理安装。Gogs 是用 Go 语言开发，因此任何 Go 语言支持的平台都可以运行 Gogs，包括 Windows、Mac、Linux 以及 ARM。一个廉价的树莓派的配置足以满足 Gogs 的最低系统硬件要求。甚至还可以将 Gogs 运行在 NAS">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.coley48.cn/2021/08/21/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Gogs%E8%BF%90%E8%A1%8C.png">
+<meta property="article:published_time" content="2021-08-21T10:22:03.000Z">
+<meta property="article:modified_time" content="2021-08-31T13:26:47.193Z">
 <meta property="article:author" content="Coley Brooks">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Gogs">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.coley48.cn/2021/08/21/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Gogs%E8%BF%90%E8%A1%8C.png">
 
-<link rel="canonical" href="http://blog.coley48.cn/tags/%E6%97%A5%E8%AE%B0/">
+<link rel="canonical" href="http://blog.coley48.cn/2021/08/21/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
 
 <script id="page-configurations">
@@ -36,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 日记 | Coley's Blog</title>
+  <title>Gogs-学习笔记 | Coley's Blog</title>
   
 
 
@@ -182,91 +191,165 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">日记
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.coley48.cn/2021/08/21/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpg">
+      <meta itemprop="name" content="Coley Brooks">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coley's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Gogs-学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-21 10:22:03" itemprop="dateCreated datePublished" datetime="2021-08-21T10:22:03+00:00">2021-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-31 13:26:47" itemprop="dateModified" datetime="2021-08-31T13:26:47+00:00">2021-08-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>509</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <h3 id="什么是-Gogs"><a href="#什么是-Gogs" class="headerlink" title="什么是 Gogs?"></a>什么是 Gogs?</h3><p>Gogs 是一款极易搭建的自助 Git 服务。可以根据操作系统平台下载二进制运行，或者通过 Docker 或 Vagrant，以及包管理安装。Gogs 是用 Go 语言开发，因此任何 Go 语言支持的平台都可以运行 Gogs，包括 Windows、Mac、Linux 以及 ARM。一个廉价的树莓派的配置足以满足 Gogs 的最低系统硬件要求。甚至还可以将 Gogs 运行在 NAS 设备上。</p>
+<p>Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过独立的二进制分发，并且支持 Go 语言支持的 所有平台，包括 Linux、Mac OS X、Windows 以及 ARM 平台。</p>
+<span id="more"></span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="源文件安装"><a href="#源文件安装" class="headerlink" title="源文件安装"></a>源文件安装</h4><ol>
+<li>克隆 Gogs 仓库</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> --depth 1 https://github.com/gogs/gogs.git gogs</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-08-31T13:55:06+00:00"
-              content="2021-08-31">
-          08-31
-        </time>
-      </div>
+<ol start="2">
+<li>进入仓库文件夹下，执行编译</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> build -o gogs</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/08/31/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/" itemprop="url">
-            <span itemprop="name">我的大学</span>
-          </a>
-      </div>
+<ol start="3">
+<li>测试是否安装正确</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gogs web</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </article>
+<img src="/2021/08/21/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Gogs%E8%BF%90%E8%A1%8C.png" class="">
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-29T22:32:01+00:00"
-              content="2021-06-29">
-          06-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/29/%E5%86%99%E7%BB%99%E8%87%AA%E5%B7%B1/" itemprop="url">
-            <span itemprop="name">写给自己</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-27T17:09:37+00:00"
-              content="2021-05-27">
-          05-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/27/%E6%96%AF%E4%BA%BA%E5%B7%B2%E5%8E%BB%EF%BC%8C%E4%B8%BE%E5%9B%BD%E7%9A%86%E5%93%80/" itemprop="url">
-            <span itemprop="name">斯人已去，举国皆哀</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+<ol start="4">
+<li>初始配置，Gogs 默认会在端口<code>3000</code>启动 HTTP 服务</li>
+</ol>
+<h4 id="二进制安装"><a href="#二进制安装" class="headerlink" title="二进制安装"></a>二进制安装</h4><p>步骤</p>
+<ol>
+<li>解压压缩包。</li>
+<li>使用命令 cd 进入到刚刚创建的目录。</li>
+<li>执行命令 <code>./gogs web</code>。</li>
+<li>访问<code>/install</code>以进行初始配置。</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://gogs.io/docs">官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gogs/gogs/releases">历史版本</a></li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Coley Brooks
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.coley48.cn/2021/08/21/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Gogs-学习笔记">http://blog.coley48.cn/2021/08/21/Gogs-学习笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/notes/" rel="tag"># notes</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Gogs/" rel="tag"># Gogs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/28/Webpack-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Webpack-学习笔记">
+      <i class="fa fa-chevron-left"></i> Webpack-学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/31/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/" rel="next" title="我的大学">
+      我的大学 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -319,6 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Gogs"><span class="nav-number">1.</span> <span class="nav-text">什么是 Gogs?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">安装方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">源文件安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">二进制安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
