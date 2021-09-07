@@ -117,7 +117,7 @@ unicode: 12.1
 
 - 配置 Git
 
-如果初次使用Git，需要设置用户名和邮箱。打开Git Bash，设置全局用户名和邮箱。
+如果初次使用 Git，需要设置用户名和邮箱。打开 Git Bash，设置全局用户名和邮箱。
 
 ```bash
 $ git config --global user.name coley48
