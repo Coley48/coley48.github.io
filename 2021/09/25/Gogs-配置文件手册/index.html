@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.coley48.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="配置参数该配置文件手册是有关 Gogs 配置文件选项的详尽描述，主要为了方便使用 Gogs 时查相关配置项。注：Gogs 任何修改都是发生在custom&#x2F;conf&#x2F;app.ini自定义配置文件中，该文件的具体位置与您的设置有关。完整的默认设置可以通过app.ini文件查看。如果看到类似%(X)s字符，这是由 ini 提供的递归取值的特性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gogs-配置文件手册">
+<meta property="og:url" content="http://blog.coley48.cn/2021/09/25/Gogs-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="Coley&#39;s Blog">
+<meta property="og:description" content="配置参数该配置文件手册是有关 Gogs 配置文件选项的详尽描述，主要为了方便使用 Gogs 时查相关配置项。注：Gogs 任何修改都是发生在custom&#x2F;conf&#x2F;app.ini自定义配置文件中，该文件的具体位置与您的设置有关。完整的默认设置可以通过app.ini文件查看。如果看到类似%(X)s字符，这是由 ini 提供的递归取值的特性。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-25T16:05:52.000Z">
+<meta property="article:modified_time" content="2021-09-25T12:57:27.816Z">
+<meta property="article:author" content="Coley Brooks">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="Gogs">
+<meta property="article:tag" content="自查手册">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.coley48.cn/2021/09/25/Gogs-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%89%8B%E5%86%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Gogs-配置文件手册 | Coley's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Coley's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">君之所向，一往无前。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-意见">
+
+    <a href="/reform/" rel="section"><i class="fa fa-calendar fa-fw"></i>意见</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Coley48" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.coley48.cn/2021/09/25/Gogs-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpg">
+      <meta itemprop="name" content="Coley Brooks">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coley's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Gogs-配置文件手册
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-25 16:05:52 / 修改时间：12:57:27" itemprop="dateCreated datePublished" datetime="2021-09-25T16:05:52+00:00">2021-09-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><p>该配置文件手册是有关 Gogs 配置文件选项的详尽描述，主要为了方便使用 Gogs 时查相关配置项。<br>注：Gogs 任何修改都是发生在<code>custom/conf/app.ini</code>自定义配置文件中，该文件的具体位置与您的设置有关。<br>完整的默认设置可以通过<code>app.ini</code>文件查看。如果看到类似<code>%(X)s</code>字符，这是由 ini 提供的递归取值的特性。</p>
+<span id="more"></span>
+
+<p><strong>概览</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">APP_NAME</td>
+<td align="left">应用名称，可以改成您的组织或公司名称</td>
+</tr>
+<tr>
+<td align="left">RUN_USER</td>
+<td align="left">运行应用的用户名称，我们建议您使用 git，但如果您在个人计算机上运行 Gogs，请修改为您的系统用户名称。如果没有正确设置这个值，很可能导致您的应用崩溃</td>
+</tr>
+<tr>
+<td align="left">RUN_MODE</td>
+<td align="left">鉴于性能和其它考虑，建议在部署环境下修改为 prod 模式。在您完成安装操作时，该值也会被设置为 prod</td>
+</tr>
+</tbody></table>
+<p><strong>服务器 (server)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">PROTOCOL</td>
+<td align="left">http 或 https</td>
+</tr>
+<tr>
+<td align="left">DOMAIN</td>
+<td align="left">服务器域名</td>
+</tr>
+<tr>
+<td align="left">ROOT_URL</td>
+<td align="left">公开的完整 URL 路径</td>
+</tr>
+<tr>
+<td align="left">HTTP_ADDR</td>
+<td align="left">应用 HTTP 监听地址</td>
+</tr>
+<tr>
+<td align="left">HTTP_PORT</td>
+<td align="left">应用 HTTP 监听端口号</td>
+</tr>
+<tr>
+<td align="left">UNIX_SOCKET_PERMISSION</td>
+<td align="left">Unix 套接字文件的权限</td>
+</tr>
+<tr>
+<td align="left">LOCAL_ROOT_URL</td>
+<td align="left">用于 Gogs 工作进程（如：SSH）回访应用的本地（DMZ）URL，一般情况下请保持默认值，除非您的 SSH 服务器节点与 HTTP 并不是同一个节点入口</td>
+</tr>
+<tr>
+<td align="left">DISABLE_SSH</td>
+<td align="left">当 SSH 功能不可用时可以禁用</td>
+</tr>
+<tr>
+<td align="left">START_SSH_SERVER</td>
+<td align="left">启用该选项来启动内置 SSH 服务器</td>
+</tr>
+<tr>
+<td align="left">SSH_DOMAIN</td>
+<td align="left">允许公用网络访问 SSH 的域名</td>
+</tr>
+<tr>
+<td align="left">SSH_PORT</td>
+<td align="left">SSH 端口号，如果不为 22 的话可以在此修改</td>
+</tr>
+<tr>
+<td align="left">SSH_LISTEN_HOST</td>
+<td align="left">内置 SSH 服务器监听的地址</td>
+</tr>
+<tr>
+<td align="left">SSH_LISTEN_PORT</td>
+<td align="left">内置 SSH 服务器监听的端口</td>
+</tr>
+<tr>
+<td align="left">SSH_ROOT_PATH</td>
+<td align="left">SSH 根目录，一般为 ~/.ssh，但必须填写为 /home/git/.ssh</td>
+</tr>
+<tr>
+<td align="left">REWRITE_AUTHORIZED_KEYS_AT_START</td>
+<td align="left">激活该选项以在应用启动时自动重写 authorized_keys 文件，该选项在使用内置 SSH 服务器时将会被自动禁用</td>
+</tr>
+<tr>
+<td align="left">SSH_KEY_TEST_PATH</td>
+<td align="left">用于测试 SSH 公钥的临时目录</td>
+</tr>
+<tr>
+<td align="left">SSH_KEYGEN_PATH</td>
+<td align="left">ssh-keygen 程序的路径，默认为 ssh-keygen 即通过系统路径查找</td>
+</tr>
+<tr>
+<td align="left">MINIMUM_KEY_SIZE_CHECK</td>
+<td align="left">指定不同类型的公钥的最小密钥大小</td>
+</tr>
+<tr>
+<td align="left">OFFLINE_MODE</td>
+<td align="left">激活该选项来禁止从 CDN 获取静态资源，同时 Gravatar 服务也将被自动禁用</td>
+</tr>
+<tr>
+<td align="left">DISABLE_ROUTER_LOG</td>
+<td align="left">激活该选项来禁止打印路由日志</td>
+</tr>
+<tr>
+<td align="left">CERT_FILE</td>
+<td align="left">HTTPS 授权文件路径</td>
+</tr>
+<tr>
+<td align="left">KEY_FILE</td>
+<td align="left">HTTPS 的密钥文件路径</td>
+</tr>
+<tr>
+<td align="left">STATIC_ROOT_PATH</td>
+<td align="left">模板文件和静态文件的上级目录，默认为应用二进制所在的位置</td>
+</tr>
+<tr>
+<td align="left">APP_DATA_PATH</td>
+<td align="left">应用内部数据的存放目录</td>
+</tr>
+<tr>
+<td align="left">ENABLE_GZIP</td>
+<td align="left">激活该选项来启用应用级别 GZIP 支持</td>
+</tr>
+<tr>
+<td align="left">LANDING_PAGE</td>
+<td align="left">未登录用户的默认首页，可以是 home 或 explore（探索页）</td>
+</tr>
+</tbody></table>
+<p><strong>仓库 (repository)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ROOT</td>
+<td align="left">用户仓库存储根目录，必须为绝对路径，默认为 ~/<user name>/gogs-repositories</td>
+</tr>
+<tr>
+<td align="left">SCRIPT_TYPE</td>
+<td align="left">系统脚本类型，一般情况下均为 bash，但有些用户反应只能使用 sh</td>
+</tr>
+<tr>
+<td align="left">ANSI_CHARSET</td>
+<td align="left">当遇到无法识别的字符集时使用的默认字符集</td>
+</tr>
+<tr>
+<td align="left">FORCE_PRIVATE</td>
+<td align="left">强制要求所有新建的仓库都是私有的</td>
+</tr>
+<tr>
+<td align="left">MAX_CREATION_LIMIT</td>
+<td align="left">全局默认的每个用户可创建创建仓库上限，-1 表示无限制</td>
+</tr>
+<tr>
+<td align="left">PREFERRED_LICENSES</td>
+<td align="left">建议用户首选的授权类型</td>
+</tr>
+<tr>
+<td align="left">DISABLE_HTTP_GIT</td>
+<td align="left">激活该选项来禁止用户通过 HTTP 对 Git 仓库进行交互操作，即用户只能通过 SSH 操作</td>
+</tr>
+<tr>
+<td align="left">ENABLE_LOCAL_PATH_MIGRATION</td>
+<td align="left">激活该选项来启用本地路径迁移仓库功能。启动后默认只有管理员可以使用，普通用户必须经由管理员授权</td>
+</tr>
+<tr>
+<td align="left">ENABLE_RAW_FILE_RENDER_MODE</td>
+<td align="left">激活该选项来启用在查看原始数据时对页面进行真实渲染，例如渲染实际的 HTML 页面，有潜在安全隐患</td>
+</tr>
+</tbody></table>
+<p><strong>仓库 - 编辑器 (repository.editor)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LINE_WRAP_EXTENSIONS</td>
+<td align="left">需要显示为行包装的文件名后缀，通过逗号分隔。如果是无后缀名的文件，则单独放置一个逗号，例如：.txt,</td>
+</tr>
+</tbody></table>
+<p><strong>仓库 - 文件上传 (repository.upload)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项来启用仓库文件上传功能</td>
+</tr>
+<tr>
+<td align="left">TEMP_PATH</td>
+<td align="left">文件上传的临时存放目录</td>
+</tr>
+<tr>
+<td align="left">ALLOWED_TYPES</td>
+<td align="left">允许上传的文件类型（例如：”image/jpeg|image/png”），留空表示允许上传任意类型的文件</td>
+</tr>
+<tr>
+<td align="left">FILE_MAX_SIZE</td>
+<td align="left">单个上传的文件的最大体积，以 MB 为单位</td>
+</tr>
+<tr>
+<td align="left">MAX_FILES</td>
+<td align="left">单次同时上传的最多文件个数</td>
+</tr>
+</tbody></table>
+<p><strong>版本发布 - 附件 (release.attachment)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项来启用版本发布附件功能</td>
+</tr>
+<tr>
+<td align="left">PATH</td>
+<td align="left">存放附件的路径</td>
+</tr>
+<tr>
+<td align="left">ALLOWED_TYPES</td>
+<td align="left">允许上传的 MIME 类型，例如 “image/jpeg</td>
+</tr>
+<tr>
+<td align="left">MAX_SIZE</td>
+<td align="left">最大允许上传的附件体积，单位为 MB，例如 32</td>
+</tr>
+<tr>
+<td align="left">MAX_FILES</td>
+<td align="left">最大允许一次性上传的附件个数，例如 10</td>
+</tr>
+</tbody></table>
+<p><strong>Markdown (markdown)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLE_HARD_LINE_BREAK</td>
+<td align="left">指示是否启用硬性换行扩展</td>
+</tr>
+<tr>
+<td align="left">CUSTOM_URL_SCHEMES</td>
+<td align="left">允许被解析为链接的自定义 URL 方案，例如 git（用于 git://）和magnet（用于 magnet://）</td>
+</tr>
+<tr>
+<td align="left">FILE_EXTENSIONS</td>
+<td align="left">需要被渲染为 Markdown 格式的文件名后缀，通过逗号分隔。如果是无后缀名的文件，则单独放置一个逗号，例如：.markdown,</td>
+</tr>
+</tbody></table>
+<p><strong>Smartypants (smartypants)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">指示是否启用 Smartypants 扩展</td>
+</tr>
+</tbody></table>
+<p><strong>HTTP (http)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ACCESS_CONTROL_ALLOW_ORIGIN</td>
+<td align="left">头信息 Access-Control-Allow-Origin 的自定义值，默认为空，即不响应此头信息</td>
+</tr>
+</tbody></table>
+<p><strong>数据库 (database)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DB_TYPE</td>
+<td align="left">数据库类型，可以是 mysql、postgres、mssql 或 sqlite3</td>
+</tr>
+<tr>
+<td align="left">HOST</td>
+<td align="left">数据库主机地址与端口</td>
+</tr>
+<tr>
+<td align="left">NAME</td>
+<td align="left">数据库名称</td>
+</tr>
+<tr>
+<td align="left">USER</td>
+<td align="left">数据库用户名</td>
+</tr>
+<tr>
+<td align="left">PASSWD</td>
+<td align="left">数据库用户密码</td>
+</tr>
+<tr>
+<td align="left">SSL_MODE</td>
+<td align="left">仅限 PostgreSQL 使用</td>
+</tr>
+<tr>
+<td align="left">PATH</td>
+<td align="left">仅限 SQLite3 使用，数据库文件路径</td>
+</tr>
+</tbody></table>
+<p><strong>应用管理 (admin)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DISABLE_REGULAR_ORG_CREATION</td>
+<td align="left">激活该选项来禁止普通用户（非管理员）创建组织</td>
+</tr>
+</tbody></table>
+<p><strong>安全 (security)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">INSTALL_LOCK</td>
+<td align="left">用于指示是否允许访问安装页面（该页面可以设置管理员帐号，因此该选项非常重要）</td>
+</tr>
+<tr>
+<td align="left">SECRET_KEY</td>
+<td align="left">全局的加密密钥，务必修改该值以确保您的服务器安全（会在每次安装时自动生成随机字符串）</td>
+</tr>
+<tr>
+<td align="left">LOGIN_REMEMBER_DAYS</td>
+<td align="left">记住登录的天数</td>
+</tr>
+<tr>
+<td align="left">COOKIE_USERNAME</td>
+<td align="left">记录用户名的 Cookie 名称</td>
+</tr>
+<tr>
+<td align="left">COOKIE_REMEMBER_NAME</td>
+<td align="left">记录用户自动登录信息的 Cookie 名称</td>
+</tr>
+<tr>
+<td align="left">REVERSE_PROXY_AUTHENTICATION_USER</td>
+<td align="left">反向代理认证用户的 Header 字段名</td>
+</tr>
+</tbody></table>
+<p><strong>服务 (service)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ACTIVE_CODE_LIVE_MINUTES</td>
+<td align="left">激活码的有效期，单位为分钟</td>
+</tr>
+<tr>
+<td align="left">RESET_PASSWD_CODE_LIVE_MINUTES</td>
+<td align="left">重置密码的有效期，单位为分钟</td>
+</tr>
+<tr>
+<td align="left">REGISTER_EMAIL_CONFIRM</td>
+<td align="left">激活该选项来要求注册用户必须验证邮箱，要求已启用 Mailer</td>
+</tr>
+<tr>
+<td align="left">DISABLE_REGISTRATION</td>
+<td align="left">激活该选项来禁止用户注册功能，只能由管理员创建帐号</td>
+</tr>
+<tr>
+<td align="left">SHOW_REGISTRATION_BUTTON</td>
+<td align="left">用于指示是否显示注册按钮</td>
+</tr>
+<tr>
+<td align="left">REQUIRE_SIGNIN_VIEW</td>
+<td align="left">激活该选项来要求用户必须登录才能浏览任何页面</td>
+</tr>
+<tr>
+<td align="left">ENABLE_CACHE_AVATAR</td>
+<td align="left">激活该选项来缓存 Gravatar 的头像</td>
+</tr>
+<tr>
+<td align="left">ENABLE_NOTIFY_MAIL</td>
+<td align="left">激活该选项来发送通知邮件给关注者，例如创建 issue 时，要求已启用 Mailer</td>
+</tr>
+<tr>
+<td align="left">ENABLE_REVERSE_PROXY_AUTHENTICATION</td>
+<td align="left">激活该选项来开启反向代理用户认证，请从 #165 了解更多信息</td>
+</tr>
+<tr>
+<td align="left">ENABLE_REVERSE_PROXY_AUTO_REGISTRATION</td>
+<td align="left">激活该选项来开启反向代理用户认证的自动注册功能</td>
+</tr>
+<tr>
+<td align="left">DISABLE_MINIMUM_KEY_SIZE_CHECK</td>
+<td align="left">激活该选项来禁止检查响应类型的密钥最小长度</td>
+</tr>
+<tr>
+<td align="left">ENABLE_CAPTCHA</td>
+<td align="left">激活该选项以在用户注册时要求输入验证码</td>
+</tr>
+</tbody></table>
+<p><strong>Web 钩子 (webhook)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">TYPES</td>
+<td align="left">启动的 Web 钩子类型，可以是 gogs、slack、discord或dingtalk</td>
+</tr>
+<tr>
+<td align="left">QUEUE_LENGTH</td>
+<td align="left">Web钩子队列长度，如果发现部分Webhook未能成功触发，可考虑增加该值</td>
+</tr>
+<tr>
+<td align="left">DELIVER_TIMEOUT</td>
+<td align="left">发送通知的超时时间，以秒为单位</td>
+</tr>
+<tr>
+<td align="left">SKIP_TLS_VERIFY</td>
+<td align="left">指示是否允许向具有非信任证书的地址发送通知</td>
+</tr>
+<tr>
+<td align="left">PAGING_NUM</td>
+<td align="left">Web 钩子历史页面每页显示记录条数</td>
+</tr>
+</tbody></table>
+<p><strong>邮件 (mailer)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">启用该选项以激活邮件服务</td>
+</tr>
+<tr>
+<td align="left">SUBJECT_PREFIX</td>
+<td align="left">邮件标题的前缀</td>
+</tr>
+<tr>
+<td align="left">HOST</td>
+<td align="left">SMTP 主机地址与端口</td>
+</tr>
+<tr>
+<td align="left">DISABLE_HELO</td>
+<td align="left">禁用 HELO 操作</td>
+</tr>
+<tr>
+<td align="left">HELO_HOSTNAME</td>
+<td align="left">HELO 操作的自定义主机名</td>
+</tr>
+<tr>
+<td align="left">SKIP_VERIFY</td>
+<td align="left">不验证自签发证书的有效性</td>
+</tr>
+<tr>
+<td align="left">FROM</td>
+<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#111;&#109;">&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#111;&#109;</a> 的形式</td>
+</tr>
+<tr>
+<td align="left">USER</td>
+<td align="left">邮箱用户名</td>
+</tr>
+<tr>
+<td align="left">PASSWD</td>
+<td align="left">邮箱密码</td>
+</tr>
+<tr>
+<td align="left">USE_PLAIN_TEXT</td>
+<td align="left">使用 text/plain 作为邮件内容格式</td>
+</tr>
+</tbody></table>
+<p>备注：Gogs 仅支持使用 STARTTLS 的 SMTP 协议</p>
+<p><strong>缓存 (cache)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ADAPTER</td>
+<td align="left">缓存引擎适配器，可以为 memory、redis 或 memcache。如果您使用 redis 或 memcache，请确保使用 -tags 选项重新构建所有依赖，例如：go build -tags=’redis’</td>
+</tr>
+<tr>
+<td align="left">INTERVAL</td>
+<td align="left">仅限内存缓存使用，GC 周期，单位为秒</td>
+</tr>
+<tr>
+<td align="left">HOST</td>
+<td align="left">仅限 redis 和 memcache 使用，主机地址和端口号</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">Redis：network=tcp,addr=127.0.0.1:6379,password=macaron,db=0,pool_size=100,idle_timeout=180</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">Memache：127.0.0.1:9090;127.0.0.1:9091</td>
+</tr>
+</tbody></table>
+<p><strong>会话 (session)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">PROVIDER</td>
+<td align="left">Session 引擎提供者，可以是 memory、file、redis 或 mysql</td>
+</tr>
+<tr>
+<td align="left">PROVIDER_CONFIG</td>
+<td align="left">如果提供者为 file，则为文件根目录；如果为其它提供者，则为主机地址和端口号</td>
+</tr>
+<tr>
+<td align="left">COOKIE_SECURE</td>
+<td align="left">激活该选项以要求所有 session 操作均通过 HTTPS</td>
+</tr>
+<tr>
+<td align="left">GC_INTERVAL_TIME</td>
+<td align="left">GC 周期，单位为秒</td>
+</tr>
+</tbody></table>
+<p><strong>图片 (picture)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AVATAR_UPLOAD_PATH</td>
+<td align="left">存放用户上传头像的目录</td>
+</tr>
+<tr>
+<td align="left">GRAVATAR_SOURCE</td>
+<td align="left">可以是 gravatar、duoshuo 或任何 URL，例如：<a target="_blank" rel="noopener" href="http://cn.gravatar.com/avatar/">http://cn.gravatar.com/avatar/</a></td>
+</tr>
+<tr>
+<td align="left">DISABLE_GRAVATAR</td>
+<td align="left">激活该选项来仅使用本地头像</td>
+</tr>
+<tr>
+<td align="left">ENABLE_FEDERATED_AVATAR</td>
+<td align="left">激活该选项来启用 Federated 头像服务（<a target="_blank" rel="noopener" href="http://www.libravatar.org),当/">http://www.libravatar.org），当</a> Gravatar 被禁用时此选项无法生效</td>
+</tr>
+</tbody></table>
+<p><strong>附件 (attachment)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项以允许用户上传附件</td>
+</tr>
+<tr>
+<td align="left">PATH</td>
+<td align="left">存放附件的路径</td>
+</tr>
+<tr>
+<td align="left">ALLOWED_TYPES</td>
+<td align="left">允许上传的 MIME 类型，例如 “image/jpeg</td>
+</tr>
+<tr>
+<td align="left">MAX_SIZE</td>
+<td align="left">最大允许上传的附件体积，单位为 MB，例如 4</td>
+</tr>
+<tr>
+<td align="left">MAX_FILES</td>
+<td align="left">最大允许一次性上传的附件个数，例如 5</td>
+</tr>
+</tbody></table>
+<p><strong>时间 (time)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">FORMAT</td>
+<td align="left">指定日期的输出格式，默认为 RFC1123，其它可选的格式为 ANSIC、UnixDate、RubyDate、RFC822、RFC822Z、RFC850、RFC1123、RFC1123Z、RFC3339、RFC3339Nano、Kitchen、Stamp、StampMilli、StampMicro 和 StampNano。访问 <a target="_blank" rel="noopener" href="http://golang.org/pkg/time/#pkg-constants">http://golang.org/pkg/time/#pkg-constants</a> 查看详情</td>
+</tr>
+</tbody></table>
+<p><strong>日志 (log)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ROOT_PATH</td>
+<td align="left">日志文件的根目录</td>
+</tr>
+<tr>
+<td align="left">MODE</td>
+<td align="left">日志记录模式，默认为 console。如果想要开启多模式，请使用逗号分割，例如：”console, file”</td>
+</tr>
+<tr>
+<td align="left">LEVEL</td>
+<td align="left">基本日志级别，默认为 Trace</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - 控制台 (log.console)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">控制台日志级别，留空则继承父值</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - 文件 (log.file)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">文件日志级别，留空则继承父值</td>
+</tr>
+<tr>
+<td align="left">LOG_ROTATE</td>
+<td align="left">激活该选项以启用日志文件自转</td>
+</tr>
+<tr>
+<td align="left">DAILY_ROTATE</td>
+<td align="left">激活该选项以进行日常自转</td>
+</tr>
+<tr>
+<td align="left">MAX_SIZE_SHIFT</td>
+<td align="left">自转需要达到的最大文件体积，使用位左移，默认为 28 即 1 &lt;&lt; 28，表示 256MB</td>
+</tr>
+<tr>
+<td align="left">MAX_LINES</td>
+<td align="left">自转需要达到的最大文件行数，默认为 1000000</td>
+</tr>
+<tr>
+<td align="left">MAX_DAYS</td>
+<td align="left">保留自转文件的最长期限，默认为 7 天后删除</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - Slack (log.slack)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">Slack 日志级别，留空则继承父值</td>
+</tr>
+<tr>
+<td align="left">URL</td>
+<td align="left">Slack Web 钩子 URL</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - Discord (log.discord)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">Discord 日志级别，留空则继承父值</td>
+</tr>
+<tr>
+<td align="left">URL</td>
+<td align="left">Discord Web 钩子 URL</td>
+</tr>
+<tr>
+<td align="left">USERNAME</td>
+<td align="left">在 Web 钩子中显示的用户名</td>
+</tr>
+</tbody></table>
+<p><strong>Cron (cron)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项以允许周期性运行 Cron 任务</td>
+</tr>
+<tr>
+<td align="left">RUN_AT_START</td>
+<td align="left">激活该选项以允许在启动时执行 Cron 任务</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 更新镜像 (cron.update_mirrors)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时更新仓库镜像的 Cron 语法，例如：@every 1h</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 仓库健康检查 (cron.repo_health_check)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时进行仓库健康检查的 Cron 语法，例如：@every 24h</td>
+</tr>
+<tr>
+<td align="left">TIMEOUT</td>
+<td align="left">仓库健康检查超时的定义语法，例如：60s</td>
+</tr>
+<tr>
+<td align="left">ARGS</td>
+<td align="left">git fsck 命令的参数，例如：–unreachable –tags</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 仓库统计检查 (cron.check_repo_stats)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">RUN_AT_START</td>
+<td align="left">激活该选项以在启动时执行仓库统计检查</td>
+</tr>
+<tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时进行仓库统计检查的 Cron 语法，例如：@every 24h</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 仓库归档清理 (cron.repo_archive_cleanup)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">RUN_AT_START</td>
+<td align="left">激活该选项以在启动时执行仓库归档清理</td>
+</tr>
+<tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时进行仓库归档清理的 Cron 语法，例如：@every 24h</td>
+</tr>
+<tr>
+<td align="left">OLDER_THAN</td>
+<td align="left">仓库归档的文件有效期，过期的归档将被清理，例如：24h</td>
+</tr>
+</tbody></table>
+<p><strong>Git (git)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DISABLE_DIFF_HIGHLIGHT</td>
+<td align="left">激活该选项以禁用行内差异高亮</td>
+</tr>
+<tr>
+<td align="left">MAX_GIT_DIFF_LINES</td>
+<td align="left">差异对比页面单个文件显示的最大行数</td>
+</tr>
+<tr>
+<td align="left">MAX_GIT_DIFF_LINE_CHARACTERS</td>
+<td align="left">差异对比页面单行显示的最大字符数</td>
+</tr>
+<tr>
+<td align="left">MAX_GIT_DIFF_FILES</td>
+<td align="left">差异对比页面文件显示的最多个数</td>
+</tr>
+<tr>
+<td align="left">GC_ARGS</td>
+<td align="left">git gc 命令的参数，例如：–aggressive –auto</td>
+</tr>
+</tbody></table>
+<p><strong>Git - 超时 (git.timeout)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">MIGRATE</td>
+<td align="left">仓库迁移操作超时，默认为 600 秒</td>
+</tr>
+<tr>
+<td align="left">MIRROR</td>
+<td align="left">仓库镜像同步操作超时，默认为 300 秒</td>
+</tr>
+<tr>
+<td align="left">CLONE</td>
+<td align="left">仓库克隆操作超时，默认为 300 秒</td>
+</tr>
+<tr>
+<td align="left">PULL</td>
+<td align="left">仓库拉取操作超时，默认为 300 秒</td>
+</tr>
+<tr>
+<td align="left">GC</td>
+<td align="left">仓库垃圾回收操作超时，默认为 60 秒</td>
+</tr>
+</tbody></table>
+<p><strong>UI (ui)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">EXPLORE_PAGING_NUM</td>
+<td align="left">探索页面每页显示仓库的数量</td>
+</tr>
+<tr>
+<td align="left">ISSUE_PAGING_NUM</td>
+<td align="left">每页显示工单（Issue）的数量（应用到所有以列表形式显示工单的页面）</td>
+</tr>
+<tr>
+<td align="left">FEED_MAX_COMMIT_NUM</td>
+<td align="left">一条最新活动中显示代码提交（Commit）的最大数量</td>
+</tr>
+<tr>
+<td align="left">THEME_COLOR_META_TAG</td>
+<td align="left">被用于 Android &gt;= 5.0 版本 “theme-color” 标记的值，无效的值将被忽略并使用默认值（查看详情）</td>
+</tr>
+<tr>
+<td align="left">MAX_DISPLAY_FILE_SIZE</td>
+<td align="left">显示到页面的最大文件体积（Byte）</td>
+</tr>
+</tbody></table>
+<p><strong>UI - Admin (ui.admin)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">USER_PAGING_NUM</td>
+<td align="left">用户管理页面每页显示记录条数</td>
+</tr>
+<tr>
+<td align="left">REPO_PAGING_NUM</td>
+<td align="left">仓库管理页面每页显示记录条数</td>
+</tr>
+<tr>
+<td align="left">NOTICE_PAGING_NUM</td>
+<td align="left">系统提示管理页面每页显示记录条数</td>
+</tr>
+<tr>
+<td align="left">ORG_PAGING_NUM</td>
+<td align="left">组织管理页面每页显示记录条数</td>
+</tr>
+</tbody></table>
+<p><strong>Prometheus (prometheus)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项以启用 Prometheus 监控信息，默认为 true</td>
+</tr>
+<tr>
+<td align="left">ENABLE_BASIC_AUTH</td>
+<td align="left">激活该选项以启用 HTTP 基本认证保护监控信息数据，默认为 false</td>
+</tr>
+<tr>
+<td align="left">BASIC_AUTH_USERNAME</td>
+<td align="left">HTTP 基本认证的用户名</td>
+</tr>
+<tr>
+<td align="left">BASIC_AUTH_PASSWORD</td>
+<td align="left">HTTP 基本认证的密码</td>
+</tr>
+</tbody></table>
+<p><strong>其他 (other)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SHOW_FOOTER_BRANDING</td>
+<td align="left">激活该选项以在页脚显示 Gogs 推广信息</td>
+</tr>
+<tr>
+<td align="left">SHOW_FOOTER_VERSION</td>
+<td align="left">激活该选项以在页脚显示 Gogs 版本信息</td>
+</tr>
+<tr>
+<td align="left">SHOW_FOOTER_TEMPLATE_LOAD_TIME</td>
+<td align="left">激活该选项以在页脚显示 Gogs 模板加载时间</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Coley Brooks
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.coley48.cn/2021/09/25/Gogs-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%89%8B%E5%86%8C/" title="Gogs-配置文件手册">http://blog.coley48.cn/2021/09/25/Gogs-配置文件手册/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/notes/" rel="tag"># notes</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/Gogs/" rel="tag"># Gogs</a>
+              <a href="/tags/%E8%87%AA%E6%9F%A5%E6%89%8B%E5%86%8C/" rel="tag"># 自查手册</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/05/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Gogs-学习笔记">
+      <i class="fa fa-chevron-left"></i> Gogs-学习笔记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">配置参数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Coley Brooks"
+      src="/images/avator.jpg">
+  <p class="site-author-name" itemprop="name">Coley Brooks</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Coley48" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Coley48" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:coley48@qq.com" title="E-Mail → mailto:coley48@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hush</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.95,"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

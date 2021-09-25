@@ -140,6 +140,1149 @@
       </tags>
   </entry>
   <entry>
+    <title>Gogs-学习笔记</title>
+    <url>/2021/09/05/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h3 id="什么是-Gogs"><a href="#什么是-Gogs" class="headerlink" title="什么是 Gogs?"></a>什么是 Gogs?</h3><p>Gogs 是一款极易搭建的自助 Git 服务。可以根据操作系统平台下载二进制运行，或者通过 Docker 或 Vagrant，以及包管理安装。Gogs 是用 Go 语言开发，因此任何 Go 语言支持的平台都可以运行 Gogs，包括 Windows、Mac、Linux 以及 ARM。一个廉价的树莓派的配置足以满足 Gogs 的最低系统硬件要求。甚至还可以将 Gogs 运行在 NAS 设备上。</p>
+<p>Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过独立的二进制分发，并且支持 Go 语言支持的 所有平台，包括 Linux、Mac OS X、Windows 以及 ARM 平台。</p>
+<span id="more"></span>
+
+<h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><p>数据库（选择以下一项）：</p>
+<ul>
+<li>MySQL：版本 &gt;= 5.7</li>
+<li>PostgreSQL</li>
+<li>TiDB（实验性支持，使用 MySQL 协议连接）</li>
+<li>或者什么都不安装，直接使用 SQLite3</li>
+</ul>
+<p>Git（bash）：</p>
+<ul>
+<li>服务端和客户端均需版本 &gt;= 1.8.3</li>
+<li>Windows 系统建议使用最新版</li>
+</ul>
+<p>SSH 服务器：</p>
+<ul>
+<li>如果您只使用 HTTP/HTTPS 的话请忽略此项</li>
+<li>如果您选择在 Windows 系统使用内置 SSH 服务器，请确保添加<code>ssh-keygen</code>到您的<code>%PATH%</code>环境变量中</li>
+<li>推荐 Windows 系统使用 Cygwin OpenSSH 或 Copssh</li>
+<li>Windows 系统 请确保 Bash 是默认的 Shell 程序，而不是 PowerShell</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>安装好 Git，MySQL，NSSM；</li>
+<li>新增 git 系统用户，并修改其权限，具体可以参考<a href="https://o-r.github.io/2018/05/12/Gogs%E5%9C%A8windows%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">这篇</a>；</li>
+</ol>
+<p>版本信息：</p>
+<ul>
+<li>Git：<code>2.29.2</code>；</li>
+<li>MySQL：<code>15.1</code>；</li>
+<li>NSSM：<code>2.24</code>；</li>
+</ul>
+<p>其中数据库我用的是 <a href="https://mariadb.org/">MariaDB</a>；</p>
+<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><p>Gogs 有多种安装方式，一般使用源码安装和二进制安装。但是源码安装相对麻烦一点，需要在本地有 Go 语言环境，然后将源码下到本地，再进行编译，期间可能还会遇到其他一些问题。</p>
+<p>通常直接进行二进制安装，下载最新版本的 Gogs，在 Windows 环境下有两种安装方式；</p>
+<h4 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h4><p>下载 Gogs mws（Minimal Windows Service）版，即提供内置 Windows 服务支持版本；</p>
+<p>下载完成之后依次执行以下步骤：</p>
+<ol>
+<li>解压压缩包；</li>
+<li>使用命令 cd 进入到刚刚创建的目录；</li>
+<li>执行命令 <code>./gogs web</code>；</li>
+<li>访问<code>/install</code>以进行初始配置，默认在<code>3000</code>端口启动 HTTP 服务；</li>
+<li>配置服务器访问端口；</li>
+</ol>
+<p>初次运行</p>
+<img src="/2021/09/05/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Gogs%E8%BF%90%E8%A1%8C.png" class="">
+
+<p>配置界面</p>
+<img src="/2021/09/05/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Gogs%E9%85%8D%E7%BD%AE.png" class="">
+
+<p>在本地测试的时候发现手动命令行启动 Gogs 时需要通过 Bash 开启服务，否则会出现无法克隆仓库的问题，后面才发现是环境变量不完整；</p>
+<h4 id="自动安装"><a href="#自动安装" class="headerlink" title="自动安装"></a>自动安装</h4><p>而更推荐的做法是下载非 mws 版，这样可以使用 NSSM 将 Gogs 注册成 Windows 服务在后台运行；</p>
+<p>然后通过 NSSM 注册服务并开启后，同样会出现无法克隆仓库的问题；<br>最后发现环境变量中要有 ssh-keygen 的路径，可以是 git 下的路径（<code>e.g. C:\Program Files\Git\usr\bin</code>）<br>当然也可以在 NSSM 注册服务时，通过 Environment 栏添加包含 ssh-keygen 的路径；</p>
+<p>其中在使用 NSSM 注册服务时，可以按照<a href="https://gogs.io/docs/installation/run_as_windows_service">官方教程</a>进行手动配置；<br>而更简单的做法是，使用 Gogs 中自带的脚本进行自动注册；</p>
+<ol>
+<li>找到<code>C:\gogs\scripts\windows</code>下的<code>install-as-service.bat</code>文件；</li>
+<li>右键以管理员身份打开；</li>
+<li>然后看到注册成功的提示信息则说明服务已经注册并开启；</li>
+<li>直接访问<code>localhost:3000</code>，进入初始配置页面进行配置；</li>
+</ol>
+<h3 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h3><p>通常在初始安装后的初始配置时完成各项配置，后续需要更新配置时可以在根目录下的<code>custom/conf/app.ini</code>。详细的配置解释和默认值请参考官方文档，其中关键的配置是下面这些，详细配置放在<a href="/2021/09/25/Gogs-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%89%8B%E5%86%8C/" title="Gogs-配置文件手册">Gogs-配置文件手册</a>中。</p>
+<table>
+<thead>
+<tr>
+<th align="left">配置</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">RUN_USER</td>
+<td align="left">默认是 git，指定 Gogs 以哪个用户运行</td>
+</tr>
+<tr>
+<td align="left">ROOT</td>
+<td align="left">所有仓库的存储根路径</td>
+</tr>
+<tr>
+<td align="left">PROTOCOL</td>
+<td align="left">如果你使用 nginx 反代的话请使用 http，如果直接裸跑对外服务的话随意</td>
+</tr>
+<tr>
+<td align="left">DOMAIN</td>
+<td align="left">域名，会影响 SSH clone 地址</td>
+</tr>
+<tr>
+<td align="left">ROOT_URL</td>
+<td align="left">完整的根路径，会影响访问时页面上链接的指向，以及 HTTP clone 的地址</td>
+</tr>
+<tr>
+<td align="left">HTTP_ADDR</td>
+<td align="left">监听地址，使用 nginx 的话建议 127.0.0.1，否则 0.0.0.0 也可以</td>
+</tr>
+<tr>
+<td align="left">HTTP_PORT</td>
+<td align="left">监听端口，默认 3000</td>
+</tr>
+<tr>
+<td align="left">INSTALL_LOCK</td>
+<td align="left">锁定安装页面</td>
+</tr>
+<tr>
+<td align="left">Mailer</td>
+<td align="left">相关的选项，可以使用 Mailgun 的免费邮件发送服务，将 Mailgun 的 SMTP 配置填入到配置中</td>
+</tr>
+</tbody></table>
+<p>此外除了基础配置外，还可以通过自定义模板更改默认的页面主题外观或新增一些额外的自定义功能；注意：所有针对自定义模板的修改都需要重启 Gogs 实例。</p>
+<ul>
+<li>重载 HTML 模板：通过在<code>custom/templates/</code>目录下创建一个自定义版本的副本实现 HTML 模板重载（包括邮件模板）</li>
+<li>重载静态文件：通过在<code>custom/public/</code>目录下创建一个自定义版本的副本实现静态文件重载（CSS、JS、图片等等）</li>
+<li>注入自定义内容到模板中：通过在<code>custom/templates/inject/head.tmpl</code>或<code>custom/templates/inject/footer.tmpl</code>文件中分别添加自定义头部 meta 信息和引入自定义静态资源（如 CSS）或自定义 JS 和分析代码；</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://gogs.io/docs">官方文档</a></li>
+<li><a href="https://github.com/gogs/gogs/releases">历史版本</a></li>
+<li><a href="https://blog.mynook.info/post/host-your-own-git-server-using-gogs/">使用 Gogs 搭建自己的 Git 服务器</a></li>
+<li><a href="https://discuss.gogs.io/t/how-to-inject-custom-head-and-footer/943">注入自定义头部和尾部</a></li>
+<li><a href="https://o-r.github.io/2018/05/12/Gogs%E5%9C%A8windows%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">Gogs在windows上的安装和配置</a></li>
+<li><a href="https://dashdream.github.io/p/7dd2a61d.html">gogs配置详解</a></li>
+<li><a href="https://www.cxyzjd.com/article/e891377/109302884">win10操作系统Gogs配置解决ssh方式git免密下载上传问题</a></li>
+<li><a href="https://www.itfanr.cc/2017/03/24/docker-ubuntu-gogs-problems/">Docker-Ubuntu-Gogs部署及配置时遇到的问题</a></li>
+<li><a href="https://www.jianshu.com/p/b78b385cf168">Windows下安装Gogs</a></li>
+<li><a href="https://www.cnblogs.com/configure/p/7878501.html">Git服务器Gogs简易安装-Windows环境</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>学习笔记</tag>
+        <tag>Gogs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gogs-配置文件手册</title>
+    <url>/2021/09/25/Gogs-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><p>该配置文件手册是有关 Gogs 配置文件选项的详尽描述，主要为了方便使用 Gogs 时查相关配置项。<br>注：Gogs 任何修改都是发生在<code>custom/conf/app.ini</code>自定义配置文件中，该文件的具体位置与您的设置有关。<br>完整的默认设置可以通过<code>app.ini</code>文件查看。如果看到类似<code>%(X)s</code>字符，这是由 ini 提供的递归取值的特性。</p>
+<span id="more"></span>
+
+<p><strong>概览</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">APP_NAME</td>
+<td align="left">应用名称，可以改成您的组织或公司名称</td>
+</tr>
+<tr>
+<td align="left">RUN_USER</td>
+<td align="left">运行应用的用户名称，我们建议您使用 git，但如果您在个人计算机上运行 Gogs，请修改为您的系统用户名称。如果没有正确设置这个值，很可能导致您的应用崩溃</td>
+</tr>
+<tr>
+<td align="left">RUN_MODE</td>
+<td align="left">鉴于性能和其它考虑，建议在部署环境下修改为 prod 模式。在您完成安装操作时，该值也会被设置为 prod</td>
+</tr>
+</tbody></table>
+<p><strong>服务器 (server)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">PROTOCOL</td>
+<td align="left">http 或 https</td>
+</tr>
+<tr>
+<td align="left">DOMAIN</td>
+<td align="left">服务器域名</td>
+</tr>
+<tr>
+<td align="left">ROOT_URL</td>
+<td align="left">公开的完整 URL 路径</td>
+</tr>
+<tr>
+<td align="left">HTTP_ADDR</td>
+<td align="left">应用 HTTP 监听地址</td>
+</tr>
+<tr>
+<td align="left">HTTP_PORT</td>
+<td align="left">应用 HTTP 监听端口号</td>
+</tr>
+<tr>
+<td align="left">UNIX_SOCKET_PERMISSION</td>
+<td align="left">Unix 套接字文件的权限</td>
+</tr>
+<tr>
+<td align="left">LOCAL_ROOT_URL</td>
+<td align="left">用于 Gogs 工作进程（如：SSH）回访应用的本地（DMZ）URL，一般情况下请保持默认值，除非您的 SSH 服务器节点与 HTTP 并不是同一个节点入口</td>
+</tr>
+<tr>
+<td align="left">DISABLE_SSH</td>
+<td align="left">当 SSH 功能不可用时可以禁用</td>
+</tr>
+<tr>
+<td align="left">START_SSH_SERVER</td>
+<td align="left">启用该选项来启动内置 SSH 服务器</td>
+</tr>
+<tr>
+<td align="left">SSH_DOMAIN</td>
+<td align="left">允许公用网络访问 SSH 的域名</td>
+</tr>
+<tr>
+<td align="left">SSH_PORT</td>
+<td align="left">SSH 端口号，如果不为 22 的话可以在此修改</td>
+</tr>
+<tr>
+<td align="left">SSH_LISTEN_HOST</td>
+<td align="left">内置 SSH 服务器监听的地址</td>
+</tr>
+<tr>
+<td align="left">SSH_LISTEN_PORT</td>
+<td align="left">内置 SSH 服务器监听的端口</td>
+</tr>
+<tr>
+<td align="left">SSH_ROOT_PATH</td>
+<td align="left">SSH 根目录，一般为 ~/.ssh，但必须填写为 /home/git/.ssh</td>
+</tr>
+<tr>
+<td align="left">REWRITE_AUTHORIZED_KEYS_AT_START</td>
+<td align="left">激活该选项以在应用启动时自动重写 authorized_keys 文件，该选项在使用内置 SSH 服务器时将会被自动禁用</td>
+</tr>
+<tr>
+<td align="left">SSH_KEY_TEST_PATH</td>
+<td align="left">用于测试 SSH 公钥的临时目录</td>
+</tr>
+<tr>
+<td align="left">SSH_KEYGEN_PATH</td>
+<td align="left">ssh-keygen 程序的路径，默认为 ssh-keygen 即通过系统路径查找</td>
+</tr>
+<tr>
+<td align="left">MINIMUM_KEY_SIZE_CHECK</td>
+<td align="left">指定不同类型的公钥的最小密钥大小</td>
+</tr>
+<tr>
+<td align="left">OFFLINE_MODE</td>
+<td align="left">激活该选项来禁止从 CDN 获取静态资源，同时 Gravatar 服务也将被自动禁用</td>
+</tr>
+<tr>
+<td align="left">DISABLE_ROUTER_LOG</td>
+<td align="left">激活该选项来禁止打印路由日志</td>
+</tr>
+<tr>
+<td align="left">CERT_FILE</td>
+<td align="left">HTTPS 授权文件路径</td>
+</tr>
+<tr>
+<td align="left">KEY_FILE</td>
+<td align="left">HTTPS 的密钥文件路径</td>
+</tr>
+<tr>
+<td align="left">STATIC_ROOT_PATH</td>
+<td align="left">模板文件和静态文件的上级目录，默认为应用二进制所在的位置</td>
+</tr>
+<tr>
+<td align="left">APP_DATA_PATH</td>
+<td align="left">应用内部数据的存放目录</td>
+</tr>
+<tr>
+<td align="left">ENABLE_GZIP</td>
+<td align="left">激活该选项来启用应用级别 GZIP 支持</td>
+</tr>
+<tr>
+<td align="left">LANDING_PAGE</td>
+<td align="left">未登录用户的默认首页，可以是 home 或 explore（探索页）</td>
+</tr>
+</tbody></table>
+<p><strong>仓库 (repository)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ROOT</td>
+<td align="left">用户仓库存储根目录，必须为绝对路径，默认为 ~/<user name>/gogs-repositories</td>
+</tr>
+<tr>
+<td align="left">SCRIPT_TYPE</td>
+<td align="left">系统脚本类型，一般情况下均为 bash，但有些用户反应只能使用 sh</td>
+</tr>
+<tr>
+<td align="left">ANSI_CHARSET</td>
+<td align="left">当遇到无法识别的字符集时使用的默认字符集</td>
+</tr>
+<tr>
+<td align="left">FORCE_PRIVATE</td>
+<td align="left">强制要求所有新建的仓库都是私有的</td>
+</tr>
+<tr>
+<td align="left">MAX_CREATION_LIMIT</td>
+<td align="left">全局默认的每个用户可创建创建仓库上限，-1 表示无限制</td>
+</tr>
+<tr>
+<td align="left">PREFERRED_LICENSES</td>
+<td align="left">建议用户首选的授权类型</td>
+</tr>
+<tr>
+<td align="left">DISABLE_HTTP_GIT</td>
+<td align="left">激活该选项来禁止用户通过 HTTP 对 Git 仓库进行交互操作，即用户只能通过 SSH 操作</td>
+</tr>
+<tr>
+<td align="left">ENABLE_LOCAL_PATH_MIGRATION</td>
+<td align="left">激活该选项来启用本地路径迁移仓库功能。启动后默认只有管理员可以使用，普通用户必须经由管理员授权</td>
+</tr>
+<tr>
+<td align="left">ENABLE_RAW_FILE_RENDER_MODE</td>
+<td align="left">激活该选项来启用在查看原始数据时对页面进行真实渲染，例如渲染实际的 HTML 页面，有潜在安全隐患</td>
+</tr>
+</tbody></table>
+<p><strong>仓库 - 编辑器 (repository.editor)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LINE_WRAP_EXTENSIONS</td>
+<td align="left">需要显示为行包装的文件名后缀，通过逗号分隔。如果是无后缀名的文件，则单独放置一个逗号，例如：.txt,</td>
+</tr>
+</tbody></table>
+<p><strong>仓库 - 文件上传 (repository.upload)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项来启用仓库文件上传功能</td>
+</tr>
+<tr>
+<td align="left">TEMP_PATH</td>
+<td align="left">文件上传的临时存放目录</td>
+</tr>
+<tr>
+<td align="left">ALLOWED_TYPES</td>
+<td align="left">允许上传的文件类型（例如：”image/jpeg|image/png”），留空表示允许上传任意类型的文件</td>
+</tr>
+<tr>
+<td align="left">FILE_MAX_SIZE</td>
+<td align="left">单个上传的文件的最大体积，以 MB 为单位</td>
+</tr>
+<tr>
+<td align="left">MAX_FILES</td>
+<td align="left">单次同时上传的最多文件个数</td>
+</tr>
+</tbody></table>
+<p><strong>版本发布 - 附件 (release.attachment)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项来启用版本发布附件功能</td>
+</tr>
+<tr>
+<td align="left">PATH</td>
+<td align="left">存放附件的路径</td>
+</tr>
+<tr>
+<td align="left">ALLOWED_TYPES</td>
+<td align="left">允许上传的 MIME 类型，例如 “image/jpeg</td>
+</tr>
+<tr>
+<td align="left">MAX_SIZE</td>
+<td align="left">最大允许上传的附件体积，单位为 MB，例如 32</td>
+</tr>
+<tr>
+<td align="left">MAX_FILES</td>
+<td align="left">最大允许一次性上传的附件个数，例如 10</td>
+</tr>
+</tbody></table>
+<p><strong>Markdown (markdown)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLE_HARD_LINE_BREAK</td>
+<td align="left">指示是否启用硬性换行扩展</td>
+</tr>
+<tr>
+<td align="left">CUSTOM_URL_SCHEMES</td>
+<td align="left">允许被解析为链接的自定义 URL 方案，例如 git（用于 git://）和magnet（用于 magnet://）</td>
+</tr>
+<tr>
+<td align="left">FILE_EXTENSIONS</td>
+<td align="left">需要被渲染为 Markdown 格式的文件名后缀，通过逗号分隔。如果是无后缀名的文件，则单独放置一个逗号，例如：.markdown,</td>
+</tr>
+</tbody></table>
+<p><strong>Smartypants (smartypants)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">指示是否启用 Smartypants 扩展</td>
+</tr>
+</tbody></table>
+<p><strong>HTTP (http)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ACCESS_CONTROL_ALLOW_ORIGIN</td>
+<td align="left">头信息 Access-Control-Allow-Origin 的自定义值，默认为空，即不响应此头信息</td>
+</tr>
+</tbody></table>
+<p><strong>数据库 (database)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DB_TYPE</td>
+<td align="left">数据库类型，可以是 mysql、postgres、mssql 或 sqlite3</td>
+</tr>
+<tr>
+<td align="left">HOST</td>
+<td align="left">数据库主机地址与端口</td>
+</tr>
+<tr>
+<td align="left">NAME</td>
+<td align="left">数据库名称</td>
+</tr>
+<tr>
+<td align="left">USER</td>
+<td align="left">数据库用户名</td>
+</tr>
+<tr>
+<td align="left">PASSWD</td>
+<td align="left">数据库用户密码</td>
+</tr>
+<tr>
+<td align="left">SSL_MODE</td>
+<td align="left">仅限 PostgreSQL 使用</td>
+</tr>
+<tr>
+<td align="left">PATH</td>
+<td align="left">仅限 SQLite3 使用，数据库文件路径</td>
+</tr>
+</tbody></table>
+<p><strong>应用管理 (admin)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DISABLE_REGULAR_ORG_CREATION</td>
+<td align="left">激活该选项来禁止普通用户（非管理员）创建组织</td>
+</tr>
+</tbody></table>
+<p><strong>安全 (security)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">INSTALL_LOCK</td>
+<td align="left">用于指示是否允许访问安装页面（该页面可以设置管理员帐号，因此该选项非常重要）</td>
+</tr>
+<tr>
+<td align="left">SECRET_KEY</td>
+<td align="left">全局的加密密钥，务必修改该值以确保您的服务器安全（会在每次安装时自动生成随机字符串）</td>
+</tr>
+<tr>
+<td align="left">LOGIN_REMEMBER_DAYS</td>
+<td align="left">记住登录的天数</td>
+</tr>
+<tr>
+<td align="left">COOKIE_USERNAME</td>
+<td align="left">记录用户名的 Cookie 名称</td>
+</tr>
+<tr>
+<td align="left">COOKIE_REMEMBER_NAME</td>
+<td align="left">记录用户自动登录信息的 Cookie 名称</td>
+</tr>
+<tr>
+<td align="left">REVERSE_PROXY_AUTHENTICATION_USER</td>
+<td align="left">反向代理认证用户的 Header 字段名</td>
+</tr>
+</tbody></table>
+<p><strong>服务 (service)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ACTIVE_CODE_LIVE_MINUTES</td>
+<td align="left">激活码的有效期，单位为分钟</td>
+</tr>
+<tr>
+<td align="left">RESET_PASSWD_CODE_LIVE_MINUTES</td>
+<td align="left">重置密码的有效期，单位为分钟</td>
+</tr>
+<tr>
+<td align="left">REGISTER_EMAIL_CONFIRM</td>
+<td align="left">激活该选项来要求注册用户必须验证邮箱，要求已启用 Mailer</td>
+</tr>
+<tr>
+<td align="left">DISABLE_REGISTRATION</td>
+<td align="left">激活该选项来禁止用户注册功能，只能由管理员创建帐号</td>
+</tr>
+<tr>
+<td align="left">SHOW_REGISTRATION_BUTTON</td>
+<td align="left">用于指示是否显示注册按钮</td>
+</tr>
+<tr>
+<td align="left">REQUIRE_SIGNIN_VIEW</td>
+<td align="left">激活该选项来要求用户必须登录才能浏览任何页面</td>
+</tr>
+<tr>
+<td align="left">ENABLE_CACHE_AVATAR</td>
+<td align="left">激活该选项来缓存 Gravatar 的头像</td>
+</tr>
+<tr>
+<td align="left">ENABLE_NOTIFY_MAIL</td>
+<td align="left">激活该选项来发送通知邮件给关注者，例如创建 issue 时，要求已启用 Mailer</td>
+</tr>
+<tr>
+<td align="left">ENABLE_REVERSE_PROXY_AUTHENTICATION</td>
+<td align="left">激活该选项来开启反向代理用户认证，请从 #165 了解更多信息</td>
+</tr>
+<tr>
+<td align="left">ENABLE_REVERSE_PROXY_AUTO_REGISTRATION</td>
+<td align="left">激活该选项来开启反向代理用户认证的自动注册功能</td>
+</tr>
+<tr>
+<td align="left">DISABLE_MINIMUM_KEY_SIZE_CHECK</td>
+<td align="left">激活该选项来禁止检查响应类型的密钥最小长度</td>
+</tr>
+<tr>
+<td align="left">ENABLE_CAPTCHA</td>
+<td align="left">激活该选项以在用户注册时要求输入验证码</td>
+</tr>
+</tbody></table>
+<p><strong>Web 钩子 (webhook)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">TYPES</td>
+<td align="left">启动的 Web 钩子类型，可以是 gogs、slack、discord或dingtalk</td>
+</tr>
+<tr>
+<td align="left">QUEUE_LENGTH</td>
+<td align="left">Web钩子队列长度，如果发现部分Webhook未能成功触发，可考虑增加该值</td>
+</tr>
+<tr>
+<td align="left">DELIVER_TIMEOUT</td>
+<td align="left">发送通知的超时时间，以秒为单位</td>
+</tr>
+<tr>
+<td align="left">SKIP_TLS_VERIFY</td>
+<td align="left">指示是否允许向具有非信任证书的地址发送通知</td>
+</tr>
+<tr>
+<td align="left">PAGING_NUM</td>
+<td align="left">Web 钩子历史页面每页显示记录条数</td>
+</tr>
+</tbody></table>
+<p><strong>邮件 (mailer)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">启用该选项以激活邮件服务</td>
+</tr>
+<tr>
+<td align="left">SUBJECT_PREFIX</td>
+<td align="left">邮件标题的前缀</td>
+</tr>
+<tr>
+<td align="left">HOST</td>
+<td align="left">SMTP 主机地址与端口</td>
+</tr>
+<tr>
+<td align="left">DISABLE_HELO</td>
+<td align="left">禁用 HELO 操作</td>
+</tr>
+<tr>
+<td align="left">HELO_HOSTNAME</td>
+<td align="left">HELO 操作的自定义主机名</td>
+</tr>
+<tr>
+<td align="left">SKIP_VERIFY</td>
+<td align="left">不验证自签发证书的有效性</td>
+</tr>
+<tr>
+<td align="left">FROM</td>
+<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#111;&#109;">&#101;&#109;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#x63;&#111;&#109;</a> 的形式</td>
+</tr>
+<tr>
+<td align="left">USER</td>
+<td align="left">邮箱用户名</td>
+</tr>
+<tr>
+<td align="left">PASSWD</td>
+<td align="left">邮箱密码</td>
+</tr>
+<tr>
+<td align="left">USE_PLAIN_TEXT</td>
+<td align="left">使用 text/plain 作为邮件内容格式</td>
+</tr>
+</tbody></table>
+<p>备注：Gogs 仅支持使用 STARTTLS 的 SMTP 协议</p>
+<p><strong>缓存 (cache)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ADAPTER</td>
+<td align="left">缓存引擎适配器，可以为 memory、redis 或 memcache。如果您使用 redis 或 memcache，请确保使用 -tags 选项重新构建所有依赖，例如：go build -tags=’redis’</td>
+</tr>
+<tr>
+<td align="left">INTERVAL</td>
+<td align="left">仅限内存缓存使用，GC 周期，单位为秒</td>
+</tr>
+<tr>
+<td align="left">HOST</td>
+<td align="left">仅限 redis 和 memcache 使用，主机地址和端口号</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">Redis：network=tcp,addr=127.0.0.1:6379,password=macaron,db=0,pool_size=100,idle_timeout=180</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">Memache：127.0.0.1:9090;127.0.0.1:9091</td>
+</tr>
+</tbody></table>
+<p><strong>会话 (session)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">PROVIDER</td>
+<td align="left">Session 引擎提供者，可以是 memory、file、redis 或 mysql</td>
+</tr>
+<tr>
+<td align="left">PROVIDER_CONFIG</td>
+<td align="left">如果提供者为 file，则为文件根目录；如果为其它提供者，则为主机地址和端口号</td>
+</tr>
+<tr>
+<td align="left">COOKIE_SECURE</td>
+<td align="left">激活该选项以要求所有 session 操作均通过 HTTPS</td>
+</tr>
+<tr>
+<td align="left">GC_INTERVAL_TIME</td>
+<td align="left">GC 周期，单位为秒</td>
+</tr>
+</tbody></table>
+<p><strong>图片 (picture)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AVATAR_UPLOAD_PATH</td>
+<td align="left">存放用户上传头像的目录</td>
+</tr>
+<tr>
+<td align="left">GRAVATAR_SOURCE</td>
+<td align="left">可以是 gravatar、duoshuo 或任何 URL，例如：<a href="http://cn.gravatar.com/avatar/">http://cn.gravatar.com/avatar/</a></td>
+</tr>
+<tr>
+<td align="left">DISABLE_GRAVATAR</td>
+<td align="left">激活该选项来仅使用本地头像</td>
+</tr>
+<tr>
+<td align="left">ENABLE_FEDERATED_AVATAR</td>
+<td align="left">激活该选项来启用 Federated 头像服务（<a href="http://www.libravatar.org),当/">http://www.libravatar.org），当</a> Gravatar 被禁用时此选项无法生效</td>
+</tr>
+</tbody></table>
+<p><strong>附件 (attachment)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项以允许用户上传附件</td>
+</tr>
+<tr>
+<td align="left">PATH</td>
+<td align="left">存放附件的路径</td>
+</tr>
+<tr>
+<td align="left">ALLOWED_TYPES</td>
+<td align="left">允许上传的 MIME 类型，例如 “image/jpeg</td>
+</tr>
+<tr>
+<td align="left">MAX_SIZE</td>
+<td align="left">最大允许上传的附件体积，单位为 MB，例如 4</td>
+</tr>
+<tr>
+<td align="left">MAX_FILES</td>
+<td align="left">最大允许一次性上传的附件个数，例如 5</td>
+</tr>
+</tbody></table>
+<p><strong>时间 (time)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">FORMAT</td>
+<td align="left">指定日期的输出格式，默认为 RFC1123，其它可选的格式为 ANSIC、UnixDate、RubyDate、RFC822、RFC822Z、RFC850、RFC1123、RFC1123Z、RFC3339、RFC3339Nano、Kitchen、Stamp、StampMilli、StampMicro 和 StampNano。访问 <a href="http://golang.org/pkg/time/#pkg-constants">http://golang.org/pkg/time/#pkg-constants</a> 查看详情</td>
+</tr>
+</tbody></table>
+<p><strong>日志 (log)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ROOT_PATH</td>
+<td align="left">日志文件的根目录</td>
+</tr>
+<tr>
+<td align="left">MODE</td>
+<td align="left">日志记录模式，默认为 console。如果想要开启多模式，请使用逗号分割，例如：”console, file”</td>
+</tr>
+<tr>
+<td align="left">LEVEL</td>
+<td align="left">基本日志级别，默认为 Trace</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - 控制台 (log.console)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">控制台日志级别，留空则继承父值</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - 文件 (log.file)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">文件日志级别，留空则继承父值</td>
+</tr>
+<tr>
+<td align="left">LOG_ROTATE</td>
+<td align="left">激活该选项以启用日志文件自转</td>
+</tr>
+<tr>
+<td align="left">DAILY_ROTATE</td>
+<td align="left">激活该选项以进行日常自转</td>
+</tr>
+<tr>
+<td align="left">MAX_SIZE_SHIFT</td>
+<td align="left">自转需要达到的最大文件体积，使用位左移，默认为 28 即 1 &lt;&lt; 28，表示 256MB</td>
+</tr>
+<tr>
+<td align="left">MAX_LINES</td>
+<td align="left">自转需要达到的最大文件行数，默认为 1000000</td>
+</tr>
+<tr>
+<td align="left">MAX_DAYS</td>
+<td align="left">保留自转文件的最长期限，默认为 7 天后删除</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - Slack (log.slack)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">Slack 日志级别，留空则继承父值</td>
+</tr>
+<tr>
+<td align="left">URL</td>
+<td align="left">Slack Web 钩子 URL</td>
+</tr>
+</tbody></table>
+<p><strong>日志 - Discord (log.discord)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">LEVEL</td>
+<td align="left">Discord 日志级别，留空则继承父值</td>
+</tr>
+<tr>
+<td align="left">URL</td>
+<td align="left">Discord Web 钩子 URL</td>
+</tr>
+<tr>
+<td align="left">USERNAME</td>
+<td align="left">在 Web 钩子中显示的用户名</td>
+</tr>
+</tbody></table>
+<p><strong>Cron (cron)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项以允许周期性运行 Cron 任务</td>
+</tr>
+<tr>
+<td align="left">RUN_AT_START</td>
+<td align="left">激活该选项以允许在启动时执行 Cron 任务</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 更新镜像 (cron.update_mirrors)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时更新仓库镜像的 Cron 语法，例如：@every 1h</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 仓库健康检查 (cron.repo_health_check)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时进行仓库健康检查的 Cron 语法，例如：@every 24h</td>
+</tr>
+<tr>
+<td align="left">TIMEOUT</td>
+<td align="left">仓库健康检查超时的定义语法，例如：60s</td>
+</tr>
+<tr>
+<td align="left">ARGS</td>
+<td align="left">git fsck 命令的参数，例如：–unreachable –tags</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 仓库统计检查 (cron.check_repo_stats)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">RUN_AT_START</td>
+<td align="left">激活该选项以在启动时执行仓库统计检查</td>
+</tr>
+<tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时进行仓库统计检查的 Cron 语法，例如：@every 24h</td>
+</tr>
+</tbody></table>
+<p><strong>Cron - 仓库归档清理 (cron.repo_archive_cleanup)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">RUN_AT_START</td>
+<td align="left">激活该选项以在启动时执行仓库归档清理</td>
+</tr>
+<tr>
+<td align="left">SCHEDULE</td>
+<td align="left">定时进行仓库归档清理的 Cron 语法，例如：@every 24h</td>
+</tr>
+<tr>
+<td align="left">OLDER_THAN</td>
+<td align="left">仓库归档的文件有效期，过期的归档将被清理，例如：24h</td>
+</tr>
+</tbody></table>
+<p><strong>Git (git)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">DISABLE_DIFF_HIGHLIGHT</td>
+<td align="left">激活该选项以禁用行内差异高亮</td>
+</tr>
+<tr>
+<td align="left">MAX_GIT_DIFF_LINES</td>
+<td align="left">差异对比页面单个文件显示的最大行数</td>
+</tr>
+<tr>
+<td align="left">MAX_GIT_DIFF_LINE_CHARACTERS</td>
+<td align="left">差异对比页面单行显示的最大字符数</td>
+</tr>
+<tr>
+<td align="left">MAX_GIT_DIFF_FILES</td>
+<td align="left">差异对比页面文件显示的最多个数</td>
+</tr>
+<tr>
+<td align="left">GC_ARGS</td>
+<td align="left">git gc 命令的参数，例如：–aggressive –auto</td>
+</tr>
+</tbody></table>
+<p><strong>Git - 超时 (git.timeout)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">MIGRATE</td>
+<td align="left">仓库迁移操作超时，默认为 600 秒</td>
+</tr>
+<tr>
+<td align="left">MIRROR</td>
+<td align="left">仓库镜像同步操作超时，默认为 300 秒</td>
+</tr>
+<tr>
+<td align="left">CLONE</td>
+<td align="left">仓库克隆操作超时，默认为 300 秒</td>
+</tr>
+<tr>
+<td align="left">PULL</td>
+<td align="left">仓库拉取操作超时，默认为 300 秒</td>
+</tr>
+<tr>
+<td align="left">GC</td>
+<td align="left">仓库垃圾回收操作超时，默认为 60 秒</td>
+</tr>
+</tbody></table>
+<p><strong>UI (ui)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">EXPLORE_PAGING_NUM</td>
+<td align="left">探索页面每页显示仓库的数量</td>
+</tr>
+<tr>
+<td align="left">ISSUE_PAGING_NUM</td>
+<td align="left">每页显示工单（Issue）的数量（应用到所有以列表形式显示工单的页面）</td>
+</tr>
+<tr>
+<td align="left">FEED_MAX_COMMIT_NUM</td>
+<td align="left">一条最新活动中显示代码提交（Commit）的最大数量</td>
+</tr>
+<tr>
+<td align="left">THEME_COLOR_META_TAG</td>
+<td align="left">被用于 Android &gt;= 5.0 版本 “theme-color” 标记的值，无效的值将被忽略并使用默认值（查看详情）</td>
+</tr>
+<tr>
+<td align="left">MAX_DISPLAY_FILE_SIZE</td>
+<td align="left">显示到页面的最大文件体积（Byte）</td>
+</tr>
+</tbody></table>
+<p><strong>UI - Admin (ui.admin)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">USER_PAGING_NUM</td>
+<td align="left">用户管理页面每页显示记录条数</td>
+</tr>
+<tr>
+<td align="left">REPO_PAGING_NUM</td>
+<td align="left">仓库管理页面每页显示记录条数</td>
+</tr>
+<tr>
+<td align="left">NOTICE_PAGING_NUM</td>
+<td align="left">系统提示管理页面每页显示记录条数</td>
+</tr>
+<tr>
+<td align="left">ORG_PAGING_NUM</td>
+<td align="left">组织管理页面每页显示记录条数</td>
+</tr>
+</tbody></table>
+<p><strong>Prometheus (prometheus)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ENABLED</td>
+<td align="left">激活该选项以启用 Prometheus 监控信息，默认为 true</td>
+</tr>
+<tr>
+<td align="left">ENABLE_BASIC_AUTH</td>
+<td align="left">激活该选项以启用 HTTP 基本认证保护监控信息数据，默认为 false</td>
+</tr>
+<tr>
+<td align="left">BASIC_AUTH_USERNAME</td>
+<td align="left">HTTP 基本认证的用户名</td>
+</tr>
+<tr>
+<td align="left">BASIC_AUTH_PASSWORD</td>
+<td align="left">HTTP 基本认证的密码</td>
+</tr>
+</tbody></table>
+<p><strong>其他 (other)</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SHOW_FOOTER_BRANDING</td>
+<td align="left">激活该选项以在页脚显示 Gogs 推广信息</td>
+</tr>
+<tr>
+<td align="left">SHOW_FOOTER_VERSION</td>
+<td align="left">激活该选项以在页脚显示 Gogs 版本信息</td>
+</tr>
+<tr>
+<td align="left">SHOW_FOOTER_TEMPLATE_LOAD_TIME</td>
+<td align="left">激活该选项以在页脚显示 Gogs 模板加载时间</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>学习笔记</tag>
+        <tag>Gogs</tag>
+        <tag>自查手册</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo + GitHub Pages搭建个人博客网站</title>
     <url>/2021/04/05/Hexo-GitHub-Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</url>
     <content><![CDATA[<h3 id="Hexo-简介"><a href="#Hexo-简介" class="headerlink" title="Hexo 简介"></a>Hexo 简介</h3><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。本文记录了如何利用 Hexo 和 Github Pages 快速搭建个人博客网站的整个过程。以下代码均已我的博客和仓库为例，请自行更改为自己的。</p>
@@ -754,7 +1897,9 @@
 <p>党校是在这年中秋之后开始的，然后就是每天中午一点到教室开始背书，三天一小考五天一大考，这些都算做平时成绩。除了每天中午会固定的背书之外，我早上一般会起的早一些，然后会在教室过道里背一会书，差不多要到早上第一节课开始之前。</p>
 <p><strong>18-10-25</strong><br>这一天是我们积极分子的奉献日，奉献日有不同的活动，这跟不同的学院也有关系。之前几期党校的同学有去打扫烈士陵园的、有去植树的，我们那次是去老区办宣传黑板报，我其实最想做的还是植树，我觉得这对我来说会更有意义一点，毕竟还没有去植过树。</p>
 <p><strong>18-10-28</strong><br>这天是学校组织去参观红色景点的社会实践，我去的是广安武胜，然后参观了乡村振兴橙子种植基地，观看了当地传统的民俗表演，还是很有意义的一天；</p>
-<p>之后的整个大二上学期好像我就全身心投入学习了。当时的背景是这样的，离研究生考试越来越近，加上我们学校学习氛围一向的好，毕竟还是师范院校，然后图书馆的位置又有限且离我们校区又有一点远，这样就催生出了很多在教室复习的同学，但是教室时不时有会有人上课，就得不断地换教室，因此很多人干脆直接买了小板凳小桌子摆在教学楼的过道上用来学习。</p>
+<p>之后的整个大二上学期我就全身心投入学习了。当时的背景是这样的，离每年12月的研究生考试越来越近，加上我们学校学习氛围一向很好，然后图书馆的位置有限且离我们校区又有一点远，这样就催生出了很多在教室复习的同学，但是教室时不时有会有人上课，就得不断地换教室，所以很多人干脆直接买了小板凳小桌子摆在教学楼的过道上用来学习。</p>
+<p>于是我也买了一个小板凳，开始每天早上准时6点起床，7点到教学楼与15级的师兄师姐为伴，一起背书；也是受了当时都党校时候的影响，那时候是背的党校考试的复习资料，后面党校结束后，开始看一些专业书，一直到期末。</p>
+<p><strong>18-12-20</strong><br>研究生考试前夕，我还做了一些我觉得很有意义的事情，那天下午，我发动整个过道的师兄师姐一起来合张影，大家都是朝夕相处的战友，虽然可能都不认识彼此；照片中的大部分我也不认识，最后反正我认识的几个师姐都上了岸。然后晚上从图书馆回来的时候，拿着提前买的两袋大白兔奶糖，在教学楼里见人就发，然后对师兄师姐说了鼓励的话，祝他们考个好成绩！</p>
 <p>未完待续…</p>
 <!-- 
 纵观整个大二是我整个大学最刻苦，也是最忙的一年，
@@ -808,1108 +1953,6 @@
         <tag>日记</tag>
         <tag>diary</tag>
         <tag>纪念</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Gogs-学习笔记</title>
-    <url>/2021/09/05/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h3 id="什么是-Gogs"><a href="#什么是-Gogs" class="headerlink" title="什么是 Gogs?"></a>什么是 Gogs?</h3><p>Gogs 是一款极易搭建的自助 Git 服务。可以根据操作系统平台下载二进制运行，或者通过 Docker 或 Vagrant，以及包管理安装。Gogs 是用 Go 语言开发，因此任何 Go 语言支持的平台都可以运行 Gogs，包括 Windows、Mac、Linux 以及 ARM。一个廉价的树莓派的配置足以满足 Gogs 的最低系统硬件要求。甚至还可以将 Gogs 运行在 NAS 设备上。</p>
-<p>Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过独立的二进制分发，并且支持 Go 语言支持的 所有平台，包括 Linux、Mac OS X、Windows 以及 ARM 平台。</p>
-<span id="more"></span>
-
-<h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><p>数据库（选择以下一项）：</p>
-<ul>
-<li>MySQL：版本 &gt;= 5.7</li>
-<li>PostgreSQL</li>
-<li>TiDB（实验性支持，使用 MySQL 协议连接）</li>
-<li>或者什么都不安装，直接使用 SQLite3</li>
-</ul>
-<p>git（bash）：</p>
-<ul>
-<li>服务端和客户端均需版本 &gt;= 1.8.3</li>
-<li>Windows 系统建议使用最新版</li>
-</ul>
-<p>SSH 服务器：</p>
-<ul>
-<li>如果您只使用 HTTP/HTTPS 的话请忽略此项</li>
-<li>如果您选择在 Windows 系统使用内置 SSH 服务器，请确保添加<code>ssh-keygen</code>到您的<code>%PATH%</code>环境变量中</li>
-<li>推荐 Windows 系统使用 Cygwin OpenSSH 或 Copssh</li>
-<li>Windows 系统 请确保 Bash 是默认的 Shell 程序，而不是 PowerShell</li>
-</ul>
-<p>在设置 SSH 服务的时候踩了坑，在本地测试的时候发现 Gogs 需要通过 Bash 开启服务，否则会出现无法克隆仓库的问题；目前也没有找到设置 Windows 默认 Shell 的方法；</p>
-<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><p>Gogs 有多种安装方式，一般使用源码安装和二进制安装。但是源码安装相对麻烦一点，需要在本地有 Go 语言环境，然后将源码下到本地，再进行编译，期间可能还会遇到其他一些问题。</p>
-<p>因此通常直接进行二进制安装，下载最新版本的 Gogs，注意如果是 Windows 环境的话建议直接下载 mws（Managed Windows Service）版，即提供内置 Windows 服务支持，否则还需要手动配置进行注册；</p>
-<p>下载好之后依次执行以下步骤：</p>
-<ol>
-<li>解压压缩包；</li>
-<li>使用命令 cd 进入到刚刚创建的目录；</li>
-<li>执行命令 <code>./gogs web</code>，检验是否安装成功；</li>
-<li>访问<code>/install</code>以进行初始配置，Gogs 默认会在端口<code>3000</code>启动 HTTP 服务；</li>
-</ol>
-<p>初次运行</p>
-<img src="/2021/09/05/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Gogs%E8%BF%90%E8%A1%8C.png" class="">
-
-<p>配置界面</p>
-<img src="/2021/09/05/Gogs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Gogs%E9%85%8D%E7%BD%AE.png" class="">
-
-<h3 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h3><p>通常在初始安装后的初始配置时完成各项配置，后续需要更新配置时可以在根目录下的<code>custom/conf/app.ini</code>。详细的配置解释和默认值请参考官方文档，其中关键的配置是下面这些，详细配置放在文末附录中。</p>
-<table>
-<thead>
-<tr>
-<th align="left">配置</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">RUN_USER</td>
-<td align="left">默认是 git，指定 Gogs 以哪个用户运行</td>
-</tr>
-<tr>
-<td align="left">ROOT</td>
-<td align="left">所有仓库的存储根路径</td>
-</tr>
-<tr>
-<td align="left">PROTOCOL</td>
-<td align="left">如果你使用 nginx 反代的话请使用 http，如果直接裸跑对外服务的话随意</td>
-</tr>
-<tr>
-<td align="left">DOMAIN</td>
-<td align="left">域名，会影响 SSH clone 地址</td>
-</tr>
-<tr>
-<td align="left">ROOT_URL</td>
-<td align="left">完整的根路径，会影响访问时页面上链接的指向，以及 HTTP clone 的地址</td>
-</tr>
-<tr>
-<td align="left">HTTP_ADDR</td>
-<td align="left">监听地址，使用 nginx 的话建议 127.0.0.1，否则 0.0.0.0 也可以</td>
-</tr>
-<tr>
-<td align="left">HTTP_PORT</td>
-<td align="left">监听端口，默认 3000</td>
-</tr>
-<tr>
-<td align="left">INSTALL_LOCK</td>
-<td align="left">锁定安装页面</td>
-</tr>
-<tr>
-<td align="left">Mailer</td>
-<td align="left">相关的选项，可以使用 Mailgun 的免费邮件发送服务，将 Mailgun 的 SMTP 配置填入到配置中</td>
-</tr>
-</tbody></table>
-<p>此外除了基础配置外，还可以通过自定义模板更改默认的页面主题外观或新增一些额外的自定义功能；注意：所有针对自定义模板的修改都需要重启 Gogs 实例。</p>
-<ul>
-<li>重载 HTML 模板：通过在<code>custom/templates/</code>目录下创建一个自定义版本的副本实现 HTML 模板重载（包括邮件模板）</li>
-<li>重载静态文件：通过在<code>custom/public/</code>目录下创建一个自定义版本的副本实现静态文件重载（CSS、JS、图片等等）</li>
-<li>注入自定义内容到模板中：通过在<code>custom/templates/inject/head.tmpl</code>或<code>custom/templates/inject/footer.tmpl</code>文件中分别添加自定义头部 meta 信息和引入自定义静态资源（如 CSS）或自定义 JS 和分析代码；</li>
-</ul>
-<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>配置文件手册会详尽地描述有关 Gogs 配置文件的选项，帮助您更好地理解和使用 Gogs。<br>请记住，任何修改都是发生在 custom/conf/app.ini 自定义配置文件中，该文件的具体位置与您的设置有关。<br>完整的默认设置可以通过 app.ini 文件查看。如果您看到类似 %(X)s 字符，这是由 ini 提供的递归取值的特性。</p>
-<p><strong>概览</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">APP_NAME</td>
-<td align="left">应用名称，可以改成您的组织或公司名称</td>
-</tr>
-<tr>
-<td align="left">RUN_USER</td>
-<td align="left">运行应用的用户名称，我们建议您使用 git，但如果您在个人计算机上运行 Gogs，请修改为您的系统用户名称。如果没有正确设置这个值，很可能导致您的应用崩溃</td>
-</tr>
-<tr>
-<td align="left">RUN_MODE</td>
-<td align="left">鉴于性能和其它考虑，建议在部署环境下修改为 prod 模式。在您完成安装操作时，该值也会被设置为 prod</td>
-</tr>
-</tbody></table>
-<p><strong>服务器 (server)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">PROTOCOL</td>
-<td align="left">http 或 https</td>
-</tr>
-<tr>
-<td align="left">DOMAIN</td>
-<td align="left">服务器域名</td>
-</tr>
-<tr>
-<td align="left">ROOT_URL</td>
-<td align="left">公开的完整 URL 路径</td>
-</tr>
-<tr>
-<td align="left">HTTP_ADDR</td>
-<td align="left">应用 HTTP 监听地址</td>
-</tr>
-<tr>
-<td align="left">HTTP_PORT</td>
-<td align="left">应用 HTTP 监听端口号</td>
-</tr>
-<tr>
-<td align="left">UNIX_SOCKET_PERMISSION</td>
-<td align="left">Unix 套接字文件的权限</td>
-</tr>
-<tr>
-<td align="left">LOCAL_ROOT_URL</td>
-<td align="left">用于 Gogs 工作进程（如：SSH）回访应用的本地（DMZ）URL，一般情况下请保持默认值，除非您的 SSH 服务器节点与 HTTP 并不是同一个节点入口</td>
-</tr>
-<tr>
-<td align="left">DISABLE_SSH</td>
-<td align="left">当 SSH 功能不可用时可以禁用</td>
-</tr>
-<tr>
-<td align="left">START_SSH_SERVER</td>
-<td align="left">启用该选项来启动内置 SSH 服务器</td>
-</tr>
-<tr>
-<td align="left">SSH_DOMAIN</td>
-<td align="left">允许公用网络访问 SSH 的域名</td>
-</tr>
-<tr>
-<td align="left">SSH_PORT</td>
-<td align="left">SSH 端口号，如果不为 22 的话可以在此修改</td>
-</tr>
-<tr>
-<td align="left">SSH_LISTEN_HOST</td>
-<td align="left">内置 SSH 服务器监听的地址</td>
-</tr>
-<tr>
-<td align="left">SSH_LISTEN_PORT</td>
-<td align="left">内置 SSH 服务器监听的端口</td>
-</tr>
-<tr>
-<td align="left">SSH_ROOT_PATH</td>
-<td align="left">SSH 根目录，一般为 ~/.ssh，但必须填写为 /home/git/.ssh</td>
-</tr>
-<tr>
-<td align="left">REWRITE_AUTHORIZED_KEYS_AT_START</td>
-<td align="left">激活该选项以在应用启动时自动重写 authorized_keys 文件，该选项在使用内置 SSH 服务器时将会被自动禁用</td>
-</tr>
-<tr>
-<td align="left">SSH_KEY_TEST_PATH</td>
-<td align="left">用于测试 SSH 公钥的临时目录</td>
-</tr>
-<tr>
-<td align="left">SSH_KEYGEN_PATH</td>
-<td align="left">ssh-keygen 程序的路径，默认为 ssh-keygen 即通过系统路径查找</td>
-</tr>
-<tr>
-<td align="left">MINIMUM_KEY_SIZE_CHECK</td>
-<td align="left">指定不同类型的公钥的最小密钥大小</td>
-</tr>
-<tr>
-<td align="left">OFFLINE_MODE</td>
-<td align="left">激活该选项来禁止从 CDN 获取静态资源，同时 Gravatar 服务也将被自动禁用</td>
-</tr>
-<tr>
-<td align="left">DISABLE_ROUTER_LOG</td>
-<td align="left">激活该选项来禁止打印路由日志</td>
-</tr>
-<tr>
-<td align="left">CERT_FILE</td>
-<td align="left">HTTPS 授权文件路径</td>
-</tr>
-<tr>
-<td align="left">KEY_FILE</td>
-<td align="left">HTTPS 的密钥文件路径</td>
-</tr>
-<tr>
-<td align="left">STATIC_ROOT_PATH</td>
-<td align="left">模板文件和静态文件的上级目录，默认为应用二进制所在的位置</td>
-</tr>
-<tr>
-<td align="left">APP_DATA_PATH</td>
-<td align="left">应用内部数据的存放目录</td>
-</tr>
-<tr>
-<td align="left">ENABLE_GZIP</td>
-<td align="left">激活该选项来启用应用级别 GZIP 支持</td>
-</tr>
-<tr>
-<td align="left">LANDING_PAGE</td>
-<td align="left">未登录用户的默认首页，可以是 home 或 explore（探索页）</td>
-</tr>
-</tbody></table>
-<p><strong>仓库 (repository)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ROOT</td>
-<td align="left">用户仓库存储根目录，必须为绝对路径，默认为 ~/<user name>/gogs-repositories</td>
-</tr>
-<tr>
-<td align="left">SCRIPT_TYPE</td>
-<td align="left">系统脚本类型，一般情况下均为 bash，但有些用户反应只能使用 sh</td>
-</tr>
-<tr>
-<td align="left">ANSI_CHARSET</td>
-<td align="left">当遇到无法识别的字符集时使用的默认字符集</td>
-</tr>
-<tr>
-<td align="left">FORCE_PRIVATE</td>
-<td align="left">强制要求所有新建的仓库都是私有的</td>
-</tr>
-<tr>
-<td align="left">MAX_CREATION_LIMIT</td>
-<td align="left">全局默认的每个用户可创建创建仓库上限，-1 表示无限制</td>
-</tr>
-<tr>
-<td align="left">PREFERRED_LICENSES</td>
-<td align="left">建议用户首选的授权类型</td>
-</tr>
-<tr>
-<td align="left">DISABLE_HTTP_GIT</td>
-<td align="left">激活该选项来禁止用户通过 HTTP 对 Git 仓库进行交互操作，即用户只能通过 SSH 操作</td>
-</tr>
-<tr>
-<td align="left">ENABLE_LOCAL_PATH_MIGRATION</td>
-<td align="left">激活该选项来启用本地路径迁移仓库功能。启动后默认只有管理员可以使用，普通用户必须经由管理员授权</td>
-</tr>
-<tr>
-<td align="left">ENABLE_RAW_FILE_RENDER_MODE</td>
-<td align="left">激活该选项来启用在查看原始数据时对页面进行真实渲染，例如渲染实际的 HTML 页面，有潜在安全隐患</td>
-</tr>
-</tbody></table>
-<p><strong>仓库 - 编辑器 (repository.editor)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">LINE_WRAP_EXTENSIONS</td>
-<td align="left">需要显示为行包装的文件名后缀，通过逗号分隔。如果是无后缀名的文件，则单独放置一个逗号，例如：.txt,</td>
-</tr>
-</tbody></table>
-<p><strong>仓库 - 文件上传 (repository.upload)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLED</td>
-<td align="left">激活该选项来启用仓库文件上传功能</td>
-</tr>
-<tr>
-<td align="left">TEMP_PATH</td>
-<td align="left">文件上传的临时存放目录</td>
-</tr>
-<tr>
-<td align="left">ALLOWED_TYPES</td>
-<td align="left">允许上传的文件类型（例如：”image/jpeg|image/png”），留空表示允许上传任意类型的文件</td>
-</tr>
-<tr>
-<td align="left">FILE_MAX_SIZE</td>
-<td align="left">单个上传的文件的最大体积，以 MB 为单位</td>
-</tr>
-<tr>
-<td align="left">MAX_FILES</td>
-<td align="left">单次同时上传的最多文件个数</td>
-</tr>
-</tbody></table>
-<p><strong>版本发布 - 附件 (release.attachment)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLED</td>
-<td align="left">激活该选项来启用版本发布附件功能</td>
-</tr>
-<tr>
-<td align="left">PATH</td>
-<td align="left">存放附件的路径</td>
-</tr>
-<tr>
-<td align="left">ALLOWED_TYPES</td>
-<td align="left">允许上传的 MIME 类型，例如 “image/jpeg</td>
-</tr>
-<tr>
-<td align="left">MAX_SIZE</td>
-<td align="left">最大允许上传的附件体积，单位为 MB，例如 32</td>
-</tr>
-<tr>
-<td align="left">MAX_FILES</td>
-<td align="left">最大允许一次性上传的附件个数，例如 10</td>
-</tr>
-</tbody></table>
-<p><strong>Markdown (markdown)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLE_HARD_LINE_BREAK</td>
-<td align="left">指示是否启用硬性换行扩展</td>
-</tr>
-<tr>
-<td align="left">CUSTOM_URL_SCHEMES</td>
-<td align="left">允许被解析为链接的自定义 URL 方案，例如 git（用于 git://）和magnet（用于 magnet://）</td>
-</tr>
-<tr>
-<td align="left">FILE_EXTENSIONS</td>
-<td align="left">需要被渲染为 Markdown 格式的文件名后缀，通过逗号分隔。如果是无后缀名的文件，则单独放置一个逗号，例如：.markdown,</td>
-</tr>
-</tbody></table>
-<p><strong>Smartypants (smartypants)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLED</td>
-<td align="left">指示是否启用 Smartypants 扩展</td>
-</tr>
-</tbody></table>
-<p><strong>HTTP (http)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ACCESS_CONTROL_ALLOW_ORIGIN</td>
-<td align="left">头信息 Access-Control-Allow-Origin 的自定义值，默认为空，即不响应此头信息</td>
-</tr>
-</tbody></table>
-<p><strong>数据库 (database)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">DB_TYPE</td>
-<td align="left">数据库类型，可以是 mysql、postgres、mssql 或 sqlite3</td>
-</tr>
-<tr>
-<td align="left">HOST</td>
-<td align="left">数据库主机地址与端口</td>
-</tr>
-<tr>
-<td align="left">NAME</td>
-<td align="left">数据库名称</td>
-</tr>
-<tr>
-<td align="left">USER</td>
-<td align="left">数据库用户名</td>
-</tr>
-<tr>
-<td align="left">PASSWD</td>
-<td align="left">数据库用户密码</td>
-</tr>
-<tr>
-<td align="left">SSL_MODE</td>
-<td align="left">仅限 PostgreSQL 使用</td>
-</tr>
-<tr>
-<td align="left">PATH</td>
-<td align="left">仅限 SQLite3 使用，数据库文件路径</td>
-</tr>
-</tbody></table>
-<p><strong>应用管理 (admin)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">DISABLE_REGULAR_ORG_CREATION</td>
-<td align="left">激活该选项来禁止普通用户（非管理员）创建组织</td>
-</tr>
-</tbody></table>
-<p><strong>安全 (security)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">INSTALL_LOCK</td>
-<td align="left">用于指示是否允许访问安装页面（该页面可以设置管理员帐号，因此该选项非常重要）</td>
-</tr>
-<tr>
-<td align="left">SECRET_KEY</td>
-<td align="left">全局的加密密钥，务必修改该值以确保您的服务器安全（会在每次安装时自动生成随机字符串）</td>
-</tr>
-<tr>
-<td align="left">LOGIN_REMEMBER_DAYS</td>
-<td align="left">记住登录的天数</td>
-</tr>
-<tr>
-<td align="left">COOKIE_USERNAME</td>
-<td align="left">记录用户名的 Cookie 名称</td>
-</tr>
-<tr>
-<td align="left">COOKIE_REMEMBER_NAME</td>
-<td align="left">记录用户自动登录信息的 Cookie 名称</td>
-</tr>
-<tr>
-<td align="left">REVERSE_PROXY_AUTHENTICATION_USER</td>
-<td align="left">反向代理认证用户的 Header 字段名</td>
-</tr>
-</tbody></table>
-<p><strong>服务 (service)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ACTIVE_CODE_LIVE_MINUTES</td>
-<td align="left">激活码的有效期，单位为分钟</td>
-</tr>
-<tr>
-<td align="left">RESET_PASSWD_CODE_LIVE_MINUTES</td>
-<td align="left">重置密码的有效期，单位为分钟</td>
-</tr>
-<tr>
-<td align="left">REGISTER_EMAIL_CONFIRM</td>
-<td align="left">激活该选项来要求注册用户必须验证邮箱，要求已启用 Mailer</td>
-</tr>
-<tr>
-<td align="left">DISABLE_REGISTRATION</td>
-<td align="left">激活该选项来禁止用户注册功能，只能由管理员创建帐号</td>
-</tr>
-<tr>
-<td align="left">SHOW_REGISTRATION_BUTTON</td>
-<td align="left">用于指示是否显示注册按钮</td>
-</tr>
-<tr>
-<td align="left">REQUIRE_SIGNIN_VIEW</td>
-<td align="left">激活该选项来要求用户必须登录才能浏览任何页面</td>
-</tr>
-<tr>
-<td align="left">ENABLE_CACHE_AVATAR</td>
-<td align="left">激活该选项来缓存 Gravatar 的头像</td>
-</tr>
-<tr>
-<td align="left">ENABLE_NOTIFY_MAIL</td>
-<td align="left">激活该选项来发送通知邮件给关注者，例如创建 issue 时，要求已启用 Mailer</td>
-</tr>
-<tr>
-<td align="left">ENABLE_REVERSE_PROXY_AUTHENTICATION</td>
-<td align="left">激活该选项来开启反向代理用户认证，请从 #165 了解更多信息</td>
-</tr>
-<tr>
-<td align="left">ENABLE_REVERSE_PROXY_AUTO_REGISTRATION</td>
-<td align="left">激活该选项来开启反向代理用户认证的自动注册功能</td>
-</tr>
-<tr>
-<td align="left">DISABLE_MINIMUM_KEY_SIZE_CHECK</td>
-<td align="left">激活该选项来禁止检查响应类型的密钥最小长度</td>
-</tr>
-<tr>
-<td align="left">ENABLE_CAPTCHA</td>
-<td align="left">激活该选项以在用户注册时要求输入验证码</td>
-</tr>
-</tbody></table>
-<p><strong>Web 钩子 (webhook)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">TYPES</td>
-<td align="left">启动的 Web 钩子类型，可以是 gogs、slack、discord或dingtalk</td>
-</tr>
-<tr>
-<td align="left">QUEUE_LENGTH</td>
-<td align="left">Web钩子队列长度，如果发现部分Webhook未能成功触发，可考虑增加该值</td>
-</tr>
-<tr>
-<td align="left">DELIVER_TIMEOUT</td>
-<td align="left">发送通知的超时时间，以秒为单位</td>
-</tr>
-<tr>
-<td align="left">SKIP_TLS_VERIFY</td>
-<td align="left">指示是否允许向具有非信任证书的地址发送通知</td>
-</tr>
-<tr>
-<td align="left">PAGING_NUM</td>
-<td align="left">Web 钩子历史页面每页显示记录条数</td>
-</tr>
-</tbody></table>
-<p><strong>邮件 (mailer)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLED</td>
-<td align="left">启用该选项以激活邮件服务</td>
-</tr>
-<tr>
-<td align="left">SUBJECT_PREFIX</td>
-<td align="left">邮件标题的前缀</td>
-</tr>
-<tr>
-<td align="left">HOST</td>
-<td align="left">SMTP 主机地址与端口</td>
-</tr>
-<tr>
-<td align="left">DISABLE_HELO</td>
-<td align="left">禁用 HELO 操作</td>
-</tr>
-<tr>
-<td align="left">HELO_HOSTNAME</td>
-<td align="left">HELO 操作的自定义主机名</td>
-</tr>
-<tr>
-<td align="left">SKIP_VERIFY</td>
-<td align="left">不验证自签发证书的有效性</td>
-</tr>
-<tr>
-<td align="left">FROM</td>
-<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#101;&#109;&#97;&#x69;&#108;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#109;">&#101;&#109;&#97;&#x69;&#108;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#109;</a> 的形式</td>
-</tr>
-<tr>
-<td align="left">USER</td>
-<td align="left">邮箱用户名</td>
-</tr>
-<tr>
-<td align="left">PASSWD</td>
-<td align="left">邮箱密码</td>
-</tr>
-<tr>
-<td align="left">USE_PLAIN_TEXT</td>
-<td align="left">使用 text/plain 作为邮件内容格式</td>
-</tr>
-</tbody></table>
-<p>备注：Gogs 仅支持使用 STARTTLS 的 SMTP 协议</p>
-<p><strong>缓存 (cache)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ADAPTER</td>
-<td align="left">缓存引擎适配器，可以为 memory、redis 或 memcache。如果您使用 redis 或 memcache，请确保使用 -tags 选项重新构建所有依赖，例如：go build -tags=’redis’</td>
-</tr>
-<tr>
-<td align="left">INTERVAL</td>
-<td align="left">仅限内存缓存使用，GC 周期，单位为秒</td>
-</tr>
-<tr>
-<td align="left">HOST</td>
-<td align="left">仅限 redis 和 memcache 使用，主机地址和端口号</td>
-</tr>
-<tr>
-<td align="left">-</td>
-<td align="left">Redis：network=tcp,addr=127.0.0.1:6379,password=macaron,db=0,pool_size=100,idle_timeout=180</td>
-</tr>
-<tr>
-<td align="left">-</td>
-<td align="left">Memache：127.0.0.1:9090;127.0.0.1:9091</td>
-</tr>
-</tbody></table>
-<p><strong>会话 (session)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">PROVIDER</td>
-<td align="left">Session 引擎提供者，可以是 memory、file、redis 或 mysql</td>
-</tr>
-<tr>
-<td align="left">PROVIDER_CONFIG</td>
-<td align="left">如果提供者为 file，则为文件根目录；如果为其它提供者，则为主机地址和端口号</td>
-</tr>
-<tr>
-<td align="left">COOKIE_SECURE</td>
-<td align="left">激活该选项以要求所有 session 操作均通过 HTTPS</td>
-</tr>
-<tr>
-<td align="left">GC_INTERVAL_TIME</td>
-<td align="left">GC 周期，单位为秒</td>
-</tr>
-</tbody></table>
-<p><strong>图片 (picture)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">AVATAR_UPLOAD_PATH</td>
-<td align="left">存放用户上传头像的目录</td>
-</tr>
-<tr>
-<td align="left">GRAVATAR_SOURCE</td>
-<td align="left">可以是 gravatar、duoshuo 或任何 URL，例如：<a href="http://cn.gravatar.com/avatar/">http://cn.gravatar.com/avatar/</a></td>
-</tr>
-<tr>
-<td align="left">DISABLE_GRAVATAR</td>
-<td align="left">激活该选项来仅使用本地头像</td>
-</tr>
-<tr>
-<td align="left">ENABLE_FEDERATED_AVATAR</td>
-<td align="left">激活该选项来启用 Federated 头像服务（<a href="http://www.libravatar.org),当/">http://www.libravatar.org），当</a> Gravatar 被禁用时此选项无法生效</td>
-</tr>
-</tbody></table>
-<p><strong>附件 (attachment)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLED</td>
-<td align="left">激活该选项以允许用户上传附件</td>
-</tr>
-<tr>
-<td align="left">PATH</td>
-<td align="left">存放附件的路径</td>
-</tr>
-<tr>
-<td align="left">ALLOWED_TYPES</td>
-<td align="left">允许上传的 MIME 类型，例如 “image/jpeg</td>
-</tr>
-<tr>
-<td align="left">MAX_SIZE</td>
-<td align="left">最大允许上传的附件体积，单位为 MB，例如 4</td>
-</tr>
-<tr>
-<td align="left">MAX_FILES</td>
-<td align="left">最大允许一次性上传的附件个数，例如 5</td>
-</tr>
-</tbody></table>
-<p><strong>时间 (time)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">FORMAT</td>
-<td align="left">指定日期的输出格式，默认为 RFC1123，其它可选的格式为 ANSIC、UnixDate、RubyDate、RFC822、RFC822Z、RFC850、RFC1123、RFC1123Z、RFC3339、RFC3339Nano、Kitchen、Stamp、StampMilli、StampMicro 和 StampNano。访问 <a href="http://golang.org/pkg/time/#pkg-constants">http://golang.org/pkg/time/#pkg-constants</a> 查看详情</td>
-</tr>
-</tbody></table>
-<p><strong>日志 (log)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ROOT_PATH</td>
-<td align="left">日志文件的根目录</td>
-</tr>
-<tr>
-<td align="left">MODE</td>
-<td align="left">日志记录模式，默认为 console。如果想要开启多模式，请使用逗号分割，例如：”console, file”</td>
-</tr>
-<tr>
-<td align="left">LEVEL</td>
-<td align="left">基本日志级别，默认为 Trace</td>
-</tr>
-</tbody></table>
-<p><strong>日志 - 控制台 (log.console)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">LEVEL</td>
-<td align="left">控制台日志级别，留空则继承父值</td>
-</tr>
-</tbody></table>
-<p><strong>日志 - 文件 (log.file)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">LEVEL</td>
-<td align="left">文件日志级别，留空则继承父值</td>
-</tr>
-<tr>
-<td align="left">LOG_ROTATE</td>
-<td align="left">激活该选项以启用日志文件自转</td>
-</tr>
-<tr>
-<td align="left">DAILY_ROTATE</td>
-<td align="left">激活该选项以进行日常自转</td>
-</tr>
-<tr>
-<td align="left">MAX_SIZE_SHIFT</td>
-<td align="left">自转需要达到的最大文件体积，使用位左移，默认为 28 即 1 &lt;&lt; 28，表示 256MB</td>
-</tr>
-<tr>
-<td align="left">MAX_LINES</td>
-<td align="left">自转需要达到的最大文件行数，默认为 1000000</td>
-</tr>
-<tr>
-<td align="left">MAX_DAYS</td>
-<td align="left">保留自转文件的最长期限，默认为 7 天后删除</td>
-</tr>
-</tbody></table>
-<p><strong>日志 - Slack (log.slack)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">LEVEL</td>
-<td align="left">Slack 日志级别，留空则继承父值</td>
-</tr>
-<tr>
-<td align="left">URL</td>
-<td align="left">Slack Web 钩子 URL</td>
-</tr>
-</tbody></table>
-<p><strong>日志 - Discord (log.discord)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">LEVEL</td>
-<td align="left">Discord 日志级别，留空则继承父值</td>
-</tr>
-<tr>
-<td align="left">URL</td>
-<td align="left">Discord Web 钩子 URL</td>
-</tr>
-<tr>
-<td align="left">USERNAME</td>
-<td align="left">在 Web 钩子中显示的用户名</td>
-</tr>
-</tbody></table>
-<p><strong>Cron (cron)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLED</td>
-<td align="left">激活该选项以允许周期性运行 Cron 任务</td>
-</tr>
-<tr>
-<td align="left">RUN_AT_START</td>
-<td align="left">激活该选项以允许在启动时执行 Cron 任务</td>
-</tr>
-</tbody></table>
-<p><strong>Cron - 更新镜像 (cron.update_mirrors)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">SCHEDULE</td>
-<td align="left">定时更新仓库镜像的 Cron 语法，例如：@every 1h</td>
-</tr>
-</tbody></table>
-<p><strong>Cron - 仓库健康检查 (cron.repo_health_check)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">SCHEDULE</td>
-<td align="left">定时进行仓库健康检查的 Cron 语法，例如：@every 24h</td>
-</tr>
-<tr>
-<td align="left">TIMEOUT</td>
-<td align="left">仓库健康检查超时的定义语法，例如：60s</td>
-</tr>
-<tr>
-<td align="left">ARGS</td>
-<td align="left">git fsck 命令的参数，例如：–unreachable –tags</td>
-</tr>
-</tbody></table>
-<p><strong>Cron - 仓库统计检查 (cron.check_repo_stats)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">RUN_AT_START</td>
-<td align="left">激活该选项以在启动时执行仓库统计检查</td>
-</tr>
-<tr>
-<td align="left">SCHEDULE</td>
-<td align="left">定时进行仓库统计检查的 Cron 语法，例如：@every 24h</td>
-</tr>
-</tbody></table>
-<p><strong>Cron - 仓库归档清理 (cron.repo_archive_cleanup)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">RUN_AT_START</td>
-<td align="left">激活该选项以在启动时执行仓库归档清理</td>
-</tr>
-<tr>
-<td align="left">SCHEDULE</td>
-<td align="left">定时进行仓库归档清理的 Cron 语法，例如：@every 24h</td>
-</tr>
-<tr>
-<td align="left">OLDER_THAN</td>
-<td align="left">仓库归档的文件有效期，过期的归档将被清理，例如：24h</td>
-</tr>
-</tbody></table>
-<p><strong>Git (git)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">DISABLE_DIFF_HIGHLIGHT</td>
-<td align="left">激活该选项以禁用行内差异高亮</td>
-</tr>
-<tr>
-<td align="left">MAX_GIT_DIFF_LINES</td>
-<td align="left">差异对比页面单个文件显示的最大行数</td>
-</tr>
-<tr>
-<td align="left">MAX_GIT_DIFF_LINE_CHARACTERS</td>
-<td align="left">差异对比页面单行显示的最大字符数</td>
-</tr>
-<tr>
-<td align="left">MAX_GIT_DIFF_FILES</td>
-<td align="left">差异对比页面文件显示的最多个数</td>
-</tr>
-<tr>
-<td align="left">GC_ARGS</td>
-<td align="left">git gc 命令的参数，例如：–aggressive –auto</td>
-</tr>
-</tbody></table>
-<p><strong>Git - 超时 (git.timeout)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">MIGRATE</td>
-<td align="left">仓库迁移操作超时，默认为 600 秒</td>
-</tr>
-<tr>
-<td align="left">MIRROR</td>
-<td align="left">仓库镜像同步操作超时，默认为 300 秒</td>
-</tr>
-<tr>
-<td align="left">CLONE</td>
-<td align="left">仓库克隆操作超时，默认为 300 秒</td>
-</tr>
-<tr>
-<td align="left">PULL</td>
-<td align="left">仓库拉取操作超时，默认为 300 秒</td>
-</tr>
-<tr>
-<td align="left">GC</td>
-<td align="left">仓库垃圾回收操作超时，默认为 60 秒</td>
-</tr>
-</tbody></table>
-<p><strong>UI (ui)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">EXPLORE_PAGING_NUM</td>
-<td align="left">探索页面每页显示仓库的数量</td>
-</tr>
-<tr>
-<td align="left">ISSUE_PAGING_NUM</td>
-<td align="left">每页显示工单（Issue）的数量（应用到所有以列表形式显示工单的页面）</td>
-</tr>
-<tr>
-<td align="left">FEED_MAX_COMMIT_NUM</td>
-<td align="left">一条最新活动中显示代码提交（Commit）的最大数量</td>
-</tr>
-<tr>
-<td align="left">THEME_COLOR_META_TAG</td>
-<td align="left">被用于 Android &gt;= 5.0 版本 “theme-color” 标记的值，无效的值将被忽略并使用默认值（查看详情）</td>
-</tr>
-<tr>
-<td align="left">MAX_DISPLAY_FILE_SIZE</td>
-<td align="left">显示到页面的最大文件体积（Byte）</td>
-</tr>
-</tbody></table>
-<p><strong>UI - Admin (ui.admin)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">USER_PAGING_NUM</td>
-<td align="left">用户管理页面每页显示记录条数</td>
-</tr>
-<tr>
-<td align="left">REPO_PAGING_NUM</td>
-<td align="left">仓库管理页面每页显示记录条数</td>
-</tr>
-<tr>
-<td align="left">NOTICE_PAGING_NUM</td>
-<td align="left">系统提示管理页面每页显示记录条数</td>
-</tr>
-<tr>
-<td align="left">ORG_PAGING_NUM</td>
-<td align="left">组织管理页面每页显示记录条数</td>
-</tr>
-</tbody></table>
-<p><strong>Prometheus (prometheus)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ENABLED</td>
-<td align="left">激活该选项以启用 Prometheus 监控信息，默认为 true</td>
-</tr>
-<tr>
-<td align="left">ENABLE_BASIC_AUTH</td>
-<td align="left">激活该选项以启用 HTTP 基本认证保护监控信息数据，默认为 false</td>
-</tr>
-<tr>
-<td align="left">BASIC_AUTH_USERNAME</td>
-<td align="left">HTTP 基本认证的用户名</td>
-</tr>
-<tr>
-<td align="left">BASIC_AUTH_PASSWORD</td>
-<td align="left">HTTP 基本认证的密码</td>
-</tr>
-</tbody></table>
-<p><strong>其他 (other)</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">SHOW_FOOTER_BRANDING</td>
-<td align="left">激活该选项以在页脚显示 Gogs 推广信息</td>
-</tr>
-<tr>
-<td align="left">SHOW_FOOTER_VERSION</td>
-<td align="left">激活该选项以在页脚显示 Gogs 版本信息</td>
-</tr>
-<tr>
-<td align="left">SHOW_FOOTER_TEMPLATE_LOAD_TIME</td>
-<td align="left">激活该选项以在页脚显示 Gogs 模板加载时间</td>
-</tr>
-</tbody></table>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a href="https://gogs.io/docs">官方文档</a></li>
-<li><a href="https://github.com/gogs/gogs/releases">历史版本</a></li>
-<li><a href="https://blog.mynook.info/post/host-your-own-git-server-using-gogs/">使用 Gogs 搭建自己的 Git 服务器</a></li>
-<li><a href="https://discuss.gogs.io/t/how-to-inject-custom-head-and-footer/943">注入自定义头部和尾部</a></li>
-<li><a href="https://o-r.github.io/2018/05/12/Gogs%E5%9C%A8windows%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">Gogs在windows上的安装和配置</a></li>
-<li><a href="https://dashdream.github.io/p/7dd2a61d.html">gogs配置详解</a></li>
-<li><a href="https://www.cxyzjd.com/article/e891377/109302884">win10操作系统Gogs配置解决ssh方式git免密下载上传问题</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>notes</tag>
-        <tag>学习笔记</tag>
-        <tag>Gogs</tag>
       </tags>
   </entry>
 </search>
