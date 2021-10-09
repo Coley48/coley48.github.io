@@ -323,4 +323,5 @@ Hexo的所有配置都在_config.yml文件中，部分配置如下：
 - [Hexo 搭建 Blog 精简笔记](https://www.cnblogs.com/michael-xiang/p/10464518.html)
 - [Hexo 史上最全搭建教程](https://blog.csdn.net/sinat_37781304/article/details/82729029?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.baidujs&dist_request_id=1328741.37347.16169781187402753&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.baidujs)
 - [Hexo 图片插入](http://www.xinxiaoyang.com/programming/2016-11-25-hexo-image-bug/)
+- [如何在Hexo的博文中引用自己的文章](https://www.mls-tech.info/hexo/hexo-use-internal-link/)
 - [YAML 语言教程](https://www.ruanyifeng.com/blog/2016/07/yaml.html)
