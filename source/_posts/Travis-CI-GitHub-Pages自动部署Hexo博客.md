@@ -1,6 +1,6 @@
 ---
 title: Travis CI + GitHub Pages自动部署Hexo博客
-tags: [Hexo, Travis-CI,GitHub Pages,持续集成]
+tags: [Hexo, Travis-CI, GitHub Pages, 持续集成]
 date: 2021-04-15 22:23:21
 categories: blog
 ---
