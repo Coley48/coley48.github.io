@@ -782,7 +782,7 @@
 </tr>
 <tr>
 <td align="left">FROM</td>
-<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#101;&#109;&#97;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;">&#101;&#109;&#97;&#105;&#x6c;&#64;&#x65;&#x78;&#97;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;</a> 的形式</td>
+<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#x65;&#109;&#97;&#105;&#x6c;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#109;">&#x65;&#109;&#97;&#105;&#x6c;&#64;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#111;&#109;</a> 的形式</td>
 </tr>
 <tr>
 <td align="left">USER</td>
@@ -1562,7 +1562,7 @@
   </entry>
   <entry>
     <title>LaTeX环境搭建和配置教程</title>
-    <url>/2021/10/12/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</url>
+    <url>/2021/10/10/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<h3 id="关于-LaTeX"><a href="#关于-LaTeX" class="headerlink" title="关于 LaTeX"></a>关于 LaTeX</h3><blockquote>
 <p>LaTeX is not a stand-alone typesetting program in itself, but document preparation software that runs on top of Donald E. Knuth’s TeX typesetting system. </p>
 </blockquote>
@@ -1579,7 +1579,7 @@
 <li>安装的时间稍微有点长，最后看到欢迎字样时，表示安装完成，可以直接关闭；</li>
 <li>在命令行中输入<code>xelatex -v</code>命令测试，会有很多版本信息出现，表示安装成功；</li>
 </ol>
-<img src="/2021/10/12/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/TeX-Live%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90.png" class="">
+<img src="/2021/10/10/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/TeX-Live%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90.png" class="">
 
 <h4 id="配置-VS-Code"><a href="#配置-VS-Code" class="headerlink" title="配置 VS Code"></a>配置 VS Code</h4><p>这里省略 VS Code 安装步骤，详细安装配置以及配置项说明可以参考<a href="https://zhuanlan.zhihu.com/p/166523064">Visual Studio Code 配置LaTeX</a>；</p>
 <ol>
@@ -1596,7 +1596,7 @@
 </ol>
 <figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">Hello, <span class="keyword">\LaTeX</span>!</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="/2021/10/12/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/hello-latex.png" class="">
+<img src="/2021/10/10/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/hello-latex.png" class="">
 
 <p>在 VS Code 中可以使用快捷键：<br><code>Ctrl</code>+<code>Alt</code>+<code>b</code>：编译输出当前编辑的 tex 文件；<br><code>Ctrl</code>+<code>Alt</code>+<code>v</code>：预览当前编辑的 tex 文件输出的 pdf 文件；</p>
 <p>主要的编译器：</p>
@@ -1638,11 +1638,11 @@
 <li><p>进入配置页面，先在 Github 的设置页面中找到 Developer settings，点进入后选择第三条 Personal access tokens，或者直接点击<a href="https://github.com/settings/tokens">这个链接</a>跳转配置页面。</p>
 </li>
 <li><p>生成密钥，点击右上 Generate new token 按钮，可能会需要输入密码验证一下用户身份，然后填写 token 名称用于标识该 token 的用途，然后在下方为 token 设置权限，这里只需要添加 repo 即可。</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/%E7%94%9F%E6%88%90personal-access-token.png" class="">
+
 <p>这里需要注意的是，密钥只会在第一次生成时可见，页面刷新后就无法查看密钥的值，因此创建后需要立即保存，否则只能重新生成。</p>
 </li>
 <li><p>添加密钥，进入 Travis CI 官网 <a href="https://travis-ci.com/">travis-ci.com</a>，首次进入需要通过 Github 来进行仓库的授权访问，完成之后会进入到自己的控制面板，这里可以看到自己 GitHub 上的所有仓库，然后进入需要部署的仓库的 setting 页面，在这里添加环境变量，变量名设置为 GH_TOKEN ，变量值为上一步骤中保存的哈希值。</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/%E6%B7%BB%E5%8A%A0token%E5%88%B0Travis-CI%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" class="">
+
 <p>切记不要点开 DISPLAY VALUE IN BUILD LOG 选项，否则 token 值会输出到构建日志中，就会暴露给别人。</p>
 </li>
 </ol>
@@ -1651,13 +1651,13 @@
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">os:</span> <span class="string">linux</span> <span class="comment"># 选择构建的操作系统</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span> <span class="comment"># 项目语言</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">10</span>  <span class="comment"># 使用 nodejs LTS v10</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">main</span> <span class="comment"># 只监控存放源代码的 main 分支</span></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">directories:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">node_modules</span> <span class="comment"># 缓存 node_modules 加快构建速度</span></span><br><span class="line"><span class="attr">before_script:</span> <span class="comment"># 构建环境搭建，根据所用的主题，这里会有所不同</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">hexo-cli</span> <span class="comment"># 在 CI 环境内安装 Hexo</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">mkdir</span> <span class="string">themes</span> <span class="comment"># 由于 main 分支中没有将 themes/ 文件夹，所以需要重新创建</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">git</span> <span class="string">clone</span> <span class="string">https://github.com/theme-next/hexo-theme-next</span> <span class="string">themes/next</span> <span class="comment">#从 Github 上拉取 next 主题</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="comment"># 最后在根目录安装站点需要的依赖 </span></span><br><span class="line"><span class="attr">script:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span> <span class="comment"># 生成静态文件</span></span><br><span class="line"><span class="attr">deploy:</span> <span class="comment"># 根据个人情况，这里会有所不同</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip_cleanup:</span> <span class="literal">true</span> <span class="comment"># 构建完成后不清除</span></span><br><span class="line">  <span class="attr">strategy:</span> <span class="string">git</span> <span class="comment"># 默认使用 git</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">$GH_TOKEN</span> <span class="comment"># 在 Travis CI 中设置的环境变量 token</span></span><br><span class="line">  <span class="attr">keep_history:</span> <span class="literal">true</span> <span class="comment"># 保存历史</span></span><br><span class="line">  <span class="attr">fqdn:</span> <span class="string">blog.coley48.cn</span> <span class="comment"># 自定义域名，使用 username.github.io 可删除</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">main</span> <span class="comment"># hexo 站点源文件所在的 branch</span></span><br><span class="line">  <span class="attr">local_dir:</span> <span class="string">public</span></span><br><span class="line">  <span class="attr">target_branch:</span> <span class="string">gh-pages</span> <span class="comment"># 存放生成站点文件的 branch，使用 username.github.io 必须是 master</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="提交项目"><a href="#提交项目" class="headerlink" title="提交项目"></a>提交项目</h4><p><code>git push</code>命令执行完成之后，稍等片刻 Travis CI 就会开始运行。<br>在 Travis CI 控制面板中，进入到自己的仓库页面中可以看到项目正在构建，显示黄色：</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E4%B8%AD.png" class="">
+
 
 <p>在下方<code>Job log</code>中还可以查看构建过程中的输出信息：</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B%E8%BE%93%E5%87%BA%E4%BF%A1%E6%81%AF.png" class="">
+
 
 <p>当输出<code>Done. Your build exited with 0.</code>时，表示构建成功，显示为绿色：</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%88%90.png" class="">
+
 
 <p>此后，Travis CI 会自动监听 GitHub 仓库提交，每次有新的代码提交，Travis CI 会自动按照<code>travis.yml</code>配置文件中的命令执行，然后将生成的代码推送到指定的分支中。</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
@@ -2006,13 +2006,89 @@
       </tags>
   </entry>
   <entry>
+    <title>我的大学</title>
+    <url>/2021/08/31/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/</url>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>一转眼已经毕业了2个月了，算上实习也工作了有4个月了。总的来说，自己已经逐渐适应了每天两点一线的上班生活。相较而言，工作的压力要大一些，什么事情都要自己考虑，花钱的地方也多，因此还是读书要比工作轻松；然后另一个感受是经济独立真的太爽了，从出来工作之后也没再问家里要过钱，虽然之前实习挣的少，还要交房租，但还是勉强撑过来了，之后的日子也会逐渐步入正轨，越来越好！</p>
+<p>由于自己没有写日记的习惯，因此大学经历过的很多有趣好玩的事情并没记录下来，就打算写一篇文章，大概记录一下自己觉得好玩、有意义的事情，也算是自己的一篇大学的自传！有些时间点不准确，只是大概的参考日期。</p>
+<span id="more"></span>
+
+<h3 id="大一篇"><a href="#大一篇" class="headerlink" title="大一篇"></a>大一篇</h3><p><strong>2017-09-06</strong><br>大一，刚进入大学，便是为期一周的寝室内务 + 半个多月的军训，完全刷新了我对咱们学校的认知😱；不过比较好的一点是我们学校有一个传统是大二同专业的学长会带着大一新生搞内务；</p>
+<p>这是我总结的内务操作指南：</p>
+<ul>
+<li>缝床单：要用针线把床单沿着席子的边缝在一起，这样看起来床单才整齐；</li>
+<li>包棕垫：要用牛皮纸将棕垫包起来，用透明胶粘好，避免掉棕毛；</li>
+<li>砂铁锈：要用砂纸将床上的铁锈擦掉，然后涂上指甲油防锈；</li>
+<li>擦地板：要用洗衣粉把地面刷过之后，再拿帕子擦干净；</li>
+<li>叠军被：要把处理过的被子叠成豆腐块，但我们睡觉的时候一般都收到柜子里盖另一床被子，免得每天都叠；</li>
+<li>拉军被：要用桌桌面盖在被子上，来回拉扯把被子压得平薄，4人合作拉桌腿，2人站桌斗里加重量，1人往地上的席子上抹肥皂减小摩擦；</li>
+</ul>
+<p>拉军被的工作量最大，都是师兄弟一起拉了几天才完成，最后我们还去了女寝（还是头一次去女生寝室😊）帮女生拉军被，当时不知道有多少张桌子腿被拉断了。</p>
+<p>军训期间我的社死瞬间：刚开始军训，无知的把军训服里的腰带当作皮带用了，然后教官讲了正确的使用方式，可是该死的裤子太大了，我只能把裤子提得尽量高一点，然后把腰带扎紧一点，这样裤子也被扎住了；可惜我还是年轻了，结束了上午的军训，刚好到饭点，高年级的也下课了，我转过主教楼，迎面走来几个师姐，好巧不巧的就在这个时候，我裤子哗的一下掉了下来，我🙃…..，也没敢看她们，就一把抓住了裤子，绕开从边上跑了，还隐隐听到了她们在笑，我去之后我就把裤子裁了。</p>
+<p>还有一次，早上睡得正香的时候，被室长的叫声给吵醒了，本来还以为是军训集合了；给我们说了半天，但是不知道是他语速太快还是我们都还没清醒过来，都没听懂他在说啥，后面才知道他说老鼠爬到他床上了，还被他摸了🤨，然后看了看时间才4点过，都没当回事，接着又睡下了；</p>
+<p><strong>2017-09-15</strong><br>军训期间，我也认识了我大学中的第一位贵人，我们的班助（班主任助理），也是我的老大——婷哥；</p>
+<p><strong>2017-10-08</strong><br>国庆之后，班会上我竞选班长，落选了，当了劳生委员；后来我跟着婷哥进了两委会监察部，她是部长，我是干事。<br>按院上两委会的传统，每届都会有一个新干事见面大会，每个部门都会出一个节目，当时在一起排练的场景我还依稀记得；后面居然还是在新传演播大厅举行的！</p>
+<p><strong>2017-10-18</strong><br>我在大学过的第一个生日是我们监察部的小伙伴陪我过的，真的很惊喜！<br>那天真的是出奇的忙，中午饭晚饭都没顾上吃，就中午忙完回了寝室吃了两口面包，还拉肚子了……<br>然后那天也是我们高中校庆，我还穿了一天高中校服。✌</p>
+<p><strong>2017-11-01</strong><br>自己攒钱买了自行车，为此吃了半个月的土，谁能想象我半个月只用了80块；<br>从此我都生活中多了一个伙伴，没事的时候就喜欢骑车到处跑，所以南充的路，我也比较熟。</p>
+<p><strong>2017-12-29</strong><br>后来遇到了我的初恋，那是快放寒假假的时候了；</p>
+<p>寒假在家拿了驾照，之前科三挂了，然后还干了些啥都忘干净了。</p>
+<p><strong>2018-04-01</strong><br>第二学期开学没多久，学校的运动会就来了；我也参加了院上的集训队，带我们训练的教练都是体育学院的高年级学长；只要不下雨，每天都会训练，包括周末；大概持续了大半个月的样子，反正每天都是腰酸背痛的，在训练的日子里，虽然训练的时候很累，但是过的真的很充实，还认识了很多朋友，大家都是一起训练的同学们，可能是因为一起吃过苦，所以革命友谊都很深厚！</p>
+<p>有一次在我们训练的时候，院上新闻中心的干事来给我们拍照写新闻稿子。好巧不巧，当时在做一个一边扭腰一边横移的热身运动，专业名称叫啥我也不知道；然后我就被抓拍到了……🙄，然后就有了下面这张图，为啥刚好只有我一个人，为啥我当时要那么认真？</p>
+<img src="/2021/08/31/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/exercise.png" class="">
+
+<p><strong>2018-04-21</strong><br>因为我的优势是耐力好，所以我报的项目是5000米，后面进行专项训练的时候，差不多每天会跑15、6圈左右，最高纪录是训练一天一共跑了7000多米，没记错的话；正式比赛的时候，还是有点紧张，感觉还是没有发挥好，最后小组第3名，总成绩第10名，运动会也就告一段落了。</p>
+<p>我还是像之前一样，一边学一边玩，不过数学课程已经听不懂了，是真心难😐；期中之后，突然意识到，这样下去不行，怕是毕业后工作都不好找，危机感油然而生；从此以后开始好好学习，课后都是追着老师问问题，有高中时候那味儿了。😕</p>
+<p>然后大一还有一件让我记忆深刻的事情，有一天中午在寝室睡午觉，睡着睡着我给哭醒了；</p>
+<p><strong>2018-07-09</strong><br>剩下半个学期也很快过去，临时通知要和大二的一起搬寝室到新区，折腾了两天总算搬完了；<br>然后我就踏上了回家的路途，但是和往常不同的是，这次放暑假，我选择骑自行车回家；都是瞒着家里的，他们这时候还不知道我自己买了自行车；😁</p>
+<p><strong>2018-07-11</strong><br>大部分行李提前寄回家了，只背了一个书包，头一天上午全是在山里绕来绕去，有的坡是陡得没法，只能下来把车推上去；整个上午骑了刚好有100公里，已经一点钟了，找了个管子吃了饭，在路边休息了一会又出发了，下午骑了有60多公里，六点刚好到了绵阳三台，随便找了个宾馆住了一晚，花了我100块……（好贵，我回家车费也才100块不到😭）</p>
+<p><strong>2018-07-12</strong><br>第二天早上有点下雨，我等到10点雨停了才出发；第二天明显比第一天累多了，不过路况要好得多，大多时候是走的省道；当然也有走机耕道的时候，特别是下午跟着导航走到了一处低洼处，这里的路已经被水淹没，还好我当时没打算涉险淌过去，我折回去，凭着感觉继续往另一边的大路上走，后面好长一段前不着村后不着店，水也喝完了，后面终于又导航到了一条新的路上；所以能够发现最后轨迹图上有一个很明显的弧形；</p>
+<p>18年暑假那段时间刚好在下暴雨，不过那两天还好都没怎么下雨，我才能按计划顺利到家；在路上就能够看到路边的河道里全是洪水，岸边的玉米，一些房子有一半都泡在了水里；不过总的来说，这是一段非常棒、非常 nice 的体验！😃</p>
+<p>也是因为连续下大雨的缘故，奶奶在家不小心摔了，把手腕整骨折了，然后住进了镇上的医院。刚好这天我骑车到家这边，所以我直接骑车去了医院。这时候亲戚都在，见到我，都吃了一惊，问我这问我那的，然后就跟我说下不为例。</p>
+<p>暑假前面一段时间主要是经常来医院照顾奶奶，好在也没什么大碍，没多久就出院在家休养了，只是偶尔会去医院换个药。暑假剩余时间我也忘了干了些啥，大一就这样过去了。</p>
+<h3 id="大二篇"><a href="#大二篇" class="headerlink" title="大二篇"></a>大二篇</h3><p><strong>18-09-01</strong><br>是不是这天开的学，我也记不清了。开学一段时间还是挺忙的，然后被通知可以去读党校的我还是很惊喜的，因为经过上学期后半段的努力，成绩有了很大的进步，然后又因为担任劳生委员确实很辛苦。</p>
+<p>党校是在这年中秋之后开始的，然后就是每天中午一点到教室开始背书，三天一小考五天一大考，这些都算做平时成绩。除了每天中午会固定的背书之外，我早上一般会起的早一些，然后会在教室过道里背一会书，差不多要到早上第一节课开始之前。</p>
+<p><strong>18-10-25</strong><br>这一天是我们积极分子的奉献日，奉献日有不同的活动，这跟不同的学院也有关系。之前几期党校的同学有去打扫烈士陵园的、有去植树的，我们那次是去老区教室办的宣传党的19大的黑板报，我其实最想做的还是植树，我觉得这对我来说会更有意义一点，毕竟还没有去植过树。</p>
+<p><strong>18-10-28</strong><br>这天是学校组织去参观红色景点的社会实践，我去的是广安武胜，然后参观了乡村振兴橙子种植基地，观看了当地传统的民俗表演，还是很有意义的一天；</p>
+<p>之后的整个大二上学期我就全身心投入学习了。当时的背景是这样的，离每年12月的研究生考试越来越近，加上我们学校学习氛围一向很好，然后图书馆的位置有限且离我们校区又有一点远，这样就催生出了很多在教室复习的同学，但是教室时不时有会有人上课，就得不断地换教室，所以很多人干脆直接买了小板凳小桌子摆在教学楼的过道上用来学习。</p>
+<p>于是我也买了一个小板凳，开始每天早上准时6点起床，7点到教学楼与15级的师兄师姐为伴，一起背书；也是受了当时都党校时候的影响，那时候是背的党校考试的复习资料，后面党校结束后，开始看一些专业书，一直到期末。</p>
+<p><strong>18-12-20</strong><br>研究生考试前夕，我还做了一些我觉得很有意义的事情，那天下午，我发动整个过道的师兄师姐一起来合张影，大家都是朝夕相处的战友，虽然可能都不认识彼此；照片中的大部分我也不认识，最后反正我认识的几个师姐都上了岸。然后晚上从图书馆回来的时候，拿着提前买的两袋大白兔奶糖，在教学楼里见人就发，然后对师兄师姐说了鼓励的话，祝他们考个好成绩！</p>
+<p>临近期末，同学们都在紧张的复习准备期末考试，我也是在这个时候摸索找到了适合自己的复习方法：我会把目录撕下，然后跟着目录依次复习，然后把自己觉得重要的或者不太容易记住的知识点写在目录对应的章节处，课本过完一遍之后再做题，等到了考试前，就直接拿出目录看重点，也不用再拿书翻来翻去，因为重点都在目录上了；而且这样整个知识脉络也特别清晰。</p>
+<p>因为课程比较多，然后有时候考试是上午一门下午一门，然后隔两天又是两门，复习的时间都不太够，整个学期没记错的话有13门课，包括公共课；不过我考的还是可以😁；</p>
+<p>寒假干了什么早忘了，反正也没去哪玩，据我推测，大概率是在家躺尸了，偶尔去城里找同学上网……</p>
+<p>然后就到了大二下学期，课程还是一如既往的多，因为之前机缘巧合之下当了手工协会的手工部部长；就要去参加我们协会举办的教学活动，一般教一些折花，穿珠子，中国结这些；中国结是我的最爱，然后我身边的朋友，我比较喜欢的老师我都送了个遍；</p>
+<p>但平时大部分时间我都泡在图书馆，看书学习；因为当时课程多，作业也很多；周末的时候也在图书馆，以至于到期末的那段时间，我都感觉我眼睛经常是很干，很难受，有点用眼过度了；</p>
+<p>运动会之前我认识了我另一个好哥们——蒲长松，那天正好是他生日，我去外面买了水果，回去的路上看到有一群外国人在过生日，我犹豫了一会，鼓起勇气走过去用蹩脚英语问了是谁的生日，然后我就送了他一个苹果，并祝他生日快乐！然后他叫我留下一起吃了蛋糕，从此多了一个好朋友；后来才知道，他是我们学校的研究生，那些外国人是他的学生们，他兼职教留学生汉语；</p>
+<p><strong>19-04-21</strong><br>对，我大二也参加了运动会，也是报的5000，但是因为平时课比较多，我就没怎么经常去参加院上的集训；偶尔自己在操场练练；运动会那天下了好大的雨，淋着雨跑12圈半可真要命，不过成绩和去年相差不大，可累死我了😵，当时蒲长松还有他的几个学生也过来看了我的比赛，给我加油，完了还去了他家吃饭，他就租住在我们学校外面的小区里，不过后面他就搬走了，他毕业后去了另个高校教汉语；</p>
+<p><strong>19-05-01</strong><br>我清楚的记得劳动节的时候是放的4天假，为啥呢，因为那四天我都在写入党材料；思想汇报，考察登记表，以及各种会议记录等等；</p>
+<p><strong>19-05-07</strong><br>这一天，我光荣的加入了中国共产党，成为了一名预备党员；</p>
+<p>纵观整个大二是我整个大学最刻苦，也是最忙的一年，两次一等奖学金和学年的国家励志奖学金就是最好的证明；</p>
+<p>暑假，我申请了留校，打算多看些书；蒲长松也毕业了，然后他暑假去川师岗前培训；我们约好在成都碰头然后一起回南充；当时还和他的一个朋友一起看了当时大火的哪吒；然后在厕所外面明白了为啥男左女右：Men to be left because women are always right.</p>
+<p><strong>19-08-06</strong><br>然后回了学校，自己学了一下python，然后把打字练了，因为自己打字特慢，而且看着打都会出错，后来练了有一月，就能盲打了，也算是这个暑假最大的收获了；</p>
+<h3 id="大三篇"><a href="#大三篇" class="headerlink" title="大三篇"></a>大三篇</h3><p><strong>19-09-01</strong><br>不知不觉就到了大三，课程相对大二来说少了很多，特别是课程类型更偏向计算机了，然后我们开始更多的开始使用实训室作为我们的教室，和自习室；平时有事没事都在实训室，因此整个大三上学期除了期末那段时间去图书馆复习，其他时候都没怎么去了；</p>
+<p><strong>19-09-12</strong><br>就在12开始是为期三天的全国大学生数学建模竞赛，那三天真可以用“难忘”二字形容了，数学建模竞赛是全国高校学科竞赛排行榜中第五、含金量极高的比赛；这三天的主要任务就是有一些实际生活中的难题，需要我们用数学公式表示出来，然后用程序找到一个好的解，最后写一篇论文出来；大致可以概述成建立数学模型、编程求解、论文编写三个工作；</p>
+<p>当时我们只有比赛的头一天是回寝室睡的，后两天都是在实训室凑合的；但是我感觉我当时还是没有发挥好，然后我们配合也不够好，很多东西因为时间原因都没有最终体现在论文上，所以最后我们只拿了省三等奖，也算是个安慰奖吧；时至今日那段大家一起熬夜做题，吃泡面的时光依然历历在目。</p>
+<p>然后数学建模也告一段落了，我也知道自己面上成绩上还比较好看，但是我自己的技术自己清楚，然后就潜下心来专研技术，但那个时候包括之前的时候都还没有一个明确的方向说我今后要干啥，我喜欢C语言，但是前两年自己摸索是啥也没做出来，就把基础学扎实了；</p>
+<p>后面因为参加计算机设计大赛以及各种院上校上比赛，以及期末各科的作业，都是要求交项目，刚好大二下学期我们有个小项目组，然后把之前的项目拿来继续做了，然后不断迭代，反正在院上和校上的比赛中拿了不少奖，然后也是从这个时候接触前端的东西比较多了；</p>
+<p><strong>20-01-15</strong><br>经过大三上学期的洗礼，自己的技术深入了不少，了解的东西也多了；</p>
+<p>未完待续……</p>
+<h3 id="大四篇"><a href="#大四篇" class="headerlink" title="大四篇"></a>大四篇</h3>]]></content>
+      <categories>
+        <category>diary</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+        <tag>diary</tag>
+        <tag>大学</tag>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LaTeX-学习笔记</title>
     <url>/2021/10/12/LaTeX-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h3 id="LaTeX-简介"><a href="#LaTeX-简介" class="headerlink" title="LaTeX 简介"></a>LaTeX 简介</h3><blockquote>
 <p>LaTeX, which is pronounced «Lah-tech» or «Lay-tech» (to rhyme with «blech» or «Bertolt Brecht»), is a document preparation system for high-quality typesetting. It is most often used for medium-to-large technical or scientific documents but it can be used for almost any form of publishing.</p>
 </blockquote>
 <p>LaTeX 是一个文档准备系统 (Document Preparing System)，它非常适用于生成高印刷质量的科技类和数学类文档。它也能够生成所有其他种类的文档，小到简单的信件，大到完整的书籍。</p>
-<p>上一篇文章<a href="/2021/10/12/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" title="LaTeX环境搭建和配置教程">LaTeX环境搭建和配置教程</a>讲了 LaTeX 环境，本文是 LaTeX 详细用法，其内容主要归纳自《一份（不太）简短的 LaTeX 2ε 介绍》一书，文末参考连接中有该书的连接。</p>
+<p>上一篇文章<a href="/2021/10/10/LaTeX%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" title="LaTeX环境搭建和配置教程">LaTeX环境搭建和配置教程</a>讲了 LaTeX 环境，本文是 LaTeX 详细用法，其内容主要归纳自《一份（不太）简短的 LaTeX 2ε 介绍》一书，文末参考连接中有该书的连接。</p>
 <span id="more"></span>
 
 <h3 id="LaTeX-基本概念"><a href="#LaTeX-基本概念" class="headerlink" title="LaTeX 基本概念"></a>LaTeX 基本概念</h3><h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><p>LATEX 中命令2以反斜线 \ 开头，为以下两种形式之一：</p>
@@ -2209,7 +2285,114 @@
 <figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\verb</span>⟨<span class="string">delim⟩</span>⟨code⟩⟨delim⟩</span><br><span class="line"><span class="keyword">\verb</span>|<span class="string">\LaTeX</span>|</span><br><span class="line"><span class="keyword">\verb</span>+<span class="string">(a || b)</span>+ <span class="keyword">\verb</span>*<span class="string">+(a || b)+</span></span><br></pre></td></tr></table></figure>
 
 <p>verbatim 宏包优化了 verbatim 环境的内部命令，并提供了 \verbatiminput 命令用来直接读入文件生成代码环境。fancyvrb 宏包提供了可定制格式的 Verbatim 环境；listings 宏包更进一步，可生成关键字高亮的代码环境，支持各种程序设计语言的语法和关键字。详情请参考各自的帮助文档。</p>
-<h4 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h4><h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><ul>
+<h4 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h4><p>排版表格最基本的 tabular 环境用法为：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;⟨column-spec⟩&#125;</span><br><span class="line">⟨item1⟩ <span class="built_in">&amp;</span> ⟨item2⟩ <span class="built_in">&amp;</span> … <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">⟨item1⟩ <span class="built_in">&amp;</span> ⟨item2⟩ <span class="built_in">&amp;</span> … <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接使用 tabular 环境的话，会和周围的文字混排。tabular 环境可带一个可选参数控制垂直对齐（默认是垂直居中）；但是通常情况下，tabular 环境一般会放置在 table 浮动体环境中，并用 \caption 命令加标题。</p>
+<h5 id="列格式"><a href="#列格式" class="headerlink" title="列格式"></a>列格式</h5><p>tabular 环境使用 ⟨column-spec⟩ 参数指定表格的列数以及每列的格式。且表格中每行的单元格数目不能多于列格式里 l/c/r/p 的总数（可以少于这个总数），否则出错。</p>
+<table>
+<thead>
+<tr>
+<th align="left">列格式</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">l/c/r</td>
+<td align="left">单元格内容左对齐/居中/右对齐，不折行</td>
+</tr>
+<tr>
+<td align="left">p{⟨width⟩}</td>
+<td align="left">单元格宽度固定为 ⟨width⟩，可自动折行</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">绘制竖线</td>
+</tr>
+<tr>
+<td align="left">@{⟨string⟩}</td>
+<td align="left">自定义内容 ⟨string⟩</td>
+</tr>
+</tbody></table>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|l|c|r|&#125;</span><br><span class="line">    <span class="keyword">\hline</span></span><br><span class="line">    left <span class="built_in">&amp;</span> center <span class="built_in">&amp;</span> right <span class="keyword">\\</span></span><br><span class="line">    <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@ 格式可在单元格前后插入任意的文本，但同时它也消除了单元格前后额外添加的间距。@格式可以适当使用以充当“竖线”。特别地，@{} 可直接用来消除单元格前后的间距：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;@&#123;&#125; r@&#123;:&#125;lr @&#123;&#125;&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">1 <span class="built_in">&amp;</span> 1 <span class="built_in">&amp;</span> one <span class="keyword">\\</span></span><br><span class="line">11 <span class="built_in">&amp;</span> 3 <span class="built_in">&amp;</span> eleven <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外 LATEX 还提供了简便的将格式参数重复的写法 *{⟨n⟩{⟨column-spec⟩}，比如以下两种写法是等效的：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|c|c|c|c|c|p&#123;4em&#125;|p&#123;4em&#125;|&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|*&#123;5&#125;&#123;c|&#125;*&#123;2&#125;&#123;p&#123;4em&#125;|&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有时需要为整列修饰格式，比如整列改变为粗体，如果每个单元格都加上 \bfseries 命令会比较麻烦。array 宏包提供了辅助格式 &gt; 和 &lt;，用于给列格式前后加上修饰命令：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% \usepackage&#123;array&#125;</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;&gt;&#123;<span class="keyword">\itshape</span>&#125;r&lt;&#123;*&#125;l&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">italic <span class="built_in">&amp;</span> normal <span class="keyword">\\</span></span><br><span class="line">column <span class="built_in">&amp;</span> column <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<p>array 宏包还提供了类似 p 格式的 m 格式和 b 格式，三者分别在垂直方向上靠顶端对齐、居中以及底端对齐。</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\newcommand</span><span class="keyword">\txt</span></span><br><span class="line">&#123;a b c d e f g h i&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;cp&#123;2em&#125;m&#123;2em&#125;b&#123;2em&#125;&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">pos <span class="built_in">&amp;</span> <span class="keyword">\txt</span> <span class="built_in">&amp;</span> <span class="keyword">\txt</span> <span class="built_in">&amp;</span> <span class="keyword">\txt</span> <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="列宽"><a href="#列宽" class="headerlink" title="列宽"></a>列宽</h5><p>LATEX 本身提供了 tabular* 环境用来排版定宽表格，但是不太方便使用，比如要用到 @ 格式插入额外命令，令单元格之间的间距为 \fill，但即使这样仍然有瑕疵：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular*&#125;&#123;14em&#125;<span class="comment">%</span></span><br><span class="line">&#123;@&#123;<span class="keyword">\extracolsep</span>&#123;<span class="keyword">\fill</span>&#125;&#125;|c|c|c|c|&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">A <span class="built_in">&amp;</span> B <span class="built_in">&amp;</span> C <span class="built_in">&amp;</span> D <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line">a <span class="built_in">&amp;</span> b <span class="built_in">&amp;</span> c <span class="built_in">&amp;</span> d <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular*&#125;</span><br></pre></td></tr></table></figure>
+
+<p>tabularx 宏包为我们提供了方便的解决方案。它引入了一个 X 列格式，类似 p 列格式，不过会根据表格宽度自动计算列宽，多个 X 列格式平均分配列宽。X 列格式也可以用 array 里的辅助格式修饰对齐方式：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabularx&#125;&#123;14em&#125;<span class="comment">%</span></span><br><span class="line">&#123;|*&#123;4&#125;&#123;&gt;&#123;<span class="keyword">\centering</span><span class="keyword">\arraybackslash</span>&#125;X|&#125;&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">A <span class="built_in">&amp;</span> B <span class="built_in">&amp;</span> C <span class="built_in">&amp;</span> D <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line">a <span class="built_in">&amp;</span> b <span class="built_in">&amp;</span> c <span class="built_in">&amp;</span> d <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabularx&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="横线"><a href="#横线" class="headerlink" title="横线"></a>横线</h5><p>通过 \hline 命令绘制表格线，而 \cline{⟨i⟩-⟨j⟩} 命令用来绘制跨越部分单元格的横线：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|c|c|c|&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">1 <span class="built_in">&amp;</span> 2 <span class="built_in">&amp;</span> 3 <span class="keyword">\\</span> <span class="keyword">\cline</span>&#123;1-2&#125;</span><br><span class="line">4 <span class="built_in">&amp;</span> 5 <span class="built_in">&amp;</span> 6 <span class="keyword">\\</span> <span class="keyword">\cline</span>&#123;3-3&#125;</span><br><span class="line">7 <span class="built_in">&amp;</span> 8 <span class="built_in">&amp;</span> 9 <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+<p>在科技论文排版中广泛应用的表格形式是三线表，形式干净简明。三线表由 booktabs 宏包支持，它提供了 \toprule、\midrule 和 \bottomrule 命令用以排版三线表的三条线，以及和 \cline 对应的 \cmidrule。除此之外，最好不要用其它横线以及竖线：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;cccc&#125;</span><br><span class="line"><span class="keyword">\toprule</span></span><br><span class="line"><span class="built_in">&amp;</span> <span class="keyword">\multicolumn</span>&#123;3&#125;&#123;c&#125;&#123;Numbers&#125; <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\cmidrule</span>&#123;2-4&#125;</span><br><span class="line"><span class="built_in">&amp;</span> 1 <span class="built_in">&amp;</span> 2 <span class="built_in">&amp;</span> 3 <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\midrule</span></span><br><span class="line">Alphabet <span class="built_in">&amp;</span> A <span class="built_in">&amp;</span> B <span class="built_in">&amp;</span> C <span class="keyword">\\</span></span><br><span class="line">Roman <span class="built_in">&amp;</span> I <span class="built_in">&amp;</span> II<span class="built_in">&amp;</span> III <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\bottomrule</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="合并单元格"><a href="#合并单元格" class="headerlink" title="合并单元格"></a>合并单元格</h5><p>LATEX 通过 \multicolumn 合并横向单元格；</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\multicolumn</span>&#123;⟨n⟩&#125;&#123;⟨column-spec⟩&#125;&#123;⟨item⟩&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 ⟨n⟩ 为要合并的列数，⟨column-spec⟩ 为合并单元格后的列格式，只允许出现一个 l/c/r 或 p 格式。如果合并前的单元格前后带表格线 |，合并后的列格式也要带 | 以使得表格的竖线一致。</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|c|c|c|&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">1 <span class="built_in">&amp;</span> 2 <span class="built_in">&amp;</span> Center <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\multicolumn</span>&#123;2&#125;&#123;|c|&#125;&#123;3&#125; <span class="built_in">&amp;</span></span><br><span class="line"><span class="keyword">\multicolumn</span>&#123;1&#125;&#123;r|&#125;&#123;Right&#125; <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line">4 <span class="built_in">&amp;</span> <span class="keyword">\multicolumn</span>&#123;2&#125;&#123;c|&#125;&#123;C&#125; <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，形如 \multicolumn{1}{⟨column-spec⟩}{⟨item⟩} 的命令可以用来修改某一个单元格的列格式；</p>
+<p>纵向合并单元格需要用到 multirow 宏包提供的 \multirow 命令：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\multirow</span>&#123;⟨n⟩&#125;&#123;⟨width⟩&#125;&#123;⟨item⟩&#125;</span><br></pre></td></tr></table></figure>
+
+<p>⟨width⟩ 为合并后单元格的宽度，可以填 * 以使用自然宽度。</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% \usepackage&#123;multirow&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;ccc&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\multirow</span>&#123;2&#125;&#123;*&#125;&#123;Item&#125; <span class="built_in">&amp;</span></span><br><span class="line"><span class="keyword">\multicolumn</span>&#123;2&#125;&#123;c&#125;&#123;Value&#125; <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\cline</span>&#123;2-3&#125;</span><br><span class="line"><span class="built_in">&amp;</span> First <span class="built_in">&amp;</span> Second <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line">A <span class="built_in">&amp;</span> 1 <span class="built_in">&amp;</span> 2 <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="嵌套表格"><a href="#嵌套表格" class="headerlink" title="嵌套表格"></a>嵌套表格</h5><p>相对于合并单元格，拆分单元格对于 LATEX 来说并非易事。在单元格中嵌套一个小表格可以起到“拆分单元格”的效果。在以下的例子中，注意要用 \multicolumn 命令配合 @{} 格式把单元格的额外边距去掉，使得嵌套的表格线能和外层的表格线正确相连；</p>
+<p>如果不需要为“拆分的单元格”画线，并且只在垂直方向“拆分”的话，makecell 宏包提供的 \makecell 命令是一个简单的解决方案：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|c|c|&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">a <span class="built_in">&amp;</span> <span class="keyword">\makecell</span>&#123;d1 <span class="keyword">\\</span> d2&#125; <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">b <span class="built_in">&amp;</span> c <span class="keyword">\\</span></span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="控制行距"><a href="#控制行距" class="headerlink" title="控制行距"></a>控制行距</h5><p>LATEX 生成的表格看起来通常比较紧凑。修改参数 \arraystretch 可以得到行距更加宽松的表格，但后续的行距都会修改；</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\renewcommand</span><span class="keyword">\arraystretch</span>&#123;1.8&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;tabular&#125;&#123;|c|&#125;</span><br><span class="line"><span class="keyword">\hline</span></span><br><span class="line">Really loose <span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line">tabular rows.<span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line"><span class="keyword">\end</span>&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一种增加间距的办法是给换行命令 \ 添加可选参数，在这一行下面加额外的间距，适合用于在行间不加横线的表格；</p>
+<h4 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h4><p>LATEX 本身不支持插图功能，需要由 graphicx 宏包辅助支持，然后通过 \includegraphics 命令加载图片：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\includegraphics</span>[⟨options⟩]&#123;⟨filename⟩&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 ⟨filename⟩ 为图片文件名，与使用 \include 命令类似，文件名有时需要使用相对路径或绝对路径。图片文件的扩展名可写可不写。</p>
+<p>另外 graphicx 宏包还提供了 \graphicspath 命令，用于声明一个或多个图片文件存放的目录，使用这些目录里的图片时可不用写路径：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 假设主要的图片放在 figures 子目录下，标志放在 logo 子目录下</span></span><br><span class="line"><span class="keyword">\graphicspath</span>&#123;&#123;figures/&#125;&#123;logo/&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>\includegraphics 命令的可选参数 ⟨options⟩ 支持 ⟨key⟩=⟨value⟩ 形式赋值，常用的参数如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">width=⟨width⟩</td>
+<td align="left">将图片缩放到宽度为 ⟨width⟩</td>
+</tr>
+<tr>
+<td align="left">height=⟨height⟩</td>
+<td align="left">将图片缩放到高度为 ⟨height⟩</td>
+</tr>
+<tr>
+<td align="left">scale=⟨scale⟩</td>
+<td align="left">将图片相对于原尺寸缩放 ⟨scale⟩ 倍</td>
+</tr>
+<tr>
+<td align="left">angle=⟨angle⟩</td>
+<td align="left">令图片逆时针旋转 ⟨angle⟩ 度</td>
+</tr>
+</tbody></table>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><ul>
 <li>LATEX 的三个标准文档类可指定的选项包括：</li>
 </ul>
 <table>
@@ -2278,82 +2461,6 @@
         <tag>notes</tag>
         <tag>学习笔记</tag>
         <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的大学</title>
-    <url>/2021/08/31/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/</url>
-    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>一转眼已经毕业了2个月了，算上实习也工作了有4个月了。总的来说，自己已经逐渐适应了每天两点一线的上班生活。相较而言，工作的压力要大一些，什么事情都要自己考虑，花钱的地方也多，因此还是读书要比工作轻松；然后另一个感受是经济独立真的太爽了，从出来工作之后也没再问家里要过钱，虽然之前实习挣的少，还要交房租，但还是勉强撑过来了，之后的日子也会逐渐步入正轨，越来越好！</p>
-<p>由于自己没有写日记的习惯，因此大学经历过的很多有趣好玩的事情并没记录下来，就打算写一篇文章，大概记录一下自己觉得好玩、有意义的事情，也算是自己的一篇大学的自传！有些时间点不准确，只是大概的参考日期。</p>
-<span id="more"></span>
-
-<h3 id="大一篇"><a href="#大一篇" class="headerlink" title="大一篇"></a>大一篇</h3><p><strong>2017-09-06</strong><br>大一，刚进入大学，便是为期一周的寝室内务 + 半个多月的军训，完全刷新了我对咱们学校的认知😱；不过比较好的一点是我们学校有一个传统是大二同专业的学长会带着大一新生搞内务；</p>
-<p>这是我总结的内务操作指南：</p>
-<ul>
-<li>缝床单：要用针线把床单沿着席子的边缝在一起，这样看起来床单才整齐；</li>
-<li>包棕垫：要用牛皮纸将棕垫包起来，用透明胶粘好，避免掉棕毛；</li>
-<li>砂铁锈：要用砂纸将床上的铁锈擦掉，然后涂上指甲油防锈；</li>
-<li>擦地板：要用洗衣粉把地面刷过之后，再拿帕子擦干净；</li>
-<li>叠军被：要把处理过的被子叠成豆腐块，但我们睡觉的时候一般都收到柜子里盖另一床被子，免得每天都叠；</li>
-<li>拉军被：要用桌桌面盖在被子上，来回拉扯把被子压得平薄，4人合作拉桌腿，2人站桌斗里加重量，1人往地上的席子上抹肥皂减小摩擦；</li>
-</ul>
-<p>拉军被的工作量最大，都是师兄弟一起拉了几天才完成，最后我们还去了女寝（还是头一次去女生寝室😊）帮女生拉军被，当时不知道有多少张桌子腿被拉断了。</p>
-<p>军训期间我的社死瞬间：刚开始军训，无知的把军训服里的腰带当作皮带用了，然后教官讲了正确的使用方式，可是该死的裤子太大了，我只能把裤子提得尽量高一点，然后把腰带扎紧一点，这样裤子也被扎住了；可惜我还是年轻了，结束了上午的军训，刚好到饭点，高年级的也下课了，我转过主教楼，迎面走来几个师姐，好巧不巧的就在这个时候，我裤子哗的一下掉了下来，我🙃…..，也没敢看她们，就一把抓住了裤子，绕开从边上跑了，还隐隐听到了她们在笑，我去之后我就把裤子裁了。</p>
-<p>还有一次，早上睡得正香的时候，被室长的叫声给吵醒了，本来还以为是军训集合了；给我们说了半天，但是不知道是他语速太快还是我们都还没清醒过来，都没听懂他在说啥，后面才知道他说老鼠爬到他床上了，还被他摸了🤨，然后看了看时间才4点过，都没当回事，接着又睡下了；</p>
-<p><strong>2017-09-15</strong><br>军训期间，我也认识了我大学中的第一位贵人，我们的班助（班主任助理），也是我的老大——婷哥；</p>
-<p><strong>2017-10-08</strong><br>国庆之后，班会上我竞选班长，落选了，当了劳生委员；后来我跟着婷哥进了两委会监察部，她是部长，我是干事。<br>按院上两委会的传统，每届都会有一个新干事见面大会，每个部门都会出一个节目，当时在一起排练的场景我还依稀记得；后面居然还是在新传演播大厅举行的！</p>
-<p><strong>2017-10-18</strong><br>我在大学过的第一个生日是我们监察部的小伙伴陪我过的，真的很惊喜！<br>那天真的是出奇的忙，中午饭晚饭都没顾上吃，就中午忙完回了寝室吃了两口面包，还拉肚子了……<br>然后那天也是我们高中校庆，我还穿了一天高中校服。✌</p>
-<p><strong>2017-11-01</strong><br>自己攒钱买了自行车，为此吃了半个月的土，谁能想象我半个月只用了80块；<br>从此我都生活中多了一个伙伴，没事的时候就喜欢骑车到处跑，所以南充的路，我也比较熟。</p>
-<p><strong>2017-12-29</strong><br>后来遇到了我的初恋，那是快放寒假假的时候了；</p>
-<p>寒假在家拿了驾照，之前科三挂了，然后还干了些啥都忘干净了。</p>
-<p><strong>2018-04-01</strong><br>第二学期开学没多久，学校的运动会就来了；我也参加了院上的集训队，带我们训练的教练都是体育学院的高年级学长；只要不下雨，每天都会训练，包括周末；大概持续了大半个月的样子，反正每天都是腰酸背痛的，在训练的日子里，虽然训练的时候很累，但是过的真的很充实，还认识了很多朋友，大家都是一起训练的同学们，可能是因为一起吃过苦，所以革命友谊都很深厚！</p>
-<p>有一次在我们训练的时候，院上新闻中心的干事来给我们拍照写新闻稿子。好巧不巧，当时在做一个一边扭腰一边横移的热身运动，专业名称叫啥我也不知道；然后我就被抓拍到了……🙄，然后就有了下面这张图，为啥刚好只有我一个人，为啥我当时要那么认真？</p>
-<img src="/2021/08/31/%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6/exercise.png" class="">
-
-<p><strong>2018-04-21</strong><br>因为我的优势是耐力好，所以我报的项目是5000米，后面进行专项训练的时候，差不多每天会跑15、6圈左右，最高纪录是训练一天一共跑了7000多米，没记错的话；正式比赛的时候，还是有点紧张，感觉还是没有发挥好，最后小组第3名，总成绩第10名，运动会也就告一段落了。</p>
-<p>我还是像之前一样，一边学一边玩，不过数学课程已经听不懂了，是真心难😐；期中之后，突然意识到，这样下去不行，怕是毕业后工作都不好找，危机感油然而生；从此以后开始好好学习，课后都是追着老师问问题，有高中时候那味儿了。😕</p>
-<p>然后大一还有一件让我记忆深刻的事情，有一天中午在寝室睡午觉，睡着睡着我给哭醒了；</p>
-<p><strong>2018-07-09</strong><br>剩下半个学期也很快过去，临时通知要和大二的一起搬寝室到新区，折腾了两天总算搬完了；<br>然后我就踏上了回家的路途，但是和往常不同的是，这次放暑假，我选择骑自行车回家；都是瞒着家里的，他们这时候还不知道我自己买了自行车；😁</p>
-<p><strong>2018-07-11</strong><br>大部分行李提前寄回家了，只背了一个书包，头一天上午全是在山里绕来绕去，有的坡是陡得没法，只能下来把车推上去；整个上午骑了刚好有100公里，已经一点钟了，找了个管子吃了饭，在路边休息了一会又出发了，下午骑了有60多公里，六点刚好到了绵阳三台，随便找了个宾馆住了一晚，花了我100块……（好贵，我回家车费也才100块不到😭）</p>
-<p><strong>2018-07-12</strong><br>第二天早上有点下雨，我等到10点雨停了才出发；第二天明显比第一天累多了，不过路况要好得多，大多时候是走的省道；当然也有走机耕道的时候，特别是下午跟着导航走到了一处低洼处，这里的路已经被水淹没，还好我当时没打算涉险淌过去，我折回去，凭着感觉继续往另一边的大路上走，后面好长一段前不着村后不着店，水也喝完了，后面终于又导航到了一条新的路上；所以能够发现最后轨迹图上有一个很明显的弧形；</p>
-<p>18年暑假那段时间刚好在下暴雨，不过那两天还好都没怎么下雨，我才能按计划顺利到家；在路上就能够看到路边的河道里全是洪水，岸边的玉米，一些房子有一半都泡在了水里；不过总的来说，这是一段非常棒、非常 nice 的体验！😃</p>
-<p>也是因为连续下大雨的缘故，奶奶在家不小心摔了，把手腕整骨折了，然后住进了镇上的医院。刚好这天我骑车到家这边，所以我直接骑车去了医院。这时候亲戚都在，见到我，都吃了一惊，问我这问我那的，然后就跟我说下不为例。</p>
-<p>暑假前面一段时间主要是经常来医院照顾奶奶，好在也没什么大碍，没多久就出院在家休养了，只是偶尔会去医院换个药。暑假剩余时间我也忘了干了些啥，大一就这样过去了。</p>
-<h3 id="大二篇"><a href="#大二篇" class="headerlink" title="大二篇"></a>大二篇</h3><p><strong>18-09-01</strong><br>是不是这天开的学，我也记不清了。开学一段时间还是挺忙的，然后被通知可以去读党校的我还是很惊喜的，因为经过上学期后半段的努力，成绩有了很大的进步，然后又因为担任劳生委员确实很辛苦。</p>
-<p>党校是在这年中秋之后开始的，然后就是每天中午一点到教室开始背书，三天一小考五天一大考，这些都算做平时成绩。除了每天中午会固定的背书之外，我早上一般会起的早一些，然后会在教室过道里背一会书，差不多要到早上第一节课开始之前。</p>
-<p><strong>18-10-25</strong><br>这一天是我们积极分子的奉献日，奉献日有不同的活动，这跟不同的学院也有关系。之前几期党校的同学有去打扫烈士陵园的、有去植树的，我们那次是去老区教室办的宣传党的19大的黑板报，我其实最想做的还是植树，我觉得这对我来说会更有意义一点，毕竟还没有去植过树。</p>
-<p><strong>18-10-28</strong><br>这天是学校组织去参观红色景点的社会实践，我去的是广安武胜，然后参观了乡村振兴橙子种植基地，观看了当地传统的民俗表演，还是很有意义的一天；</p>
-<p>之后的整个大二上学期我就全身心投入学习了。当时的背景是这样的，离每年12月的研究生考试越来越近，加上我们学校学习氛围一向很好，然后图书馆的位置有限且离我们校区又有一点远，这样就催生出了很多在教室复习的同学，但是教室时不时有会有人上课，就得不断地换教室，所以很多人干脆直接买了小板凳小桌子摆在教学楼的过道上用来学习。</p>
-<p>于是我也买了一个小板凳，开始每天早上准时6点起床，7点到教学楼与15级的师兄师姐为伴，一起背书；也是受了当时都党校时候的影响，那时候是背的党校考试的复习资料，后面党校结束后，开始看一些专业书，一直到期末。</p>
-<p><strong>18-12-20</strong><br>研究生考试前夕，我还做了一些我觉得很有意义的事情，那天下午，我发动整个过道的师兄师姐一起来合张影，大家都是朝夕相处的战友，虽然可能都不认识彼此；照片中的大部分我也不认识，最后反正我认识的几个师姐都上了岸。然后晚上从图书馆回来的时候，拿着提前买的两袋大白兔奶糖，在教学楼里见人就发，然后对师兄师姐说了鼓励的话，祝他们考个好成绩！</p>
-<p>临近期末，同学们都在紧张的复习准备期末考试，我也是在这个时候摸索找到了适合自己的复习方法：我会把目录撕下，然后跟着目录依次复习，然后把自己觉得重要的或者不太容易记住的知识点写在目录对应的章节处，课本过完一遍之后再做题，等到了考试前，就直接拿出目录看重点，也不用再拿书翻来翻去，因为重点都在目录上了；而且这样整个知识脉络也特别清晰。</p>
-<p>因为课程比较多，然后有时候考试是上午一门下午一门，然后隔两天又是两门，复习的时间都不太够，整个学期没记错的话有13门课，包括公共课；不过我考的还是可以😁；</p>
-<p>寒假干了什么早忘了，反正也没去哪玩，据我推测，大概率是在家躺尸了，偶尔去城里找同学上网……</p>
-<p>然后就到了大二下学期，课程还是一如既往的多，因为之前机缘巧合之下当了手工协会的手工部部长；就要去参加我们协会举办的教学活动，一般教一些折花，穿珠子，中国结这些；中国结是我的最爱，然后我身边的朋友，我比较喜欢的老师我都送了个遍；</p>
-<p>但平时大部分时间我都泡在图书馆，看书学习；因为当时课程多，作业也很多；周末的时候也在图书馆，以至于到期末的那段时间，我都感觉我眼睛经常是很干，很难受，有点用眼过度了；</p>
-<p>运动会之前我认识了我另一个好哥们——蒲长松，那天正好是他生日，我去外面买了水果，回去的路上看到有一群外国人在过生日，我犹豫了一会，鼓起勇气走过去用蹩脚英语问了是谁的生日，然后我就送了他一个苹果，并祝他生日快乐！然后他叫我留下一起吃了蛋糕，从此多了一个好朋友；后来才知道，他是我们学校的研究生，那些外国人是他的学生们，他兼职教留学生汉语；</p>
-<p><strong>19-04-21</strong><br>对，我大二也参加了运动会，也是报的5000，但是因为平时课比较多，我就没怎么经常去参加院上的集训；偶尔自己在操场练练；运动会那天下了好大的雨，淋着雨跑12圈半可真要命，不过成绩和去年相差不大，可累死我了😵，当时蒲长松还有他的几个学生也过来看了我的比赛，给我加油，完了还去了他家吃饭，他就租住在我们学校外面的小区里，不过后面他就搬走了，他毕业后去了另个高校教汉语；</p>
-<p><strong>19-05-01</strong><br>我清楚的记得劳动节的时候是放的4天假，为啥呢，因为那四天我都在写入党材料；思想汇报，考察登记表，以及各种会议记录等等；</p>
-<p><strong>19-05-07</strong><br>这一天，我光荣的加入了中国共产党，成为了一名预备党员；</p>
-<p>纵观整个大二是我整个大学最刻苦，也是最忙的一年，两次一等奖学金和学年的国家励志奖学金就是最好的证明；</p>
-<p>暑假，我申请了留校，打算多看些书；蒲长松也毕业了，然后他暑假去川师岗前培训；我们约好在成都碰头然后一起回南充；当时还和他的一个朋友一起看了当时大火的哪吒；然后在厕所外面明白了为啥男左女右：Men to be left because women are always right.</p>
-<p><strong>19-08-06</strong><br>然后回了学校，自己学了一下python，然后把打字练了，因为自己打字特慢，而且看着打都会出错，后来练了有一月，就能盲打了，也算是这个暑假最大的收获了；</p>
-<h3 id="大三篇"><a href="#大三篇" class="headerlink" title="大三篇"></a>大三篇</h3><p><strong>19-09-01</strong><br>不知不觉就到了大三，课程相对大二来说少了很多，特别是课程类型更偏向计算机了，然后我们开始更多的开始使用实训室作为我们的教室，和自习室；平时有事没事都在实训室，因此整个大三上学期除了期末那段时间去图书馆复习，其他时候都没怎么去了；</p>
-<p><strong>19-09-12</strong><br>就在12开始是为期三天的全国大学生数学建模竞赛，那三天真可以用“难忘”二字形容了，数学建模竞赛是全国高校学科竞赛排行榜中第五、含金量极高的比赛；这三天的主要任务就是有一些实际生活中的难题，需要我们用数学公式表示出来，然后用程序找到一个好的解，最后写一篇论文出来；大致可以概述成建立数学模型、编程求解、论文编写三个工作；</p>
-<p>当时我们只有比赛的头一天是回寝室睡的，后两天都是在实训室凑合的；但是我感觉我当时还是没有发挥好，然后我们配合也不够好，很多东西因为时间原因都没有最终体现在论文上，所以最后我们只拿了省三等奖，也算是个安慰奖吧；时至今日那段大家一起熬夜做题，吃泡面的时光依然历历在目。</p>
-<p>然后数学建模也告一段落了，我也知道自己面上成绩上还比较好看，但是我自己的技术自己清楚，然后就潜下心来专研技术，但那个时候包括之前的时候都还没有一个明确的方向说我今后要干啥，我喜欢C语言，但是前两年自己摸索是啥也没做出来，就把基础学扎实了；</p>
-<p>后面因为参加计算机设计大赛以及各种院上校上比赛，以及期末各科的作业，都是要求交项目，刚好大二下学期我们有个小项目组，然后把之前的项目拿来继续做了，然后不断迭代，反正在院上和校上的比赛中拿了不少奖，然后也是从这个时候接触前端的东西比较多了；</p>
-<p><strong>20-01-15</strong><br>经过大三上学期的洗礼，自己的技术深入了不少，了解的东西也多了；</p>
-<p>未完待续……</p>
-<h3 id="大四篇"><a href="#大四篇" class="headerlink" title="大四篇"></a>大四篇</h3>]]></content>
-      <categories>
-        <category>diary</category>
-      </categories>
-      <tags>
-        <tag>日记</tag>
-        <tag>diary</tag>
-        <tag>大学</tag>
-        <tag>生活</tag>
       </tags>
   </entry>
 </search>

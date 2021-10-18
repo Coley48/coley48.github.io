@@ -27,20 +27,14 @@
 <meta property="og:site_name" content="Coley&#39;s Blog">
 <meta property="og:description" content="什么是持续集成？持续集成（Continuous Integration，简称 CI）指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码“集成”到主干。 持续集成的好处在于，每次代码的小幅变更，就能看到运行结果，从而不断累积小的变更，而不是在开发周期结束时，一下子合并一大块代码。 Travis CI 提供的是持续集成服务。它绑定 Github 上面的项目，只要有新">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.coley48.cn/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/%E7%94%9F%E6%88%90personal-access-token.png">
-<meta property="og:image" content="http://blog.coley48.cn/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/%E6%B7%BB%E5%8A%A0token%E5%88%B0Travis-CI%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png">
-<meta property="og:image" content="http://blog.coley48.cn/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E4%B8%AD.png">
-<meta property="og:image" content="http://blog.coley48.cn/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B%E8%BE%93%E5%87%BA%E4%BF%A1%E6%81%AF.png">
-<meta property="og:image" content="http://blog.coley48.cn/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%88%90.png">
 <meta property="article:published_time" content="2021-04-15T22:23:21.000Z">
-<meta property="article:modified_time" content="2021-10-17T12:14:05.609Z">
+<meta property="article:modified_time" content="2021-10-18T14:12:29.101Z">
 <meta property="article:author" content="Coley Brooks">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="GitHub Pages">
 <meta property="article:tag" content="Travis-CI">
 <meta property="article:tag" content="持续集成">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.coley48.cn/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/%E7%94%9F%E6%88%90personal-access-token.png">
 
 <link rel="canonical" href="http://blog.coley48.cn/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/">
 
@@ -238,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-17 12:14:05" itemprop="dateModified" datetime="2021-10-17T12:14:05+00:00">2021-10-17</time>
+                <time title="修改时间：2021-10-18 14:12:29" itemprop="dateModified" datetime="2021-10-18T14:12:29+00:00">2021-10-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,11 +279,11 @@
 <li><p>进入配置页面，先在 Github 的设置页面中找到 Developer settings，点进入后选择第三条 Personal access tokens，或者直接点击<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">这个链接</a>跳转配置页面。</p>
 </li>
 <li><p>生成密钥，点击右上 Generate new token 按钮，可能会需要输入密码验证一下用户身份，然后填写 token 名称用于标识该 token 的用途，然后在下方为 token 设置权限，这里只需要添加 repo 即可。</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/%E7%94%9F%E6%88%90personal-access-token.png" class="">
+
 <p>这里需要注意的是，密钥只会在第一次生成时可见，页面刷新后就无法查看密钥的值，因此创建后需要立即保存，否则只能重新生成。</p>
 </li>
 <li><p>添加密钥，进入 Travis CI 官网 <a target="_blank" rel="noopener" href="https://travis-ci.com/">travis-ci.com</a>，首次进入需要通过 Github 来进行仓库的授权访问，完成之后会进入到自己的控制面板，这里可以看到自己 GitHub 上的所有仓库，然后进入需要部署的仓库的 setting 页面，在这里添加环境变量，变量名设置为 GH_TOKEN ，变量值为上一步骤中保存的哈希值。</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/%E6%B7%BB%E5%8A%A0token%E5%88%B0Travis-CI%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" class="">
+
 <p>切记不要点开 DISPLAY VALUE IN BUILD LOG 选项，否则 token 值会输出到构建日志中，就会暴露给别人。</p>
 </li>
 </ol>
@@ -298,13 +292,13 @@
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">os:</span> <span class="string">linux</span> <span class="comment"># 选择构建的操作系统</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span> <span class="comment"># 项目语言</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">10</span>  <span class="comment"># 使用 nodejs LTS v10</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">main</span> <span class="comment"># 只监控存放源代码的 main 分支</span></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="attr">directories:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">node_modules</span> <span class="comment"># 缓存 node_modules 加快构建速度</span></span><br><span class="line"><span class="attr">before_script:</span> <span class="comment"># 构建环境搭建，根据所用的主题，这里会有所不同</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">hexo-cli</span> <span class="comment"># 在 CI 环境内安装 Hexo</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">mkdir</span> <span class="string">themes</span> <span class="comment"># 由于 main 分支中没有将 themes/ 文件夹，所以需要重新创建</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">git</span> <span class="string">clone</span> <span class="string">https://github.com/theme-next/hexo-theme-next</span> <span class="string">themes/next</span> <span class="comment">#从 Github 上拉取 next 主题</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="comment"># 最后在根目录安装站点需要的依赖 </span></span><br><span class="line"><span class="attr">script:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span> <span class="comment"># 生成静态文件</span></span><br><span class="line"><span class="attr">deploy:</span> <span class="comment"># 根据个人情况，这里会有所不同</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip_cleanup:</span> <span class="literal">true</span> <span class="comment"># 构建完成后不清除</span></span><br><span class="line">  <span class="attr">strategy:</span> <span class="string">git</span> <span class="comment"># 默认使用 git</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">$GH_TOKEN</span> <span class="comment"># 在 Travis CI 中设置的环境变量 token</span></span><br><span class="line">  <span class="attr">keep_history:</span> <span class="literal">true</span> <span class="comment"># 保存历史</span></span><br><span class="line">  <span class="attr">fqdn:</span> <span class="string">blog.coley48.cn</span> <span class="comment"># 自定义域名，使用 username.github.io 可删除</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">main</span> <span class="comment"># hexo 站点源文件所在的 branch</span></span><br><span class="line">  <span class="attr">local_dir:</span> <span class="string">public</span></span><br><span class="line">  <span class="attr">target_branch:</span> <span class="string">gh-pages</span> <span class="comment"># 存放生成站点文件的 branch，使用 username.github.io 必须是 master</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="提交项目"><a href="#提交项目" class="headerlink" title="提交项目"></a>提交项目</h4><p><code>git push</code>命令执行完成之后，稍等片刻 Travis CI 就会开始运行。<br>在 Travis CI 控制面板中，进入到自己的仓库页面中可以看到项目正在构建，显示黄色：</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E4%B8%AD.png" class="">
+
 
 <p>在下方<code>Job log</code>中还可以查看构建过程中的输出信息：</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B%E8%BE%93%E5%87%BA%E4%BF%A1%E6%81%AF.png" class="">
+
 
 <p>当输出<code>Done. Your build exited with 0.</code>时，表示构建成功，显示为绿色：</p>
-<img src="/2021/04/15/Travis-CI-GitHub-Pages%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2/travis-CI%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%88%90.png" class="">
+
 
 <p>此后，Travis CI 会自动监听 GitHub 仓库提交，每次有新的代码提交，Travis CI 会自动按照<code>travis.yml</code>配置文件中的命令执行，然后将生成的代码推送到指定的分支中。</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
