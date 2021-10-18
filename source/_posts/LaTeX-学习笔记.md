@@ -595,6 +595,230 @@ verbatim 宏包优化了 verbatim 环境的内部命令，并提供了 \verbatim
 
 #### 表格
 
+排版表格最基本的 tabular 环境用法为：
+
+```latex
+\begin{tabular}{⟨column-spec⟩}
+⟨item1⟩ & ⟨item2⟩ & … \\
+\hline
+⟨item1⟩ & ⟨item2⟩ & … \\
+\end{tabular}
+```
+
+直接使用 tabular 环境的话，会和周围的文字混排。tabular 环境可带一个可选参数控制垂直对齐（默认是垂直居中）；但是通常情况下，tabular 环境一般会放置在 table 浮动体环境中，并用 \caption 命令加标题。
+
+##### 列格式
+
+tabular 环境使用 ⟨column-spec⟩ 参数指定表格的列数以及每列的格式。且表格中每行的单元格数目不能多于列格式里 l/c/r/p 的总数（可以少于这个总数），否则出错。
+
+| 列格式      | 说明                                 |
+| :---------- | :----------------------------------- |
+| l/c/r       | 单元格内容左对齐/居中/右对齐，不折行 |
+| p{⟨width⟩}  | 单元格宽度固定为 ⟨width⟩，可自动折行 |
+| \|          | 绘制竖线                             |
+| @{⟨string⟩} | 自定义内容 ⟨string⟩                  |
+
+```latex
+\begin{tabular}{|l|c|r|}
+    \hline
+    left & center & right \\
+    \hline
+\end{tabular}
+```
+
+@ 格式可在单元格前后插入任意的文本，但同时它也消除了单元格前后额外添加的间距。@格式可以适当使用以充当“竖线”。特别地，@{} 可直接用来消除单元格前后的间距：
+
+```latex
+\begin{tabular}{@{} r@{:}lr @{}}
+\hline
+1 & 1 & one \\
+11 & 3 & eleven \\
+\hline
+\end{tabular}
+```
+
+另外 LATEX 还提供了简便的将格式参数重复的写法 *{⟨n⟩{⟨column-spec⟩}，比如以下两种写法是等效的：
+
+```latex
+\begin{tabular}{|c|c|c|c|c|p{4em}|p{4em}|}
+\begin{tabular}{|*{5}{c|}*{2}{p{4em}|}}
+```
+
+有时需要为整列修饰格式，比如整列改变为粗体，如果每个单元格都加上 \bfseries 命令会比较麻烦。array 宏包提供了辅助格式 > 和 <，用于给列格式前后加上修饰命令：
+
+```latex
+% \usepackage{array}
+\begin{tabular}{>{\itshape}r<{*}l}
+\hline
+italic & normal \\
+column & column \\
+\hline
+\end{tabular}
+```
+
+array 宏包还提供了类似 p 格式的 m 格式和 b 格式，三者分别在垂直方向上靠顶端对齐、居中以及底端对齐。
+
+```latex
+\newcommand\txt
+{a b c d e f g h i}
+\begin{tabular}{cp{2em}m{2em}b{2em}}
+\hline
+pos & \txt & \txt & \txt \\
+\hline
+\end{tabular}
+```
+
+##### 列宽
+
+LATEX 本身提供了 tabular* 环境用来排版定宽表格，但是不太方便使用，比如要用到 @ 格式插入额外命令，令单元格之间的间距为 \fill，但即使这样仍然有瑕疵：
+
+```latex
+\begin{tabular*}{14em}%
+{@{\extracolsep{\fill}}|c|c|c|c|}
+\hline
+A & B & C & D \\ \hline
+a & b & c & d \\ \hline
+\end{tabular*}
+```
+
+tabularx 宏包为我们提供了方便的解决方案。它引入了一个 X 列格式，类似 p 列格式，不过会根据表格宽度自动计算列宽，多个 X 列格式平均分配列宽。X 列格式也可以用 array 里的辅助格式修饰对齐方式：
+
+```latex
+\begin{tabularx}{14em}%
+{|*{4}{>{\centering\arraybackslash}X|}}
+\hline
+A & B & C & D \\ \hline
+a & b & c & d \\ \hline
+\end{tabularx}
+```
+
+##### 横线
+
+通过 \hline 命令绘制表格线，而 \cline{⟨i⟩-⟨j⟩} 命令用来绘制跨越部分单元格的横线：
+
+```latex
+\begin{tabular}{|c|c|c|}
+\hline
+1 & 2 & 3 \\ \cline{1-2}
+4 & 5 & 6 \\ \cline{3-3}
+7 & 8 & 9 \\ \hline
+\end{tabular}
+```
+在科技论文排版中广泛应用的表格形式是三线表，形式干净简明。三线表由 booktabs 宏包支持，它提供了 \toprule、\midrule 和 \bottomrule 命令用以排版三线表的三条线，以及和 \cline 对应的 \cmidrule。除此之外，最好不要用其它横线以及竖线：
+
+```latex
+\begin{tabular}{cccc}
+\toprule
+& \multicolumn{3}{c}{Numbers} \\
+\cmidrule{2-4}
+& 1 & 2 & 3 \\
+\midrule
+Alphabet & A & B & C \\
+Roman & I & II& III \\
+\bottomrule
+\end{tabular}
+```
+
+##### 合并单元格
+
+LATEX 通过 \multicolumn 合并横向单元格；
+
+```latex
+\multicolumn{⟨n⟩}{⟨column-spec⟩}{⟨item⟩}
+```
+
+其中 ⟨n⟩ 为要合并的列数，⟨column-spec⟩ 为合并单元格后的列格式，只允许出现一个 l/c/r 或 p 格式。如果合并前的单元格前后带表格线 |，合并后的列格式也要带 | 以使得表格的竖线一致。
+
+```latex
+\begin{tabular}{|c|c|c|}
+\hline
+1 & 2 & Center \\ \hline
+\multicolumn{2}{|c|}{3} &
+\multicolumn{1}{r|}{Right} \\ \hline
+4 & \multicolumn{2}{c|}{C} \\ \hline
+\end{tabular}
+```
+
+此外，形如 \multicolumn{1}{⟨column-spec⟩}{⟨item⟩} 的命令可以用来修改某一个单元格的列格式；
+
+纵向合并单元格需要用到 multirow 宏包提供的 \multirow 命令：
+
+```latex
+\multirow{⟨n⟩}{⟨width⟩}{⟨item⟩}
+```
+
+⟨width⟩ 为合并后单元格的宽度，可以填 * 以使用自然宽度。
+
+```latex
+% \usepackage{multirow}
+
+\begin{tabular}{ccc}
+\hline
+\multirow{2}{*}{Item} &
+\multicolumn{2}{c}{Value} \\
+\cline{2-3}
+& First & Second \\ \hline
+A & 1 & 2 \\ \hline
+\end{tabular}
+```
+
+##### 嵌套表格
+
+相对于合并单元格，拆分单元格对于 LATEX 来说并非易事。在单元格中嵌套一个小表格可以起到“拆分单元格”的效果。在以下的例子中，注意要用 \multicolumn 命令配合 @{} 格式把单元格的额外边距去掉，使得嵌套的表格线能和外层的表格线正确相连；
+
+如果不需要为“拆分的单元格”画线，并且只在垂直方向“拆分”的话，makecell 宏包提供的 \makecell 命令是一个简单的解决方案：
+
+```latex
+\begin{tabular}{|c|c|}
+\hline
+a & \makecell{d1 \\ d2} \\
+\hline
+b & c \\
+\hline
+\end{tabular}
+```
+
+##### 控制行距
+
+LATEX 生成的表格看起来通常比较紧凑。修改参数 \arraystretch 可以得到行距更加宽松的表格，但后续的行距都会修改；
+
+```latex
+\renewcommand\arraystretch{1.8}
+\begin{tabular}{|c|}
+\hline
+Really loose \\ \hline
+tabular rows.\\ \hline
+\end{tabular}
+```
+
+另一种增加间距的办法是给换行命令 \\ 添加可选参数，在这一行下面加额外的间距，适合用于在行间不加横线的表格；
+
+#### 图片
+
+LATEX 本身不支持插图功能，需要由 graphicx 宏包辅助支持，然后通过 \includegraphics 命令加载图片：
+
+```latex
+\includegraphics[⟨options⟩]{⟨filename⟩}
+```
+
+其中 ⟨filename⟩ 为图片文件名，与使用 \include 命令类似，文件名有时需要使用相对路径或绝对路径。图片文件的扩展名可写可不写。
+
+另外 graphicx 宏包还提供了 \graphicspath 命令，用于声明一个或多个图片文件存放的目录，使用这些目录里的图片时可不用写路径：
+
+```latex
+% 假设主要的图片放在 figures 子目录下，标志放在 logo 子目录下
+\graphicspath{{figures/}{logo/}}
+```
+
+\includegraphics 命令的可选参数 ⟨options⟩ 支持 ⟨key⟩=⟨value⟩ 形式赋值，常用的参数如下：
+
+| 参数            | 含义                              |
+| :-------------- | :-------------------------------- |
+| width=⟨width⟩   | 将图片缩放到宽度为 ⟨width⟩        |
+| height=⟨height⟩ | 将图片缩放到高度为 ⟨height⟩       |
+| scale=⟨scale⟩   | 将图片相对于原尺寸缩放 ⟨scale⟩ 倍 |
+| angle=⟨angle⟩   | 令图片逆时针旋转 ⟨angle⟩ 度       |
+
 
 
 ### 附录

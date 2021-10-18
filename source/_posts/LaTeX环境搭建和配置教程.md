@@ -1,7 +1,7 @@
 ---
 title: LaTeX环境搭建和配置教程
 tags: [LaTeX, 文字排版]
-date: 2021-10-12 08:34:46
+date: 2021-10-10 08:34:46
 categories: blog
 ---
 
