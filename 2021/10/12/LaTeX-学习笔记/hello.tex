@@ -1,4 +1,5 @@
 \documentclass{ctexart}
+% \usepackage[backend=bibtex]{biblatex}
 \title{hello LaTeX}
 \author{ Mary\thanks{E-mail:*****@***.com}
 \and Ted\thanks{Corresponding author}
@@ -221,5 +222,15 @@ bookmark\footnote{12345} ...
 \section*{图片}
 
 \includegraphics[scale=1.2]{LaTeX文本中的重音和特殊字符.png}
+
+\section*{盒子}
+|\mbox{Test some words.}|\\
+|\makebox[10em]{Test some words.}|\\
+|\makebox[10em][l]{Test some words.}|\\
+|\makebox[10em][r]{Test some words.}|\\
+|\makebox[10em][s]{Test some words.}|
+
+\fbox{Test some words.}\\
+\framebox[10em][r]{Test some words.}
 
 \end{document}
