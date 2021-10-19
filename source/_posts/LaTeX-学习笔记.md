@@ -819,6 +819,49 @@ LATEX 本身不支持插图功能，需要由 graphicx 宏包辅助支持，然�
 | scale=⟨scale⟩   | 将图片相对于原尺寸缩放 ⟨scale⟩ 倍 |
 | angle=⟨angle⟩   | 令图片逆时针旋转 ⟨angle⟩ 度       |
 
+#### 盒子
+
+盒子是 LATEX 排版的基础单元，LATEX 提供了一些命令让我们生成一些有特定用途的盒子。
+
+##### 水平盒子
+
+```latex
+\mbox{…}
+\makebox[⟨width⟩][⟨align⟩]{…}
+```
+\mbox 生成一个基本的水平盒子，内容只有一行，不允许分段（除非嵌套其它盒子，比如后文的垂直盒子）。外表看上去，\mbox 的内容与正常的文本无二，不过断行时文字不会从盒子里断开。
+
+\makebox 更进一步，可以加上可选参数用于控制盒子的宽度 ⟨width⟩，以及内容的对齐方式⟨align⟩，可选居中 c（默认值）、左对齐 l、右对齐 r 和分散对齐 s。但分散对齐方式强行拉开单词的间距，往往会报 Underfull \hbox 的消息
+
+```latex
+|\mbox{Test some words.}|\\
+|\makebox[10em]{Test some words.}|\\
+|\makebox[10em][l]{Test some words.}|\\
+|\makebox[10em][r]{Test some words.}|\\
+|\makebox[10em][s]{Test some words.}|
+```
+
+\fbox 和 \framebox 让我们可以为水平盒子添加边框。使用的语法与 \mbox 和 \makebox一模一样：
+
+```latex
+\fbox{…}
+\framebox[⟨width⟩][⟨align⟩]{…}
+
+\fbox{Test some words.}\\
+\framebox[10em][r]{Test some words.}
+
+% 可以通过 \setlength 命令调节边框的宽度 \fboxrule 和内边距 \fboxsep：
+\framebox[10em][r]{Test box}\\[1ex]
+\setlength{\fboxrule}{1.6pt}
+\setlength{\fboxsep}{1em}
+\framebox[10em][r]{Test box}
+```
+
+##### 垂直盒子
+
+如果需要排版一个文字可以换行的盒子，LATEX 提供了两种方式：
+
+
 
 
 ### 附录
