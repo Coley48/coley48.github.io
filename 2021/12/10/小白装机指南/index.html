@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.coley48.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面老早之前就打算换台电脑了，刚开始的时候看的都是整机，但是对于这些各种各样的参数配置我是不太了解的（说实话我对台式硬件部分了解不多）；然后就在网上找了一些讲电脑配置的视频看，然后就了解到DIY装机，因为我本身也是一个喜欢动手的人；然后就决定自己选配置，自己组装电脑； 经过这次更新电脑，我也算是恶补了很多电脑相关的硬件知识了。这里就整理一下整个装机的过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白装机指南">
+<meta property="og:url" content="http://blog.coley48.cn/2021/12/10/%E5%B0%8F%E7%99%BD%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Coley&#39;s Blog">
+<meta property="og:description" content="写在前面老早之前就打算换台电脑了，刚开始的时候看的都是整机，但是对于这些各种各样的参数配置我是不太了解的（说实话我对台式硬件部分了解不多）；然后就在网上找了一些讲电脑配置的视频看，然后就了解到DIY装机，因为我本身也是一个喜欢动手的人；然后就决定自己选配置，自己组装电脑； 经过这次更新电脑，我也算是恶补了很多电脑相关的硬件知识了。这里就整理一下整个装机的过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-10T08:35:08.000Z">
+<meta property="article:modified_time" content="2021-12-22T01:14:21.691Z">
+<meta property="article:author" content="Coley Brooks">
+<meta property="article:tag" content="note">
+<meta property="article:tag" content="电脑">
+<meta property="article:tag" content="装机">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.coley48.cn/2021/12/10/%E5%B0%8F%E7%99%BD%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>小白装机指南 | Coley's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Coley's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">君之所向，一往无前。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-意见">
+
+    <a href="/reform/" rel="section"><i class="fa fa-calendar fa-fw"></i>意见</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Coley48" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.coley48.cn/2021/12/10/%E5%B0%8F%E7%99%BD%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpg">
+      <meta itemprop="name" content="Coley Brooks">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coley's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小白装机指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-10 08:35:08" itemprop="dateCreated datePublished" datetime="2021-12-10T08:35:08+00:00">2021-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-22 01:14:21" itemprop="dateModified" datetime="2021-12-22T01:14:21+00:00">2021-12-22</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>老早之前就打算换台电脑了，刚开始的时候看的都是整机，但是对于这些各种各样的参数配置我是不太了解的（说实话我对台式硬件部分了解不多）；然后就在网上找了一些讲电脑配置的视频看，然后就了解到DIY装机，因为我本身也是一个喜欢动手的人；然后就决定自己选配置，自己组装电脑；</p>
+<p>经过这次更新电脑，我也算是恶补了很多电脑相关的硬件知识了。这里就整理一下整个装机的过程。</p>
+<span id="more"></span>
+
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>准备工作主要就是挑选配置，先罗列一下我的清单，方便抄作业的同学；</p>
+<table>
+<thead>
+<tr>
+<th align="left">组件</th>
+<th align="left">类型</th>
+<th align="left">单价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">CPU + 主板</td>
+<td align="left">i7 11700 + 微星 B560M 迫击炮 WiFi版</td>
+<td align="left">2869</td>
+</tr>
+<tr>
+<td align="left">机箱</td>
+<td align="left">爱国者 YOGO M2白</td>
+<td align="left">163</td>
+</tr>
+<tr>
+<td align="left">固态</td>
+<td align="left">西数 SN550 1T</td>
+<td align="left">620</td>
+</tr>
+<tr>
+<td align="left">电源</td>
+<td align="left">鑫谷 750W 金牌全模组 GP850G</td>
+<td align="left">437</td>
+</tr>
+<tr>
+<td align="left">显示器</td>
+<td align="left">HKC V271M IPS 27英寸</td>
+<td align="left">849</td>
+</tr>
+<tr>
+<td align="left">键盘</td>
+<td align="left">艾石头 84键RGB 红轴</td>
+<td align="left">199</td>
+</tr>
+<tr>
+<td align="left">内存条</td>
+<td align="left">金士顿 FURY DDR4 3600</td>
+<td align="left">658</td>
+</tr>
+<tr>
+<td align="left">鼠标</td>
+<td align="left">罗技 G102 RGB 白</td>
+<td align="left">105</td>
+</tr>
+<tr>
+<td align="left">扇热</td>
+<td align="left">酷冷至尊 冰神B240 ARGB水冷</td>
+<td align="left">399</td>
+</tr>
+<tr>
+<td align="left">总计</td>
+<td align="left"></td>
+<td align="left">6299</td>
+</tr>
+</tbody></table>
+<p>刚开始的时候，我也不懂这样那样的配置，所以就去B站上找了很多视频来看；然后在京东上一件一件的挑，不仅要看性能，还要看颜值。然后所有配置挑选出来之后，再慢慢筛，哪些地方可以优化的，哪些配置之间是有冲突的，然后再做一些调整；</p>
+<h3 id="组装机器"><a href="#组装机器" class="headerlink" title="组装机器"></a>组装机器</h3><p>拿到所有配件，然后迫不及待就开始组装，经过一番研究，自己总结一下组装的顺序：</p>
+<h4 id="CPU-主板"><a href="#CPU-主板" class="headerlink" title="CPU + 主板"></a>CPU + 主板</h4><ol>
+<li>先打开主板上的盖子，注意千万不要触碰主板上的针脚❗；</li>
+<li>然后辨别一下主板上和 CPU 边缘的卡槽位置，轻轻放上去；</li>
+<li>用手指按住 CPU 上下左右移动一下，会发现主板和 CPU 之间稍微有一些间隙；</li>
+<li>盖上主板的盖子，完成安装，AMD 和 Intel 的主板稍微有一点不同；</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/244970307">intel第11代i7-11700F装机配置推荐，11700F/11700搭配主板推荐，11700F搭配显卡推荐</a></li>
+</ul>
+<h4 id="内存条"><a href="#内存条" class="headerlink" title="内存条"></a>内存条</h4><p>在选择内存条的时候，要注意 CPU、主板和内存条的频率要一致，否则按照三者最低频率；当然这里不考虑超频的情况；</p>
+<p>其次要注意主板支持的内存条类型，可以根据内存条上的豁口判断，我买的是 DDR4 的；</p>
+<p>然后要注意，现在的主板大多支持双通道的内存，所以预计自己需要多大的内存，分成两根内存条，效果会比一根的要好；</p>
+<ol>
+<li>找到主板上内存条插槽，通常主板上有 2 个或者 4 个，有些主板甚至有 8 个；</li>
+<li>然后打开插槽上两端的卡扣，对应内存条上的豁口，用力按下，直到卡口自动收起；</li>
+<li>有些主板是单边卡口，安装差不多；</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.sohu.com/a/472903735_121068095">电脑内存条频率取决于CPU还是主板？</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/269392989">台式机 | 如何正确选购内存条</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/63604430">内存条怎么选？——从入门到精通</a></li>
+</ul>
+<h4 id="硬盘"><a href="#硬盘" class="headerlink" title="硬盘"></a>硬盘</h4><p>硬盘主要分两种，固态硬盘 SSD 以及 机械硬盘 HDD；现在市面上硬盘的接口主要以 SATA、mSATA、M.2 以及 PCI-E为主，我这里买的是 M.2 接口的固态硬盘；</p>
+<p>B560M 上有两处 M.2 安装位置，一处位于中部散热片下方，再往下是另一处，建议优先安装散热片下的槽位；</p>
+<ol>
+<li>先要拆下散热片；</li>
+<li>注意防呆插槽的位置，通常硬盘上有字的一面向上；</li>
+<li>倾斜角度 30° 插入卡槽；</li>
+<li>散热片背面一般会有贴纸，撕开后盖在硬盘上；</li>
+<li>拧紧螺丝就完成了；</li>
+</ol>
+<h4 id="散热"><a href="#散热" class="headerlink" title="散热"></a>散热</h4><p>散热器一般分为风冷和水冷两种，风冷虽然性能上略低，但相对便宜；而水冷散热性能好，但是相对贵一些，还有就是会有水冷会有漏液的风险，所以要买好一点的水冷；</p>
+<p>有些 CPU 是自带了一个原装散热的，我这款 11700 也是；为了方便后面做点亮测试，我就没有直接装上我自己买的水冷；</p>
+<ol>
+<li>在安装好 CPU 的基础上，进行以下操作；</li>
+<li>在 CPU 表面涂一层硅脂，但是很多原装散热上有预涂的硅脂；</li>
+<li>然后对准主板上 CPU 周围的四个孔位盖上散热；</li>
+<li>固定散热，不同散热的连接方式有些不同，具体操作可以参看说明书；</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/258379061">2021年12月电脑cpu散热器选购指南</a></li>
+</ul>
+<h4 id="电源"><a href="#电源" class="headerlink" title="电源"></a>电源</h4><p>电源这块的话，如果有极限超频的需求建议在上面的推荐基础上选择高100W~200W的电源，当然不超频也可以买比我推荐功率更大的电源，也留下后续配置升级的空间。</p>
+<p>电源有多种认证标志，从白牌到钛金；通常选择铜牌以上就可以了；等级越高转换效率越高也就越省电，但是和电源的品质不是正相关的，一般来说金牌以上的电源绝大部分质量都不错。</p>
+<p>然后根据电源的线是否可拆卸可分为：全模组、半模组和非模组；其中全模组电源上的线均可拆卸；半模组电源的主板供电线和 CPU 供电线不能拆卸，其他可拆；非模组电源的线是不可拆卸的，所以装机的时候会有很多线是多余的，走线会比较难。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/179066013">2021年12月电脑电源选择指南与推荐</a></li>
+</ul>
+<h4 id="机箱"><a href="#机箱" class="headerlink" title="机箱"></a>机箱</h4><p>注意机箱支持的主板规格：ATX、MATX、ITX；然后是显卡长度限制，风扇位个数，电池规格，硬盘位等；</p>
+<p>当时我这款散热和主板就有点冲突，尝试拆了主板最上面的散热也不行，最后在水冷风扇上取了两个固定螺柱才装上去，捣鼓了好半天；</p>
+<p>在正式装机之前，一般要做一个短接测试；</p>
+<ol>
+<li>将主板、CPU、内存条、固态、散热安装好；</li>
+<li>用 8pin（CPU供电线） 和 24pin（主板供电线） 的线将主板和电源连接；</li>
+<li>用数据线连接显示器，可以方便看到是否有图像输出；</li>
+<li>将电源通电，使用螺丝刀轻触 power+ 和 power- 针脚，通常在主板右下方；</li>
+<li>短接后，看到风扇转动，表示短接开机成功；</li>
+<li>然后有些主板上有自检灯，当第二个黄灯一直亮起时说明内存条没有插好；</li>
+<li>断电后❗，将内存条重新插好，再次短接开机；</li>
+<li>看到亮起了白灯，自检通过；</li>
+<li>同时屏幕上可以看到，顺利进入到 BIOS 界面；</li>
+<li>至此短接测试就通过了，就可以正式装机了；</li>
+</ol>
+<p>大致的装机步骤：</p>
+<ol>
+<li> 在机箱上预埋主板螺柱，不同主板的孔位是有差异的，所以要根据主板来；</li>
+<li> 然后把主板平行放入机箱中，一次拧上螺丝；</li>
+<li> 安装散热，</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/337206779">2021年12月电脑机箱推荐</a></li>
+</ul>
+<h4 id="外设"><a href="#外设" class="headerlink" title="外设"></a>外设</h4><p>外设就是鼠标、键盘、显示器、音响等输入输出设备；这部分直接按着主板上的接口插就可以了；至此，硬件部分的安装就完成了；</p>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>主机组装完成之后就是</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.wepe.com.cn/">微PE官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42256332/article/details/106933772">解决微PE不支持移动硬盘NTFS的UEFI启动</a></li>
+</ul>
+<h3 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54529443">系统安装好后，怎么用最正规的方法安装驱动</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12t4y1S7Uw">微星主板如何正确安装主板驱动和声卡驱动</a></li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/43011827">小白的初次DIY装机攻略</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.163.com/dy/article/GE64K4040512MJDN.html">遇事不决？迫击炮！微星B560M迫击炮评测</a></li>
+<li><a target="_blank" rel="noopener" href="https://new.qq.com/omn/20210428/20210428A0A9TE00.html">微星MAG B560M MORTAR主板评测：主流配置再升级</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/349293186">热门Z590主板推荐。Z590主板CPU搭配建议。支持PCIE4.0。包含ATX,M-ATX,ITX版型。</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn.msi.com/">微星中国官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn.msi.com/Motherboard/MAG-B560M-MORTAR-WIFI/support#down-driver&Win10%2064">产品支持 MAG B560M MORTAR WIFI</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Coley Brooks
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.coley48.cn/2021/12/10/%E5%B0%8F%E7%99%BD%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97/" title="小白装机指南">http://blog.coley48.cn/2021/12/10/小白装机指南/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/note/" rel="tag"># note</a>
+              <a href="/tags/%E7%94%B5%E8%84%91/" rel="tag"># 电脑</a>
+              <a href="/tags/%E8%A3%85%E6%9C%BA/" rel="tag"># 装机</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/01/%E6%80%BB%E7%BB%93-21-11/" rel="prev" title="总结@21-11">
+      <i class="fa fa-chevron-left"></i> 总结@21-11
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E8%A3%85%E6%9C%BA%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">组装机器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU-%E4%B8%BB%E6%9D%BF"><span class="nav-number">3.1.</span> <span class="nav-text">CPU + 主板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%9D%A1"><span class="nav-number">3.2.</span> <span class="nav-text">内存条</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AC%E7%9B%98"><span class="nav-number">3.3.</span> <span class="nav-text">硬盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%A3%E7%83%AD"><span class="nav-number">3.4.</span> <span class="nav-text">散热</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E6%BA%90"><span class="nav-number">3.5.</span> <span class="nav-text">电源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%BA%E7%AE%B1"><span class="nav-number">3.6.</span> <span class="nav-text">机箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E8%AE%BE"><span class="nav-number">3.7.</span> <span class="nav-text">外设</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.</span> <span class="nav-text">安装系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">驱动安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Coley Brooks"
+      src="/images/avator.jpg">
+  <p class="site-author-name" itemprop="name">Coley Brooks</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Coley48" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Coley48" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:coley48@qq.com" title="E-Mail → mailto:coley48@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hush</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacity":0.95,"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
