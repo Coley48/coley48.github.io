@@ -782,7 +782,7 @@
 </tr>
 <tr>
 <td align="left">FROM</td>
-<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#101;&#x6d;&#x61;&#105;&#x6c;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#111;&#x6d;">&#101;&#x6d;&#x61;&#105;&#x6c;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#111;&#x6d;</a> 的形式</td>
+<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#x65;&#109;&#x61;&#x69;&#108;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#x65;&#109;&#x61;&#x69;&#108;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a> 的形式</td>
 </tr>
 <tr>
 <td align="left">USER</td>
@@ -1952,6 +1952,50 @@
         <tag>diary</tag>
         <tag>单车</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>小技巧汇总</title>
+    <url>/2022/05/10/%E5%B0%8F%E6%8A%80%E5%B7%A7%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇文章主要是记录 HTML 部分可用于实际开发中的小技巧，部分章节是翻译整理而来，所有章节后都附有原文地址或者其他参考资料，本文将持续更新；</p>
+<span id="more"></span>
+
+<h3 id="添加键盘快捷键"><a href="#添加键盘快捷键" class="headerlink" title="添加键盘快捷键"></a>添加键盘快捷键</h3><p>通过使用 <code>accesskey</code> 特性，我们可以为用户激活或聚焦在一个元素上赋予一个快捷键。这个特性的值必须是一个单独的字符。</p>
+<p>值得注意的是每个浏览器提供了不同的组合键来触发快捷方式。</p>
+<table>
+<thead>
+<tr>
+<th align="left">浏览器</th>
+<th align="left">macOS</th>
+<th align="left">Windows</th>
+<th align="left">Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Chrome</td>
+<td align="left"><code>alt</code> + <code>ctrl</code> + key</td>
+<td align="left"><code>alt</code> + key</td>
+<td align="left"><code>alt</code> + key</td>
+</tr>
+<tr>
+<td align="left">Firefox</td>
+<td align="left"><code>alt</code> + <code>ctrl</code> + key</td>
+<td align="left"><code>alt</code> + <code>shift</code> + key</td>
+<td align="left"><code>alt</code> + <code>shift</code> + key</td>
+</tr>
+<tr>
+<td align="left">Safari</td>
+<td align="left"><code>alt</code> + <code>ctrl</code> + key</td>
+<td align="left">n/a</td>
+<td align="left">n/a</td>
+</tr>
+</tbody></table>
+<p>在下面的示例代码中，在 macOS Chrome 中按下组合键  <code>alt</code> + <code>ctrl</code> + <code>e</code> 会触发按钮的 <code>click</code> 事件。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">accesskey</span>=<span class="string">&quot;e&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;alert(&#x27;Edit&#x27;)&quot;</span>&gt;</span>Edit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="https://getfrontend.tips/add-keyboard-shortcuts/">原文：Add keyboard shortcuts</a></li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>小白装机指南</title>
