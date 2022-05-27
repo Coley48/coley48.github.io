@@ -782,7 +782,7 @@
 </tr>
 <tr>
 <td align="left">FROM</td>
-<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#x65;&#x6d;&#x61;&#x69;&#x6c;&#64;&#101;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#x65;&#x6d;&#x61;&#x69;&#x6c;&#64;&#101;&#120;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a> 的形式</td>
+<td align="left">邮箱的来自地址，遵循 RFC 5322规范，可以是一个单纯的邮箱地址或者 “名字” <a href="mailto:&#x65;&#109;&#x61;&#105;&#x6c;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#109;">&#x65;&#109;&#x61;&#105;&#x6c;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#108;&#101;&#x2e;&#99;&#111;&#109;</a> 的形式</td>
 </tr>
 <tr>
 <td align="left">USER</td>
@@ -1974,6 +1974,45 @@
 <p>否则，这个输入框会被当做普通文本输入框，同时 <code>ele.value</code> 会返回原始的值。</p>
 <ul>
 <li><a href="https://getfrontend.tips/check-if-the-browser-supports-for-an-element-attribute/">原文 Check if the browser supports for an element attribute</a></li>
+</ul>
+<h3 id="通过-is-伪类选择器组合样式"><a href="#通过-is-伪类选择器组合样式" class="headerlink" title="通过 :is 伪类选择器组合样式"></a>通过 :is 伪类选择器组合样式</h3><p><code>:is</code> 伪类选择器为其参数中列出的选择器匹配到的所有元素应用样式，而不是写分开的选择器：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">header</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-tag">footer</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以把它们组合成一个单独的，如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-pseudo">:is</span>(<span class="selector-tag">header</span>, <span class="selector-tag">nav</span>, <span class="selector-tag">footer</span>) <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="https://getfrontend.tips/combine-styles-with-the-is-pseudo-class-selector/">原文 Combine styles with the :is pseudo-class selector</a></li>
+</ul>
+<h3 id="创建一个一次性的事件处理器"><a href="#创建一个一次性的事件处理器" class="headerlink" title="创建一个一次性的事件处理器"></a>创建一个一次性的事件处理器</h3><p>有时候我们想要一个给定元素的事件触发一次。通常，这可以通过绑定一个移除自身的处理器实现：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 做些事情 ...</span></span><br><span class="line">    element.removeEventListener(<span class="string">&#x27;click&#x27;</span>, handler);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">&#x27;click&#x27;</span>, handler);</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用一个命名函数表达式使代码缩短一点：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span> <span class="title">handler</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 做些事情 ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移除处理器</span></span><br><span class="line">    e.currentTarget.removeEventListener(e.type, handler);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>然而，现代浏览器提供了一个新的 <code>once</code> 选项让事情变得更简单了。我们不再需要去跟踪处理器的引用了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">element.addEventListener(</span><br><span class="line">    <span class="string">&#x27;click&#x27;</span>,</span><br><span class="line">    (e) =&gt; &#123;</span><br><span class="line">        <span class="comment">// 做些事情 ...</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        once: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="https://getfrontend.tips/create-an-one-time-event-handler/">原文 Create an one-time event handler</a></li>
+</ul>
+<h3 id="强制给定必须的参数"><a href="#强制给定必须的参数" class="headerlink" title="强制给定必须的参数"></a>强制给定必须的参数</h3><p>在 ES6 中，默认参数值在参数缺省时被计算。这让我们可以强制给定某个必须的参数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> required = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Missing parameter&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getAges = <span class="function">(<span class="params">yearOfBirth = required()</span>) =&gt;</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear() - yearOfBirth;</span><br></pre></td></tr></table></figure>
+
+<p>不带参数调用 <code>getAges()</code> 函数会抛出 <code>Missing parameter</code> 异常。</p>
+<ul>
+<li><a href="https://getfrontend.tips/enforce-required-parameters/">原文 Enforce required parameters</a></li>
+</ul>
+<h3 id="在-CSS-属性选择器中忽略大小写敏感"><a href="#在-CSS-属性选择器中忽略大小写敏感" class="headerlink" title="在 CSS 属性选择器中忽略大小写敏感"></a>在 CSS 属性选择器中忽略大小写敏感</h3><p>默认情况下，CSS 属性选择器是大小写敏感的。这意味着 <code>a[href$=&quot;.png&quot;]</code> 只对带有 <code>.png</code> 扩展名的链接起作用。</p>
+<p>设想你正在创建一个文件管理应用。这可能需要根据文件的扩展名来添加一个图标。比如，下面的 CSS 为任意的 <code>.png</code> 文件插入一个图标。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href$=<span class="string">&#x27;.png&#x27;</span>]</span>:after &#123;</span><br><span class="line">    content: <span class="built_in">url</span>(<span class="string">/img/png.svg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在现实中，文件是由用户上传的，我们不能控制文件的扩展名。一个 png 文件可以被命名为 <code>.png</code>，<code>.PNG</code>，<code>.pNG</code>。</p>
+<p>为了接受所有这些变种，我们可以在选择器的 <code>]</code> 前面添加 <code>i</code>。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href$=<span class="string">&#x27;.png&#x27;</span> i]</span>:after &#123;</span><br><span class="line">    content: <span class="built_in">url</span>(<span class="string">/img/png.svg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="https://getfrontend.tips/ignore-case-sensitivity-in-a-css-attribute-selector/">原文 Ignore case sensitivity in a CSS attribute selector</a></li>
 </ul>
 ]]></content>
       <categories>
