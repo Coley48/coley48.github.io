@@ -21,7 +21,7 @@ deploy: # 根据个人情况，这里会有所不同
     strategy: git # 默认使用 git
     token: $GH_TOKEN # 在 Travis CI 中设置的环境变量 token
     keep_history: true # 保存历史
-    # fqdn: blog.coley48.cn # 自定义域名，使用 username.github.io 可删除
+    fqdn: blog.coley48.cn # 自定义域名，使用 username.github.io 可删除
     on:
         branch: main # hexo 站点源文件所在的 branch
     local_dir: public
